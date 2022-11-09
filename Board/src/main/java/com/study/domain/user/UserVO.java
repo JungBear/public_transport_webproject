@@ -1,5 +1,8 @@
 package com.study.domain.user;
 
+import lombok.Data;
+
+@Data
 public class UserVO {
-	23232
+	private String name = "씨팔 개화나네";
 }
