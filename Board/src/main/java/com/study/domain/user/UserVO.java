@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class UserVO {
-	private String name = "깃 개 허접";
+	private String name = "222";
 }
