@@ -41,7 +41,7 @@
         SELECT
             <include refid="postColumns" />
         FROM
-            board
+            board as a
         WHERE
             id = #{value}
     </select>

@@ -114,7 +114,6 @@
                 document.getElementById('saveBtn').disabled = true;
                 form.action = [[ ${post == null} ]] ? '/post/save.do' : '/post/update.do';
                 form.submit();
-                [[ ${post==null} ]] ? alert('글작성이 완료되었습니다') : alert('글수정이 완료되었습니다');
             }
 
         /*]]>*/
