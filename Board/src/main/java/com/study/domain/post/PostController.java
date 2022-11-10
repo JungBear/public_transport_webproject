@@ -38,7 +38,11 @@ public class PostController {
 //    	int writer = (int) session.getAttribute("no");
     	params.setWriterNo(1);
         postService.savePost(params);
-        return "redirect:/post/list.do";
+        if (params.getType() == 0) {
+        	return "redirect:/post/infolist.do";
+        }else {
+        	return "redirect:/post/freelist.do";
+        }
     }
     
     // 자유 게시글 리스트 페이지
@@ -67,7 +71,12 @@ public class PostController {
     // 기존 게시글 수정
     @PostMapping("/post/update.do")
     public String updatePost(final PostRequest params) {
-        postService.updatePost(params);
-        return "redirect:/post/infolist.do";
+    	params.setWriterNo(1);
+        postService.savePost(params);
+        if (params.getType() == 0) {
+        	return "redirect:/post/infolist.do";
+        }else {
+        	return "redirect:/post/freelist.do";
+        }
     }
 }
