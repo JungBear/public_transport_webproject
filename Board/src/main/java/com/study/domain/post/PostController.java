@@ -2,6 +2,8 @@ package com.study.domain.post;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,20 +31,12 @@ public class PostController {
         
         return "post/write";
     }
-    
-//    // 자유 게시글 작성 페이지
-//    @GetMapping("/post/write.do")
-//    public String openFreePostWrite(@RequestParam(value = "id", required = false) final Long id, Model model) {
-//        if (id != null) {
-//            PostResponse post = postService.findByFreeTypeId(id);
-//            model.addAttribute("post", post);
-//        }
-//        return "post/freewrite";
-//    }
-    
+        
     // 신규 게시글 생성
     @PostMapping("/post/save.do")
-    public String savePost(final PostRequest params) {
+    public String savePost(final PostRequest params, HttpSession session) {
+//    	int writer = (int) session.getAttribute("no");
+    	params.setWriterNo(1);
         postService.savePost(params);
         return "redirect:/post/list.do";
     }
