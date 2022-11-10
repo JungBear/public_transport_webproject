@@ -72,7 +72,7 @@ public class PostController {
     @PostMapping("/post/update.do")
     public String updatePost(final PostRequest params) {
     	params.setWriterNo(1);
-        postService.savePost(params);
+        postService.updatePost(params);
         if (params.getType() == 0) {
         	return "redirect:/post/infolist.do";
         }else {

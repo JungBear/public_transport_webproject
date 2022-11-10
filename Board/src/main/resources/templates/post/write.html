@@ -21,7 +21,6 @@
 				<input type="hidden" id="id" name="id" th:if="${post != null}"
 					th:value="${post.id}" />
 
-				<!--/* 서버로 전달할 공지글 여부 */-->
 				<table class="tb tb_row">
 					<colgroup>
 						<col style="width: 15%;" />
@@ -115,7 +114,7 @@
                 document.getElementById('saveBtn').disabled = true;
                 form.action = [[ ${post == null} ]] ? '/post/save.do' : '/post/update.do';
                 form.submit();
-                alert('글작성이 완료되었습니다');
+                [[ ${post==null} ]] ? alert('글작성이 완료되었습니다') : alert('글수정이 완료되었습니다');
             }
 
         /*]]>*/
