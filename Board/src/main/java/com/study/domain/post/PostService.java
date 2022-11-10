@@ -1,9 +1,13 @@
 package com.study.domain.post;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import java.util.List;
 
 import javax.transaction.Transactional;
-import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.study.common.dto.SearchDto;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
@@ -74,23 +78,23 @@ public class PostService {
      * 모든 게시글 리스트 조회
      * @return 게시글 리스트
      */
-    public List<PostResponse> findAllPost() {
-        return postMapper.findAllPost();
+    public List<PostResponse> findAllPost(final SearchDto params) {
+        return postMapper.findAllPost(params);
     }
     /**
      * 모든 게시글 리스트 조회
      * @return 게시글 리스트
      */
-    List<PostResponse> findInfoPost(){
-        return postMapper.findInfoPost();
+    List<PostResponse> findInfoPost(final SearchDto params){
+        return postMapper.findInfoPost(params);
     }
     
     /**
      * 모든 게시글 리스트 조회
      * @return 게시글 리스트
      */
-    List<PostResponse> findFreePost(){
-        return postMapper.findFreePost();
+    List<PostResponse> findFreePost(final SearchDto params){
+        return postMapper.findFreePost(params);
     }
 
 }

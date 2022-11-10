@@ -91,7 +91,7 @@
     </delete>
 
    <!-- 모든 게시글 리스트 조회 -->
-    <select id="findAllPost" resultType="com.study.domain.post.PostResponse">
+    <select id="findAllPost" parameterType="com.study.common.dto.SearchDto" resultType="com.study.domain.post.PostResponse">
         SELECT
             <include refid="postColumns" />
         FROM
@@ -100,10 +100,11 @@
             del_yn = 0
         ORDER BY
             id DESC
+        LIMIT #{offset}, #{recordSize}
     </select>
 
    <!-- 정보 게시글 리스트 조회 -->
-    <select id="findInfoPost" resultType="com.study.domain.post.PostResponse">
+    <select id="findInfoPost" parameterType="com.study.common.dto.SearchDto" resultType="com.study.domain.post.PostResponse">
         SELECT
             <include refid="postColumns" />
         FROM
@@ -112,10 +113,11 @@
             del_yn = 0 AND type = 0
         ORDER BY
             id DESC
+       	LIMIT #{offset}, #{recordSize}
     </select>
     
        <!-- 자유 게시글 리스트 조회 -->
-    <select id="findFreePost" resultType="com.study.domain.post.PostResponse">
+    <select id="findFreePost" parameterType="com.study.common.dto.SearchDto" resultType="com.study.domain.post.PostResponse">
         SELECT
             <include refid="postColumns" />
         FROM
@@ -124,6 +126,36 @@
             del_yn = 0 AND type = 1
         ORDER BY
             id DESC
+        LIMIT #{offset}, #{recordSize}
     </select>
 
+   <!-- 모든 게시글 수 카운팅 -->
+    <select id="count" parameterType="com.study.common.dto.SearchDto" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM
+            board
+        WHERE
+            delete_yn = 0
+    </select>
+    
+       <!-- 정보 게시글 수 카운팅 -->
+    <select id="count" parameterType="com.study.common.dto.SearchDto" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM
+            board
+        WHERE
+            delete_yn = 0 AND type = 0
+    </select>
+    
+       <!--자유 게시글 수 카운팅 -->
+    <select id="count" parameterType="com.study.common.dto.SearchDto" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM
+            board
+        WHERE
+            delete_yn = 0 AND type = 1
+    </select>
 </mapper>
