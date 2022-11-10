@@ -79,4 +79,15 @@ public class PostController {
         	return "redirect:/post/freelist.do";
         }
     }
+    
+    // 게시글 삭제
+    @PostMapping("/post/delete.do")
+    public String deletePost(@RequestParam final Long id, @RequestParam final int type) {
+        postService.deletePost(id);
+        if(type == 0) {
+        	return "redirect:/post/infolist.do";
+        }else {
+        	return "redirect:/post/freelist.do";
+        }
+    }
 }
