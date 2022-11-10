@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+<mapper namespace="user">
+    
+    <select id="loginCheck" resultType="String">
+        SELECT name FROM user
+        WHERE id = #{id} AND pwd = #{pwd}
+    </select>
+    
+    <select id="viewMember" resultType="com.study.domain.user.UserDAO">
+        SELECT 
+            name,
+            id,
+            email,
+            user_regdate AS userRegdate
+        FROM user
+        WHERE id = #{id} AND pwd = #{pwd}
+    </select>
+ 
+</mapper>
