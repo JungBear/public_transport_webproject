@@ -55,13 +55,13 @@ public interface PostMapper {
     List<PostResponse> findAllPost(SearchDto params);
     
     /**
-     * 모든 게시글 리스트 조회
+     * 정보 게시글 리스트 조회
      * @return 게시글 리스트
      */
     List<PostResponse> findInfoPost(SearchDto params);
     
     /**
-     * 모든 게시글 리스트 조회
+     * 자유 게시글 리스트 조회
      * @return 게시글 리스트
      */
     List<PostResponse> findFreePost(SearchDto params);
