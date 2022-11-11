@@ -56,8 +56,8 @@ public class PostController {
     // 자유 게시글 리스트 페이지
     @GetMapping("/post/freelist.do")
     public String openFreePostList(@ModelAttribute("params") final SearchDto params,Model model) {
-    	PagingResponse<PostResponse> posts = postService.findFreePost(params);
-        model.addAttribute("posts", posts);
+    	PagingResponse<PostResponse> response = postService.findFreePost(params);
+    	model.addAttribute("response", response);
         return "post/list";
     }
     

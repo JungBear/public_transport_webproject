@@ -16,6 +16,37 @@
         , del_date
         , notice
     </sql>
+    
+      <!-- 게시글 검색 -->
+    <sql id="search">
+        <!-- 검색 키워드가 있을 때 -->
+        <if test="keyword != null and keyword != ''">
+            <choose>
+                <!-- 검색 유형이 있을 때 -->
+                <when test="searchType != null and searchType != ''">
+                    <choose>
+                        <when test="'title'.equals( searchType )">
+                            AND title LIKE CONCAT('%', #{keyword}, '%')
+                        </when>
+                        <when test="'content'.equals( searchType )">
+                            AND content LIKE CONCAT('%', #{keyword}, '%')
+                        </when>
+                        <when test="'writer'.equals( searchType )">
+                            AND writer_no LIKE CONCAT('%', #{keyword}, '%')
+                        </when>
+                    </choose>
+                </when>
+                <!-- 전체 검색일 때 때 -->
+                <otherwise>
+                    AND (
+                           title LIKE CONCAT('%', #{keyword}, '%')
+                        OR content LIKE CONCAT('%', #{keyword}, '%')
+                        OR writer_no LIKE CONCAT('%', #{keyword}, '%')
+                    )
+                </otherwise>
+            </choose>
+        </if>
+    </sql>
 
 
     <!-- 게시글 저장 -->
@@ -97,7 +128,8 @@
         FROM
             board
         WHERE
-            del_yn = 0
+            del_yn = 0 
+            <include refid="search" />
         ORDER BY
             id DESC
         LIMIT #{pagination.limitStart}, #{recordSize}
@@ -110,7 +142,8 @@
         FROM
             board
         WHERE
-            del_yn = 0 AND type = 0
+            del_yn = 0 AND type = 0 
+            <include refid="search" />
         ORDER BY
             id DESC
         LIMIT #{pagination.limitStart}, #{recordSize}
@@ -123,7 +156,8 @@
         FROM
             board
         WHERE
-            del_yn = 0 AND type = 1
+            del_yn = 0 AND type = 1 
+            <include refid="search" />
         ORDER BY
             id DESC
         LIMIT #{pagination.limitStart}, #{recordSize}
@@ -136,7 +170,8 @@
         FROM
             board
         WHERE
-            del_yn = 0
+            del_yn = 0 
+            <include refid="search" />
     </select>
     
        <!-- 정보 게시글 수 카운팅 -->
@@ -146,7 +181,8 @@
         FROM
             board
         WHERE
-            del_yn = 0 AND type = 0
+            del_yn = 0 AND type = 0 
+            <include refid="search" />
     </select>
     
        <!--자유 게시글 수 카운팅 -->
@@ -156,6 +192,7 @@
         FROM
             board
         WHERE
-            del_yn = 0 AND type = 1
+            del_yn = 0 AND type = 1 
+            <include refid="search" />
     </select>
 </mapper>
