@@ -1,5 +1,7 @@
 package com.study.domain.post;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -62,8 +64,8 @@ public class PostController {
     // 정보 게시글 리스트 페이지
     @GetMapping("/post/infolist.do")
     public String openInfoPostList(@ModelAttribute("params") final SearchDto params,Model model) {
-    	PagingResponse<PostResponse> posts = postService.findInfoPost(params);
-        model.addAttribute("posts", posts);
+    	PagingResponse<PostResponse> response = postService.findAllPost(params);
+    	model.addAttribute("response", response);
         return "post/list";
     } 
     

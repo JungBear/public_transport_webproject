@@ -80,7 +80,7 @@ public class PostService {
     /**
      * 게시글 리스트 조회
      * @param params - search conditions
-     * @return list & pagination information
+     * @return 게시글 리스트
      */
     public PagingResponse<PostResponse> findAllPost(final SearchDto params) {
 
@@ -92,14 +92,15 @@ public class PostService {
         Pagination pagination = new Pagination(count, params);
         params.setPagination(pagination);
 
-        List<PostResponse> list = postMapper.findAllPost(params);
+        List<PostResponse> list = postMapper.findAll(params);
         return new PagingResponse<>(list, pagination);
     }
     /**
      * 정보 게시글 리스트 조회
      * @return 게시글 리스트
      */
-    public PagingResponse<PostResponse> findInfoPost(final SearchDto params){
+    public PagingResponse<PostResponse> findInfoPost(final SearchDto params) {
+
         int count = postMapper.count(params);
         if (count < 1) {
             return new PagingResponse<>(Collections.emptyList(), null);
@@ -108,7 +109,7 @@ public class PostService {
         Pagination pagination = new Pagination(count, params);
         params.setPagination(pagination);
 
-        List<PostResponse> list = postMapper.findInfoPost(params);
+        List<PostResponse> list = postMapper.findInfo(params);
         return new PagingResponse<>(list, pagination);
     }
     
@@ -117,7 +118,7 @@ public class PostService {
      * @return 게시글 리스트
      */
     public PagingResponse<PostResponse> findFreePost(final SearchDto params){
-    	int count = postMapper.count(params);
+    	int count = postMapper.freeCount(params);
         if (count < 1) {
             return new PagingResponse<>(Collections.emptyList(), null);
         }
@@ -125,7 +126,7 @@ public class PostService {
         Pagination pagination = new Pagination(count, params);
         params.setPagination(pagination);
 
-        List<PostResponse> list = postMapper.findFreePost(params);
+        List<PostResponse> list = postMapper.findFree(params);
         return new PagingResponse<>(list, pagination);
     }
 

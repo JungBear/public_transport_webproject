@@ -30,7 +30,7 @@
       <!--/* 리스트 */-->
       <table class="tb tb_col">
         <colgroup>
-         <col style="width:7.5%;" /><col style="width:auto;" /><col style="width:10%;" /><col style="width:15%;" />
+ 		<col style="width:7.5%;" /><col style="width:auto;" /><col style="width:10%;" /><col style="width:15%;" />
         </colgroup>
         <thead>
           <tr>
@@ -71,7 +71,7 @@
     // 게시글 리스트 조회
     function findAllPost() {
 
-      const list = [[${response.list}]];
+      const list = [[ ${response.list} ]];
       if ( !list.length ) {
         document.getElementById('list').innerHTML = '<td colspan="6"><div className="no_data_msg">검색된 결과가 없습니다.</div></td>';
         drawPage();

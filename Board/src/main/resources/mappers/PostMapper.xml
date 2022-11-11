@@ -90,8 +90,8 @@
             id = #{id}
     </delete>
 
-   <!-- 모든 게시글 리스트 조회 -->
-    <select id="findAllPost" parameterType="com.study.common.dto.SearchDto" resultType="com.study.domain.post.PostResponse">
+    <!-- 게시글 리스트 조회 -->
+    <select id="findAll" parameterType="com.study.common.dto.SearchDto" resultType="com.study.domain.post.PostResponse">
         SELECT
             <include refid="postColumns" />
         FROM
@@ -103,8 +103,8 @@
         LIMIT #{pagination.limitStart}, #{recordSize}
     </select>
 
-   <!-- 정보 게시글 리스트 조회 -->
-    <select id="findInfoPost" parameterType="com.study.common.dto.SearchDto" resultType="com.study.domain.post.PostResponse">
+    <!-- 정보게시글 리스트 조회 -->
+    <select id="findInfo" parameterType="com.study.common.dto.SearchDto" resultType="com.study.domain.post.PostResponse">
         SELECT
             <include refid="postColumns" />
         FROM
@@ -113,11 +113,11 @@
             del_yn = 0 AND type = 0
         ORDER BY
             id DESC
-       	LIMIT #{pagination.limitStart}, #{recordSize}
+        LIMIT #{pagination.limitStart}, #{recordSize}
     </select>
     
-       <!-- 자유 게시글 리스트 조회 -->
-    <select id="findFreePost" parameterType="com.study.common.dto.SearchDto" resultType="com.study.domain.post.PostResponse">
+    <!-- 자유게시글 리스트 조회 -->
+    <select id="findFree" parameterType="com.study.common.dto.SearchDto" resultType="com.study.domain.post.PostResponse">
         SELECT
             <include refid="postColumns" />
         FROM
@@ -129,7 +129,7 @@
         LIMIT #{pagination.limitStart}, #{recordSize}
     </select>
 
-   <!-- 모든 게시글 수 카운팅 -->
+    <!-- 게시글 수 카운팅 -->
     <select id="count" parameterType="com.study.common.dto.SearchDto" resultType="int">
         SELECT
             COUNT(*)
@@ -140,7 +140,7 @@
     </select>
     
        <!-- 정보 게시글 수 카운팅 -->
-    <select id="infocount" parameterType="com.study.common.dto.SearchDto" resultType="int">
+    <select id="infoCount" parameterType="com.study.common.dto.SearchDto" resultType="int">
         SELECT
             COUNT(*)
         FROM
@@ -150,7 +150,7 @@
     </select>
     
        <!--자유 게시글 수 카운팅 -->
-    <select id="freecount" parameterType="com.study.common.dto.SearchDto" resultType="int">
+    <select id="freeCount" parameterType="com.study.common.dto.SearchDto" resultType="int">
         SELECT
             COUNT(*)
         FROM
