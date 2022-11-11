@@ -35,7 +35,7 @@ public class PostController {
         
         return "post/write";
     }
-        
+    
     // 신규 게시글 생성
     @PostMapping("/post/save.do")
     public String savePost(final PostRequest params, HttpSession session, Model model) {
