@@ -1,13 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<html>
-<head>
-    <title>Home</title>
-<%@ include file="include/header.jsp" %>
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<head th:replace="~{fragment/header::headerFragment(~{::title})}">
+  <title th:text="Home"></title>
 </head>
-<body>
-<%@ include file="include/menu.jsp" %>
-    <c:if test="${msg == 'success'}">
-    <h2>${sessionScope.name}(${sessionScope.id})님 환영합니다.</h2>
-    </c:if>
+<body >
+
+<th:block layout:fragment="content">
+  <h1>content</h1>
+</th:block>
+
+<th:block layout:fragment="script">
+  <script type="text/javascript">
+    console.log('Home')
+  </script>
+</th:block>
 </body>
 </html>
