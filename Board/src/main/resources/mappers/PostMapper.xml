@@ -167,7 +167,7 @@
             board as a
             , user as b
         WHERE
-            del_yn = 0 AND type = 1 
+            a.del_yn = 0 AND a.type = 1 
             <include refid="search" />
         ORDER BY
             id DESC

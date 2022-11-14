@@ -46,10 +46,21 @@
                 <button type="button" onclick="deletePost();" class="btns btn_bdr1 btn_mid">삭제</button>
                 <a href="#" onClick="history.back()" class="btns btn_bdr3 btn_mid">뒤로</a>
             </p>
-            <!-- 댓글부분  -->
-           
+            <p>&nbsp;</p>
+		<div style="border: 1px solid; width: 600px; padding: 5px">
+		    <form name="saveComment" id = "saveComment"  method="post">
+		        <input type="hidden" name="brdno" value="<c:out value="${boardInfo.brdno}"/>">
+		        작성자: <input type="text" name="rewriter" size="20" maxlength="20"> <br/>
+		        <textarea name="rememo" rows="3" cols="60" maxlength="500" placeholder="댓글을 달아주세요."></textarea>
+		        <a href="#" onclick="fn_formSubmit()">저장</a>
+		    </form>
+		</div>
+
+            
         </section>
     </div> <!--/* .content */-->
+    <!-- 댓글부분  -->
+    
 </th:block>
 <th:block layout:fragment="script">
   <script th:inline="javascript">
@@ -76,6 +87,7 @@
       document.body.append(form);
       document.getElementById('deleteForm').submit();
     }
+
 
     /*]]>*/
   </script>
