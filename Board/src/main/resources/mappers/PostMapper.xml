@@ -41,7 +41,7 @@
                     AND (
                            title LIKE CONCAT('%', #{keyword}, '%')
                         OR content LIKE CONCAT('%', #{keyword}, '%')
-                        OR writer_no LIKE CONCAT('%', #{keyword}, '%')
+                        OR b.nickname LIKE CONCAT('%', #{keyword}, '%')
                     )
                 </otherwise>
             </choose>
@@ -67,36 +67,26 @@
         )
     </insert>
 	
-	 <!-- 정보 게시글 상세정보 조회 -->
+	 <!-- 모든 게시글 상세정보 조회 -->
     <select id="findById" parameterType="long" resultType="com.study.domain.post.PostResponse">
         SELECT
-            <include refid="postColumns" />
+            a.id
+	        , a.type
+	        , a.title
+	        , a.content
+	        , a.writer_no
+	        , a.created_date
+	        , a.modified_date      
+	        , a.del_yn
+	        , a.del_date
+	        , a.notice
+            , b.nickname
         FROM
             board as a
+            , user as b
         WHERE
-            id = #{value}
+            a.id = #{value}
     </select>
-	
-    <!-- 정보 게시글 상세정보 조회 -->
-    <select id="findByInfoTypeId" parameterType="long" resultType="com.study.domain.post.PostResponse">
-        SELECT
-            <include refid="postColumns" />
-        FROM
-            board
-        WHERE
-            id = #{value} AND type = 0
-    </select>
-    
-        <!-- 자유 게시글 상세정보 조회 -->
-    <select id="findByFreeTypeId" parameterType="long" resultType="com.study.domain.post.PostResponse">
-        SELECT
-            <include refid="postColumns" />
-        FROM
-            board
-        WHERE
-            id = #{value} AND type = 1
-    </select>
-
 
     <!-- 게시글 수정 -->
     <update id="update" parameterType="com.study.domain.post.PostRequest">
@@ -109,7 +99,6 @@
         WHERE
             id = #{id}
     </update>
-
 
     <!-- 게시글 삭제 -->
     <delete id="deleteById" parameterType="long">
@@ -138,11 +127,22 @@
     <!-- 정보게시글 리스트 조회 -->
     <select id="findInfo" parameterType="com.study.common.dto.SearchDto" resultType="com.study.domain.post.PostResponse">
         SELECT
-            <include refid="postColumns" />
+			  a.id
+	        , a.type
+	        , a.title
+	        , a.content
+	        , a.writer_no
+	        , a.created_date
+	        , a.modified_date      
+	        , a.del_yn
+	        , a.del_date
+	        , a.notice
+            , b.nickname
         FROM
-            board
+            board as a
+            , user as b
         WHERE
-            del_yn = 0 AND type = 0 
+            a.del_yn = 0 AND a.type = 0 
             <include refid="search" />
         ORDER BY
             id DESC
@@ -152,9 +152,20 @@
     <!-- 자유게시글 리스트 조회 -->
     <select id="findFree" parameterType="com.study.common.dto.SearchDto" resultType="com.study.domain.post.PostResponse">
         SELECT
-            <include refid="postColumns" />
+			  a.id
+	        , a.type
+	        , a.title
+	        , a.content
+	        , a.writer_no
+	        , a.created_date
+	        , a.modified_date      
+	        , a.del_yn
+	        , a.del_date
+	        , a.notice
+            , b.nickname
         FROM
-            board
+            board as a
+            , user as b
         WHERE
             del_yn = 0 AND type = 1 
             <include refid="search" />

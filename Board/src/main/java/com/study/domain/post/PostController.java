@@ -64,7 +64,7 @@ public class PostController {
     // 정보 게시글 리스트 페이지
     @GetMapping("/post/infolist.do")
     public String openInfoPostList(@ModelAttribute("params") final SearchDto params,Model model) {
-    	PagingResponse<PostResponse> response = postService.findAllPost(params);
+    	PagingResponse<PostResponse> response = postService.findInfoPost(params);
     	model.addAttribute("response", response);
         return "post/list";
     } 
