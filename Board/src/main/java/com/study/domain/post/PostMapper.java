@@ -52,25 +52,37 @@ public interface PostMapper {
      * 모든 게시글 리스트 조회
      * @return 게시글 리스트
      */
-    List<PostResponse> findAllPost(SearchDto params);
+    List<PostResponse> findAll(SearchDto params);
     
     /**
      * 정보 게시글 리스트 조회
      * @return 게시글 리스트
      */
-    List<PostResponse> findInfoPost(SearchDto params);
+    List<PostResponse> findInfo(SearchDto params);
     
     /**
      * 자유 게시글 리스트 조회
      * @return 게시글 리스트
      */
-    List<PostResponse> findFreePost(SearchDto params);
-
+    List<PostResponse> findFree(SearchDto params);
 
     /**
-     * 게시글 수 카운팅
+     * 정보 게시글 수 카운팅
      * @return 게시글 수
      */
     int count(SearchDto params);
+    
+    
+    /**
+     * 정보 게시글 수 카운팅
+     * @return 게시글 수
+     */
+    int infoCount(SearchDto params);
+    
+    /**
+     * 자유 게시글 수 카운팅
+     * @return 게시글 수
+     */
+    int freeCount(SearchDto params);
 
 }

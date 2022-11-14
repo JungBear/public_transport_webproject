@@ -1,5 +1,7 @@
 package com.study.domain.post;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -54,16 +56,16 @@ public class PostController {
     // 자유 게시글 리스트 페이지
     @GetMapping("/post/freelist.do")
     public String openFreePostList(@ModelAttribute("params") final SearchDto params,Model model) {
-    	PagingResponse<PostResponse> posts = postService.findFreePost(params);
-        model.addAttribute("posts", posts);
+    	PagingResponse<PostResponse> response = postService.findFreePost(params);
+    	model.addAttribute("response", response);
         return "post/list";
     }
     
     // 정보 게시글 리스트 페이지
     @GetMapping("/post/infolist.do")
     public String openInfoPostList(@ModelAttribute("params") final SearchDto params,Model model) {
-    	PagingResponse<PostResponse> posts = postService.findInfoPost(params);
-        model.addAttribute("posts", posts);
+    	PagingResponse<PostResponse> response = postService.findInfoPost(params);
+    	model.addAttribute("response", response);
         return "post/list";
     } 
     

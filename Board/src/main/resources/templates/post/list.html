@@ -16,13 +16,14 @@
       <div class="search_box">
         <form id="searchForm" onsubmit="return false;" autocomplete="off">
           <div class="sch_group fl">
-            <select title="검색 유형 선택">
-              <option value="">전체 검색</option>
-              <option value="">제목</option>
-              <option value="">내용</option>
+            <select title="검색 유형 선택" name=searchType>
+              <option value="null">전체 검색</option>
+              <option value="title">제목</option>
+              <option value="content">내용</option>
+              <option value="writerNo">작성자</option>
             </select>
-            <input type="text" placeholder="키워드를 입력해 주세요." title="키워드 입력" />
-            <button type="button" class="bt_search"><i class="fas fa-search"></i><span class="skip_info">검색</span></button>
+            <input type="text" name="keyword" placeholder="키워드를 입력해 주세요." title="키워드 입력" />
+            <button type="button" onclick="movePage(1)" class="bt_search"><i class="fas fa-search"></i><span class="skip_info">검색</span></button>
           </div>
         </form>
       </div>
@@ -30,7 +31,7 @@
       <!--/* 리스트 */-->
       <table class="tb tb_col">
         <colgroup>
-         <col style="width:7.5%;" /><col style="width:auto;" /><col style="width:10%;" /><col style="width:15%;" />
+ 		<col style="width:7.5%;" /><col style="width:auto;" /><col style="width:10%;" /><col style="width:15%;" />
         </colgroup>
         <thead>
           <tr>
@@ -64,14 +65,16 @@
     /*<![CDATA[*/
 
     window.onload = () => {
-      findAllPost();
-    }
 
+
+      	findAllPost();
+    }
+    
 
     // 게시글 리스트 조회
     function findAllPost() {
 
-      const list = [[${response.list}]];
+      const list = [[ ${response.list} ]];
       if ( !list.length ) {
         document.getElementById('list').innerHTML = '<td colspan="6"><div className="no_data_msg">검색된 결과가 없습니다.</div></td>';
         drawPage();
@@ -96,8 +99,9 @@
             <tr>
                 <td>${row.notice === 0 ? num-- : '공지'}</td>
                 <td class="tl"><a href="/post/view.do?id=${row.id}">${row.title}</a></td>
-                <td>${row.writerNo}</td>
+                <td>${row.nickname}</td>
                 <td>${dayjs(row.createdDate).format('YYYY-MM-DD HH:mm')}</td>
+
             </tr>
         `;
       })
@@ -147,13 +151,21 @@
 
     // 페이지 이동
     function movePage(page) {
-      const queryParams = {
-        page: (page) ? page : 1,
-        recordSize: 10,
-        pageSize: 10
-      }
-      location.href = location.pathname + '?' + new URLSearchParams(queryParams).toString();
+
+        const form = document.getElementById('searchForm');
+        const queryParams = {
+            page: (page) ? page : 1,
+            recordSize: 10,
+            pageSize: 10,
+            keyword: form.keyword.value,
+            searchType: form.searchType.value,
+        }
+
+        location.href = location.pathname + '?' + new URLSearchParams(queryParams).toString();
     }
+    
+
+
 
     /*]]>*/
   </script>
