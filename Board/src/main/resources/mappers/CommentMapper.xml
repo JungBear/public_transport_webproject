@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.study.domain.comment.CommentMapper">
+
+	<sql id="commentColumns">
+		  id
+		, board_id
+		, board_type
+		, content
+		, depth
+		, group_no
+		, order
+		, writer_no
+		, created_date
+		, modified_date
+		, del_yn
+		, del_date
+		, secret
+	</sql>
+
+	<insert id="insertComment" parameterType="CommentDTO">
+		INSERT INTO comment (
+			<include refid="commentColumns" />
+		) VALUES (
+			  #{id}
+			, #{boardId}
+			, #{boardType}
+			, #{content}
+			, 0
+			, 0
+			, 0
+			, #{writerNo}
+			, Now()
+			, NULL
+			, 0
+			, NULL
+			, 0
+		)
+	</insert>
+
+	<select id="selectCommentDetail" parameterType="long" resultType="CommentDTO">
+		SELECT
+			<include refid="commentColumns" />
+		FROM
+			comment
+		WHERE
+			del_yn = 0
+		AND
+			id = #{id}
+	</select>
+
+	<update id="updateComment" parameterType="CommentDTO">
+		UPDATE comment
+		SET
+			  modified_date = NOW()
+			, content = #{content}
+			, writer_no = #{writerNo}
+		WHERE
+			id = #{id}
+	</update>
+
+	<update id="deleteComment" parameterType="long">
+		UPDATE comment
+		SET
+			  del_yn = 1
+			, del_date = NOW()
+		WHERE
+			id = #{id}
+	</update>
+
+	<select id="selectCommentList" parameterType="CommentDTO" resultType="CommentDTO">
+		SELECT
+			<include refid="commentColumns" />
+		FROM
+			comment
+		WHERE
+			del_yn = 0
+		AND
+			board_id = #{boardId}
+		ORDER BY
+			id DESC,
+			created_date DESC
+	</select>
+
+	<select id="selectCommentTotalCount" parameterType="CommentDTO" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			comment
+		WHERE
+			del_yn = 0
+		AND
+			board_id = #{boardId}
+	</select>
+
+</mapper>

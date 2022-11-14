@@ -49,13 +49,15 @@
             <p>&nbsp;</p>
 		<div style="border: 1px solid; width: 600px; padding: 5px">
 		    <form name="saveComment" id = "saveComment"  method="post">
-		        <input type="hidden" name="brdno" value="<c:out value="${boardInfo.brdno}"/>">
-		        작성자: <input type="text" name="rewriter" size="20" maxlength="20"> <br/>
+		        <input type="hidden" name="brdno" value=[[${post.id}]]>
+		        작성자: <input type="text" name="rewriter"> <br/>
 		        <textarea name="rememo" rows="3" cols="60" maxlength="500" placeholder="댓글을 달아주세요."></textarea>
 		        <a href="#" onclick="fn_formSubmit()">저장</a>
 		    </form>
 		</div>
-
+		<div class="comment">
+		
+		</div>
             
         </section>
     </div> <!--/* .content */-->
