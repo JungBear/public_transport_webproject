@@ -11,7 +11,11 @@ public class WebController {
 	
 	@GetMapping("/")
 	public String index() {
-	    return "home";
+	    return "user/home";
 	}
 	
+	@GetMapping("/signup")
+	public String signup() {
+	    return "user/signup";
+	}
 }
