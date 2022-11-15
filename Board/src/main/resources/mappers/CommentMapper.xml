@@ -9,9 +9,9 @@
 		, board_id
 		, board_type
 		, content
-		, depth
+		, cdepth
 		, group_no
-		, order
+		, corder
 		, writer_no
 		, created_date
 		, modified_date

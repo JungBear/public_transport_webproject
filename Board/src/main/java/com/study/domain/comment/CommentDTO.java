@@ -10,9 +10,9 @@ public class CommentDTO {
 	private int boardId;
 	private int boardType;
 	private String content;
-	private int depth;
+	private int cdepth;
 	private int groupNo;
-	private int order;
+	private int corder;
 	private int writerNo;
 	private LocalDateTime createdDate;
 	private LocalDateTime modifiedDate;

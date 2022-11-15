@@ -26,13 +26,13 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public boolean deleteComment(Long idx) {
+	public boolean deleteComment(Long id) {
 		int queryResult = 0;
 
-		CommentDTO comment = commentMapper.selectCommentDetail(idx);
+		CommentDTO comment = commentMapper.selectCommentDetail(id);
 
 		if (comment != null && comment.getDelYn() == 0) {
-			queryResult = commentMapper.deleteComment(idx);
+			queryResult = commentMapper.deleteComment(id);
 		}
 
 		return (queryResult == 1) ? true : false;
