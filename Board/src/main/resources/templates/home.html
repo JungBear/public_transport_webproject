@@ -14,9 +14,9 @@
 					<li class="inputSelect">
 						<label for="bridge">다리명 : </label>
 						<select name="bridge" id="bridge" class="bridge">
-							<option value="1">성산대교</option>
-							<option value="1">청담대교</option>
-							<option value="1">한남대교</option>
+							<option value="1">성산대교123123123</option>
+							<option value="2">청담대교</option>
+							<option value="3">한남대교</option>
 						</select>
 					</li>
 					<li class="inputSelect">
@@ -27,9 +27,9 @@
 						<label for="selHour">시간 : </label>
 						<select name="selHour" id="selHour"></select>
 					</li>
-					<!--  <li class="inputSelect"><input type="submit" id=selSubmit value="제출하기"></li>-->
+					 <li class="inputSelect"><input type="submit" id=selSubmit value="제출하기"></li>
 					<li class="inputSelect">
-						<button  type="button" id="submitInputSelect" class="btn btn-dark">제출</button>
+						<!-- <button  type="button" id="submitInputSelect" class="btn btn-dark">제출</button> -->
 					</li>
 				</ul>
 			</div>
@@ -83,6 +83,23 @@
 	    strokeStyle: 'solid' // 선의 스타일입니다
 	});
 	polyline2.setMap(map);  
+	
+	function setCenter() {            
+	    // 이동할 위도 경도 위치를 생성합니다 
+	    var moveLatLon = new kakao.maps.LatLng(33.452613, 126.570888);
+	    
+	    // 지도 중심을 이동 시킵니다
+	    map.setCenter(moveLatLon);
+	}
+
+	function panTo() {
+	    // 이동할 위도 경도 위치를 생성합니다 
+	    var moveLatLon = new kakao.maps.LatLng(33.450580, 126.574942);
+	    
+	    // 지도 중심을 부드럽게 이동시킵니다
+	    // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+	    map.panTo(moveLatLon);            
+	}        
 	
 	
 	document.getElementById('selectDate').value = new Date().toISOString().substring(0, 10);;
