@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>SignIn Page</title>
+</head>
+<body>
+	<div class="root">
+  <div class="signin-wrapper form active">
+  
+    <div class="form-wrapper">
+      <h5>Welcome Back  👊</h5>
+      <input type="text" placeholder="Username" class="form-field"></input>
+      <input  type="password" placeholder="Password" class="form-field"></input>
+      <button class="button primary">Sign In</button>
+      <button class="button secondary" id="click-signup">Sign Up</button>
+
+  
+    </div>
+
+  </div>
+  <div class="signup-wrapper form inactive">
+
+<form>
+<div class="form-wrapper">
+      <h3>회원가입</h3>
+      
+	  <input type="text" placeholder="아이디" class="form-field"></input>
+      <input type="text" placeholder="닉네임" class="form-field"></input>
+      <input type="password" placeholder="비밀번호" class="form-field"></input>
+      <input type="password" placeholder="비밀번호 확인" class="form-field"></input>
+      
+      <select name="pwhint" class="form-field">
+          <option value=''>힌트 고르기</option>
+          <option value='34'>어릴 적 내 별명은?</option>
+          <option value='35'>가장 아끼는 물건은?</option>
+         
+        </select>
+      <input type ="text" placeholder="비밀번호 힌트"class="form-field"></input>
+      
+      <input type="email" placeholder="이메일" class="form-field"></input>
+      <input type="text" placeholder="이름" class="form-field"></input>
+      <input type="date"  class=form-field ></input>
+      
+     
+     
+     <br>
+      
+      
+      <button class="button primary">회원가입 하기</button>
+      <button class="button secondary" id="click-signin">로그인하러 가기</button>
+	
+    </div>
+</form>
+  </div>
+</div>
+
+<style>
+.root {
+	display: flex;
+	width: 100%;
+	height: 100%;
+}
+
+.mobile-root {
+	flex-direction: column;
+}
+
+.mobile-root .inactive {
+	display: none;
+}
+
+.signin-wrapper {
+	flex-grow: 1;
+	background: #d5d5d5;
+	transition: all 0.32s ease-in;
+}
+
+.signup-wrapper {
+	flex-grow: 1;
+	background: #0F3758;
+	transition: all 0.32s ease-in-out;
+}
+
+.active {
+	flex-grow: 6;
+}
+
+.active.form {
+	z-index: 5;
+}
+
+.inactive {
+	pointer-events: none;
+	filter: blur(2px) grayscale(80%);
+	transform: scale(1.1);
+}
+
+.inactive .form-wrapper {
+	filter: opacity(55%);
+}
+
+html, body {
+	font-family: "Roboto";
+	height: 100vh;
+	padding: 0;
+	margin: 0;
+}
+
+h5 {
+	color: #212121;
+	font-size: 20px;
+	margin: 15px 0 30px 0;
+	text-align: center;
+}
+
+.form, .form-wrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.form-wrapper {
+	background-color: white;
+	width: 300px;
+	height: 500px;
+	padding: 20px 0;
+	margin: 20px auto;
+	border-radius: 15px;
+}
+
+.form-wrapper button {
+	cursor: pointer;
+	font-weight: bold;
+	width: 230px;
+	margin: 0 35px 20px;
+	height: 45px;
+	padding: 6px 15px;
+	border-radius: 5px;
+	outline: none;
+	border: none;
+	font-size: 14px;
+}
+
+.form-wrapper button.primary {
+	color: white;
+	background: #0F3758;
+}
+
+.form-wrapper button.primary:hover {
+	opacity: 0.9;
+}
+
+.form-wrapper button.secondary {
+	background: white;
+	color: #0F3758;
+}
+
+.form-wrapper button.secondary:hover {
+	background: #f5f5f5;
+}
+
+.form-wrapper .form-field {
+	font-weight: bold;
+	width: 200px;
+	margin: 0 35px 20px;
+	height: 35px;
+	padding: 6px 15px;
+	border-radius: 5px;
+	outline: none;
+	border: none;
+	background: #f5f5f5;
+	color: #748194;
+	font-size: 14px;
+}
+
+.form-wrapper p {
+	color: #424242;
+	font-size: 14px;
+	text-align: center;
+}
+
+.form-wrapper p a {
+	cursor: pointer;
+	color: #0F3758;
+}
+
+.form-wrapper p a:hover {
+	color: #009688;
+}
+</style>
+<script src="https://code.jquery.com/jquery-3.6.0.slim.js" 
+integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" 
+crossorigin="anonymous"></script>
+	<script>
+	 	$( "#click-signup" ).click(function() {
+		  $(".signup-wrapper").addClass('active')
+		  $(".signin-wrapper").removeClass('active')
+		  
+		  $(".signin-wrapper").addClass('inactive')
+		  $(".signup-wrapper").removeClass('inactive')
+		});
+	
+		$( "#click-signin" ).click(function() {
+		  $(".signin-wrapper").addClass('active')
+		  $(".signup-wrapper").removeClass('active')
+		  
+		  $(".signup-wrapper").addClass('inactive')
+		  $(".signin-wrapper").removeClass('inactive')
+		});
+	
+		$("#mobile").click(function(){
+		  $(".root").addClass('mobile-root')
+		})
+	
+		$("#desk").click(function(){
+		  $(".root").removeClass('mobile-root')
+		})
+ 	</script>
+ 	
+</body>
+</html>
