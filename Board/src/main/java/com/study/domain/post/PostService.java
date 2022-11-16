@@ -24,7 +24,7 @@ public class PostService {
      * @return Generated PK
      */
     @Transactional
-    public Long savePost(final PostRequest params) {
+    public int savePost(final PostRequest params) {
         postMapper.save(params);
         return params.getId();
     }
@@ -62,7 +62,7 @@ public class PostService {
      * @return PK
      */
     @Transactional
-    public Long updatePost(final PostRequest params) {
+    public int updatePost(final PostRequest params) {
         postMapper.update(params);
         return params.getId();
     }

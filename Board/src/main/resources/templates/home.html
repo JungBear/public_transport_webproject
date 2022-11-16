@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/basic">
+<th:block layout:fragment="title">
+  <title>메인 페이지</title>
+</th:block>
+<th:block layout:fragment="content">
+	<div class="page_tits">
+    	<h3>혼잡도분석</h3>
+  	</div>
+	<div id="selectForm">
+		<form id="selectInput">
+			<div>
+				<ul class="class1">
+					<li class="inputSelect">
+						<label for="bridge">다리명 : </label>
+						<select name="bridge" id="bridge" class="bridge">
+							<option value="1">성산대교</option>
+							<option value="1">청담대교</option>
+							<option value="1">한남대교</option>
+						</select>
+					</li>
+					<li class="inputSelect">
+						<label for="selectDate" id="selectDateLabel">날짜 : </label>
+						<input type="date" name="selectDate" id="selectDate" >
+					</li>
+					<li class="inputSelect">
+						<label for="selHour">시간 : </label>
+						<select name="selHour" id="selHour"></select>
+					</li>
+					<!--  <li class="inputSelect"><input type="submit" id=selSubmit value="제출하기"></li>-->
+					<li class="inputSelect">
+						<button  type="button" id="submitInputSelect" class="btn btn-dark">제출</button>
+					</li>
+				</ul>
+			</div>
+		</form>
+	</div>
+	<div id="map" style="width:100%;height:600px;"></div>
+	성산대교 중앙 : 37.552167, 126.891178
+	성산대교 북단(강변북로) -> 남단(올림픽대로) : 37.556064, 126.893470  ->   37.548038, 126.888631
+	성산대교 남단(올림픽대로) -> 북단(강변북로) : 37.556014, 126.893595  ->   37.547991, 126.888734
+	</th:block>
+
+<th:block layout:fragment="script">
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f8da8382da627ef7cfcaa96e79115e49"></script>
+<script th:inline="javascript">
+
+/*<![CDATA[*/
+	
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	mapOption = { 
+	    center: new kakao.maps.LatLng(37.552167, 126.891178), // 지도의 중심좌표
+	    draggable: false, // 지도를 생성할때 지도 이동 및 확대/축소를 막으려면 draggable: false 옵션을 추가하세요
+	    disableDoubleClickZoom: true,
+	    level: 4  // 지도의 확대 레벨
+	};
+	
+	var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+	// 지도에 표시할 선을 생성합니다
+	
+	var linePath1 = [
+	    new kakao.maps.LatLng(37.556064, 126.893470),
+	    new kakao.maps.LatLng(37.548038, 126.888631) 
+	];
+	var polyline1 = new kakao.maps.Polyline({
+	    path: linePath1, // 선을 구성하는 좌표배열 입니다
+	    strokeWeight:  6, // 선의 두께 입니다
+	    strokeColor: '#FFAE00', // 선의 색깔입니다
+	    strokeOpacity: 0.8, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+	    strokeStyle: 'solid' // 선의 스타일입니다
+	});
+	polyline1.setMap(map);  
+	
+	var linePath2 = [
+	    new kakao.maps.LatLng(37.556014, 126.893595),
+	    new kakao.maps.LatLng(37.547991, 126.888734) 
+	];
+	var polyline2 = new kakao.maps.Polyline({
+	    path: linePath2, // 선을 구성하는 좌표배열 입니다
+	    strokeWeight: 6, // 선의 두께 입니다
+	    strokeColor: '#FF0000', // 선의 색깔입니다
+	    strokeOpacity: 0.8, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+	    strokeStyle: 'solid' // 선의 스타일입니다
+	});
+	polyline2.setMap(map);  
+	
+	
+	document.getElementById('selectDate').value = new Date().toISOString().substring(0, 10);;
+	 
+	var $select = jQuery("#selHour");
+	 
+	for (var hr = 0; hr < 24; hr++) {
+		var rhr = hr+1 
+	  	var hrStr = rhr.toString().padStart(2, "0")+ ":";
+	 
+	 	var val = hrStr + "00";
+	  $select.append('<option val="' + val + '">' + val + '</option>');
+	 
+	 
+	}
+
+	 
+	    /*]]>*/
+</script>
+
+</th:block>
+</html>
