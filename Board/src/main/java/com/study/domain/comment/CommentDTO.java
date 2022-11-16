@@ -1,11 +1,18 @@
 package com.study.domain.comment;
 
-import java.time.LocalDateTime;
+
+
+import java.sql.Date;
 
 import lombok.Data;
 
+
+
+
 @Data
 public class CommentDTO {
+	
+	
 	private int id;
 	private int boardId;
 	private int boardType;
@@ -14,10 +21,10 @@ public class CommentDTO {
 	private int groupNo;
 	private int corder;
 	private int writerNo;
-	private LocalDateTime createdDate;
-	private LocalDateTime modifiedDate;
+	private Date createdDate;
+	private Date modifiedDate;
 	private int delYn;
-	private LocalDateTime delDate;
+	private Date delDate;
 	private int secret;
 	
 }

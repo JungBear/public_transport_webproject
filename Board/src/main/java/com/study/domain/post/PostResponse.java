@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class PostResponse {
 
-    private Long id;               // PK
+    private int id;               // PK
     private int type;                 //게시글 분류
     private String title;                  // 제목
     private String content;                // 내용

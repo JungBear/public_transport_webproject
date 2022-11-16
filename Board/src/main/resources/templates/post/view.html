@@ -46,17 +46,29 @@
                 <button type="button" onclick="deletePost();" class="btns btn_bdr1 btn_mid">삭제</button>
                 <a href="#" onClick="history.back()" class="btns btn_bdr3 btn_mid">뒤로</a>
             </p>
-            <p>&nbsp;</p>
-		<div style="border: 1px solid; width: 600px; padding: 5px">
-		    <form name="saveComment" id = "saveComment"  method="post">
-		        <input type="hidden" name="brdno" value=[[${post.id}]]>
-		        작성자: <input type="text" name="rewriter"> <br/>
-		        <textarea name="rememo" rows="3" cols="60" maxlength="500" placeholder="댓글을 달아주세요."></textarea>
-		        <a href="#" onclick="fn_formSubmit()">저장</a>
-		    </form>
-		</div>
+
 		<div class="comment">
-		
+			<div class="box-content">
+			<div class="card-content">
+				<div class="clearfix">
+					<h4 class="box-title pull-left">Comment</h4>
+					<!-- /.box-title -->
+				</div>
+
+				<form class="form-horizontal form-view">
+					<div class="input-group margin-bottom-20">
+						<input type="text" id="content" class="form-control" />
+						<div class="input-group-btn">
+							<button  type="button" class="btn waves-effect waves-light" th:onclick="insertComment([[ ${post.id} ]])">
+							<i class="fa fa-commenting" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<ul class="notice-list"></ul>
+				</form>
+			</div>
+			<!-- /.card-content -->
+		</div>
 		</div>
             
         </section>
@@ -68,6 +80,90 @@
   <script th:inline="javascript">
     /*<![CDATA[*/
 
+    $(function() {
+		printCommentList();
+		
+
+	});
+    
+    
+    
+    document.getElementById("content").addEventListener('keydown', event => {
+       /*  console.log(event.target.value); */
+   //   console.log(event.code);
+        if (event.code === 'Enter') {
+ //       	insertComment([[ ${post.id} ]]);
+        }
+    });
+
+    
+    	
+    function insertComment(boardId) {
+//    	alert("insertComment 실행됨");
+    	var content = document.getElementById("content");
+//    	alert("content.value : "+content.value);
+    	if (content.value == null || content.value=='') {	//비어있으면
+//    		alert("if문안");
+    		content.setAttribute("placeholder", "댓글을 입력해 주세요.");
+    		content.focus();
+    		return false;
+    	}
+    //  alert("uri가져오기전");
+    	var uri = /*[[ @{/comments} ]]*/null;
+    	var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "POST"};
+    	var params = {"boardId": boardId, "content": content.value, "writerNo": 1};
+    	
+    	alert(JSON.stringify(params));
+    	
+    	
+//    	alert("아작스전");
+    	$.ajax({
+    		url: uri,
+    		type: "POST",
+    		headers: headers,
+    		dataType: "json",
+    		data: params,
+	
+    		success: function(response) {
+    			if (response.result == false) {
+    				alert("댓글 등록에 실패하였습니다.");
+    				return false;
+    			}
+
+    			printCommentList();
+    			content.value = "";
+    		},
+    		error: function(xhr, status, error) {
+    			console.log("code:"+xhr.status+"\n"+"message:"+xhr.responseText+"\n"+"error:"+error);
+    			alert("code:"+xhr.status+"\n"+"message:"+xhr.responseText+"\n"+"error:"+error);
+    			return false;
+    		}
+    	});
+    }
+    
+    			
+    	function printCommentList() {
+
+    		var uri = /*[[ @{/comments}+ '?boardId=' + ${post.id} ]]*/null;
+   			$.get(uri, function(response) {
+   				if (response!=null) {
+   					var commentsHtml = "";
+   					$(response.commentList).each(function(id, comment) {
+   						commentsHtml += `
+   							<li>
+   								<span class="name">${comment.nickname}</span>
+   								<span class="desc">${comment.content}</span>
+   								<span class="time">${moment(comment.createdDate).format('YYYY-MM-DD HH:mm:ss')}</span>
+   								<button type="button" class="btn btn-xs btn-circle"><i class="fa fa-close" aria-hidden="true"></i></button>
+   							</li>
+   						`;
+   					});
+
+   					$(".notice-list").html(commentsHtml);
+   				}
+   			}, "json");
+   		}
+    		/*[- end of function -]*/
     // 게시글 삭제
     function deletePost() {
       const id = [[ ${post.id} ]];

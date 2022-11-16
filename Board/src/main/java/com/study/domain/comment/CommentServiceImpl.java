@@ -17,6 +17,7 @@ public class CommentServiceImpl implements CommentService {
 		int queryResult = 0;
 
 		if (params.getId() == 0) {
+			System.out.println("서비스 인서트 실행전");
 			queryResult = commentMapper.insertComment(params);
 		} else {
 			queryResult = commentMapper.updateComment(params);
@@ -26,7 +27,7 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public boolean deleteComment(Long id) {
+	public boolean deleteComment(int id) {
 		int queryResult = 0;
 
 		CommentDTO comment = commentMapper.selectCommentDetail(id);

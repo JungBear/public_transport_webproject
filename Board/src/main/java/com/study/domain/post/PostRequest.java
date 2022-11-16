@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class PostRequest {
 
-    private Long id;             // PK
+    private int id;             // PK
     private int type;            // 게시글의 타입
     private String title;        // 제목
     private String content;      // 내용

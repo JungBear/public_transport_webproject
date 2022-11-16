@@ -42,13 +42,27 @@
 
 	<select id="selectCommentDetail" parameterType="long" resultType="com.study.domain.comment.CommentDTO">
 		SELECT
-			<include refid="commentColumns" />
+			a.id
+		, a.board_id
+		, a.board_type
+		, a.content
+		, a.cdepth
+		, a.group_no
+		, a.corder
+		, a.writer_no
+		, a.created_date
+		, a.modified_date
+		, a.del_yn
+		, a.del_date
+		, a.secret
+		, b.nickname
 		FROM
-			comment
+			comment as a
+			, user as b
 		WHERE
-			del_yn = 0
+			a.del_yn = 0
 		AND
-			id = #{id}
+			a.id = #{id}
 	</select>
 
 	<update id="updateComment" parameterType="com.study.domain.comment.CommentDTO">
@@ -56,7 +70,6 @@
 		SET
 			  modified_date = NOW()
 			, content = #{content}
-			, writer_no = #{writerNo}
 		WHERE
 			id = #{id}
 	</update>
@@ -72,16 +85,30 @@
 
 	<select id="selectCommentList" parameterType="com.study.domain.comment.CommentDTO" resultType="com.study.domain.comment.CommentDTO">
 		SELECT
-			<include refid="commentColumns" />
+		a.id
+		, a.board_id
+		, a.board_type
+		, a.content
+		, a.cdepth
+		, a.group_no
+		, a.corder
+		, a.writer_no
+		, a.created_date
+		, a.modified_date
+		, a.del_yn
+		, a.del_date
+		, a.secret
+		, b.nickname
 		FROM
-			comment
+			comment as a
+			, user as b
 		WHERE
-			del_yn = 0
+			a.del_yn = 0
 		AND
-			board_id = #{boardId}
+			a.board_id = #{boardId}
 		ORDER BY
-			id DESC,
-			created_date DESC
+			a.id DESC,
+			a.created_date DESC
 	</select>
 
 	<select id="selectCommentTotalCount" parameterType="com.study.domain.comment.CommentDTO" resultType="int">

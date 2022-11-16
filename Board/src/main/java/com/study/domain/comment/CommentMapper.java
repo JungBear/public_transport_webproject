@@ -15,11 +15,11 @@ public interface CommentMapper {
 	/*
 	 * @param = 댓글번호
 	 */
-	public CommentDTO selectCommentDetail(Long id);
+	public CommentDTO selectCommentDetail(int id);
 
 	public int updateComment(CommentDTO params);
 
-	public int deleteComment(Long id);
+	public int deleteComment(int id);
 
 	public List<CommentDTO> selectCommentList(CommentDTO params);
 

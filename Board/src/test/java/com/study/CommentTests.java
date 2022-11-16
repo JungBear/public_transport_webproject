@@ -21,11 +21,11 @@ class CommentTests {
 
 	@Test
 	public void registerComments() {
-		int number = 20;
+		int number = 3;
 
 		for (int i = 1; i <= number; i++) {
 			CommentDTO params = new CommentDTO();
-			params.setBoardId(12); // 댓글을 추가할 게시글 번호
+			params.setBoardId(11); // 댓글을 추가할 게시글 번호
 			params.setBoardType(0);
 			params.setContent(i + "번 댓글을 추가합니다!");
 			params.setWriterNo(1);
@@ -38,7 +38,7 @@ class CommentTests {
 
 	@Test
 	public void deleteComment() {
-		commentService.deleteComment((long) 10); // 삭제할 댓글 번호
+		commentService.deleteComment(10); // 삭제할 댓글 번호
 
 		getCommentList();
 	}
