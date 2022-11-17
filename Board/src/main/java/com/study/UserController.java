@@ -17,8 +17,4 @@ public class UserController {
 		return "user/signinAndsignup";
 	}
 	
-	@GetMapping("/")
-	public String main() {
-		return "home";
-	}
 }

@@ -59,7 +59,7 @@
 					<div class="input-group margin-bottom-20">
 						<input type="text" id="content" class="form-control" />
 						<div class="input-group-btn">
-							<button  type="button" class="btn waves-effect waves-light" th:onclick="insertComment([[ ${post.id} ]])">
+							<button  type="submit" class="btn waves-effect waves-light" th:onclick="insertComment([[ ${post.id} ]])">
 							<i class="fa fa-commenting" aria-hidden="true"></i>
 							</button>
 						</div>
@@ -123,7 +123,7 @@
     		headers: headers,
     		dataType: "json",
     		data: params,
-	
+			
     		success: function(response) {
     			if (response.result == false) {
     				alert("댓글 등록에 실패하였습니다.");

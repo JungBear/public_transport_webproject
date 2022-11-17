@@ -14,9 +14,9 @@
 					<li class="inputSelect">
 						<label for="bridge">다리명 : </label>
 						<select name="bridge" id="bridge" class="bridge">
-							<option value="1">성산대교</option>
-							<option value="2">청담대교</option>
-							<option value="3">한남대교</option>
+							<option value="성산대교">성산대교</option>
+							<option value="청담대교">청담대교</option>
+							<option value="한남대교">한남대교</option>
 						</select>
 					</li>
 					<li class="inputSelect">
@@ -27,18 +27,15 @@
 						<label for="selHour">시간 : </label>
 						<select name="selHour" id="selHour"></select>
 					</li>
-					 <li class="inputSelect"><input type="submit" id=selSubmit value="제출하기"></li>
+					 <!-- <li class="inputSelect"><input type="submit" id=selSubmit value="검색"></li> -->
 					<li class="inputSelect">
-						<!-- <button  type="button" id="submitInputSelect" class="btn btn-dark">제출</button> -->
+						<button onclick="submitInputSelect()" class="btn btn-dark">검색</button>
 					</li>
 				</ul>
 			</div>
 		</form>
 	</div>
 	<div id="map" style="width:100%;height:600px;"></div>
-	성산대교 중앙 : 37.552167, 126.891178
-	성산대교 북단(강변북로) -> 남단(올림픽대로) : 37.556064, 126.893470  ->   37.548038, 126.888631
-	성산대교 남단(올림픽대로) -> 북단(강변북로) : 37.556014, 126.893595  ->   37.547991, 126.888734
 	</th:block>
 
 <th:block layout:fragment="script">
@@ -46,75 +43,139 @@
 <script th:inline="javascript">
 
 /*<![CDATA[*/
+    
 	
-	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-	mapOption = { 
-	    center: new kakao.maps.LatLng(37.552167, 126.891178), // 지도의 중심좌표
-	    draggable: false, // 지도를 생성할때 지도 이동 및 확대/축소를 막으려면 draggable: false 옵션을 추가하세요
-	    disableDoubleClickZoom: true,
-	    level: 4  // 지도의 확대 레벨
-	};
 	
-	var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-	// 지도에 표시할 선을 생성합니다
-	
-	var linePath1 = [
-	    new kakao.maps.LatLng(37.556064, 126.893470),
-	    new kakao.maps.LatLng(37.548038, 126.888631) 
-	];
-	var polyline1 = new kakao.maps.Polyline({
-	    path: linePath1, // 선을 구성하는 좌표배열 입니다
-	    strokeWeight:  6, // 선의 두께 입니다
-	    strokeColor: '#FFAE00', // 선의 색깔입니다
-	    strokeOpacity: 0.8, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-	    strokeStyle: 'solid' // 선의 스타일입니다
-	});
-	polyline1.setMap(map);  
-	
-	var linePath2 = [
-	    new kakao.maps.LatLng(37.556014, 126.893595),
-	    new kakao.maps.LatLng(37.547991, 126.888734) 
-	];
-	var polyline2 = new kakao.maps.Polyline({
-	    path: linePath2, // 선을 구성하는 좌표배열 입니다
-	    strokeWeight: 6, // 선의 두께 입니다
-	    strokeColor: '#FF0000', // 선의 색깔입니다
-	    strokeOpacity: 0.8, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-	    strokeStyle: 'solid' // 선의 스타일입니다
-	});
-	polyline2.setMap(map);  
-	
-	function setCenter() {            
-	    // 이동할 위도 경도 위치를 생성합니다 
-	    var moveLatLon = new kakao.maps.LatLng(33.452613, 126.570888);
-	    
-	    // 지도 중심을 이동 시킵니다
-	    map.setCenter(moveLatLon);
+	function drawMap(bridge){
+		switch (bridge){
+		case "성산대교":
+			var latitude = 37.552167;
+			var longitude = 126.891178;
+			break;
+		case "청담대교":
+			var latitude = 37.526490;
+			var longitude = 127.064388;
+			break;
+		case "한남대교":
+			var latitude = 37.527201;
+			var longitude = 127.012782;
+			break;
+		default:
+			var latitude = 37.552167;
+			var longitude = 126.891178;
+			break;
+		}
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		mapOption = { 
+		    center: new kakao.maps.LatLng(latitude, longitude), // 지도의 중심좌표
+//		    draggable: false, // 지도를 생성할때 지도 이동 및 확대/축소를 막으려면 draggable: false 옵션을 추가하세요
+//		    disableDoubleClickZoom: true,
+		    level: 4  // 지도의 확대 레벨
+		};
+		
+		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+		// 지도에 표시할 선을 생성합니다
+		
+		var linePath1 = [
+		    new kakao.maps.LatLng(37.556064, 126.893470),
+		    new kakao.maps.LatLng(37.548038, 126.888631) 
+		];
+		var polyline1 = new kakao.maps.Polyline({
+		    path: linePath1, // 선을 구성하는 좌표배열 입니다
+		    strokeWeight:  6, // 선의 두께 입니다
+		    strokeColor: '#FFAE00', // 선의 색깔입니다
+		    strokeOpacity: 0.8, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+		    strokeStyle: 'solid' // 선의 스타일입니다
+		});
+		polyline1.setMap(map);  
+		
+		var linePath2 = [
+		    new kakao.maps.LatLng(37.556014, 126.893595),
+		    new kakao.maps.LatLng(37.547991, 126.888734) 
+		];
+		var polyline2 = new kakao.maps.Polyline({
+		    path: linePath2, // 선을 구성하는 좌표배열 입니다
+		    strokeWeight: 6, // 선의 두께 입니다
+		    strokeColor: '#FF0000', // 선의 색깔입니다
+		    strokeOpacity: 0.8, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+		    strokeStyle: 'solid' // 선의 스타일입니다
+		});
+		polyline2.setMap(map);  
 	}
 
-	function panTo() {
-	    // 이동할 위도 경도 위치를 생성합니다 
-	    var moveLatLon = new kakao.maps.LatLng(33.450580, 126.574942);
-	    
-	    // 지도 중심을 부드럽게 이동시킵니다
-	    // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
-	    map.panTo(moveLatLon);            
-	}        
-	
-	
-	document.getElementById('selectDate').value = new Date().toISOString().substring(0, 10);;
-	 
+	document.getElementById('selectDate').value = new Date().toISOString().substring(0, 10);; 
 	var $select = jQuery("#selHour");
-	 
 	for (var hr = 0; hr < 24; hr++) {
-		var rhr = hr+1 
-	  	var hrStr = rhr.toString().padStart(2, "0")+ ":";
-	 
-	 	var val = hrStr + "00";
-	  $select.append('<option val="' + val + '">' + val + '</option>');
-	 
-	 
+	  	var hrStr = hr.toString().padStart(2, "0")+ ":";
+		var val = hrStr + "00";
+		$select.append('<option val="' + val + '">' + val + '</option>');
+
 	}
+
+	function submitInputSelect() {
+//    	alert("insertComment 실행됨");
+    	var bridge = document.getElementById("bridge").value;
+//		alert(typeof bridge);
+//    	alert(bridge);
+    	var selectDate = document.getElementById("selectDate").value;
+//    	alert(date);
+    	var selHour = document.getElementById("selHour").value;
+//    	alert(time);
+// 		alert("uri가져오기전");
+//		alert(typeof date);
+//		alert(typeof time);
+    	var uri = /*[[ @{/congestionrate} ]]*/null;
+    	var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "POST"};
+    	var params = {"bridge": bridge, "selectDate": selectDate, "selHour": selHour};	
+//	  	alert(JSON.stringify(params));  	
+//    	alert("아작스전");
+    	$.ajax({
+    		url: uri,
+    		type: "GET",
+    		headers: headers,
+ 	 		dataType: "json",
+    		data: params,
+    		success: function(response) {
+    			var birdge = response[bridge];
+//    			alert(bridge);
+//   			alert(congestionRate);
+//    			alert(bridge)
+    			switch(bridge){
+    			case "성산대교":
+    				alert("case시작");
+    				drawMap(bridge);
+    				alert("맵그림");
+    				break;
+    			case "청담대교":
+    				alert("case시작");
+    				drawMap(bridge);
+    				alert("맵그림");
+    				break;
+    			case "한남대교":
+    				alert("case시작");
+    				drawMap(bridge);
+    				alert("맵그림");
+    				break;
+    			}
+
+    			printCommentList();
+    			content.value = "";
+    		},
+    		error: function(xhr, status, error) {
+    			console.log("code:"+xhr.status+"\n"+"message:"+xhr.responseText+"\n"+"error:"+error);
+    			alert("code:"+xhr.status+"\n"+"message:"+xhr.responseText+"\n"+"error:"+error);
+    			return false;
+    		}
+    	});
+    };
+    function panTo(latitude,longitude) {
+        // 이동할 위도 경도 위치를 생성합니다 
+        var moveLatLon = new kakao.maps.LatLng(latitude, longitude);
+        
+        // 지도 중심을 부드럽게 이동시킵니다
+        // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+        map.panTo(moveLatLon);            
+    };    
 
 	 
 	    /*]]>*/

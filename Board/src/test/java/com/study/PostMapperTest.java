@@ -19,30 +19,30 @@ public class PostMapperTest {
     @Autowired
     PostMapper postMapper;
 
-//    @Test
-//    void save() {
-//        PostRequest params = new PostRequest();
-//        params.setType(1);
-//        params.setTitle("정보게시판 1번 게시글 제목");
-//        params.setContent("정보게시판 1번 게시글 내용");
-//        params.setWriterNo(1);
-//        postMapper.save(params);
-//
-//        List<PostResponse> posts = postMapper.findAllPost(null);
-//        System.out.println("전체 게시글 개수는 : " + posts.size() + "개입니다.");
-//    }
-
     @Test
-    void findByInfoTypeId() {
-        PostResponse post = postMapper.findByInfoTypeId(2L);
-        try {
-            String postJson = new ObjectMapper().registerModule(new JavaTimeModule()).writeValueAsString(post);
-            System.out.println(postJson);
+    void save() {
+        PostRequest params = new PostRequest();
+        params.setType(1);
+        params.setTitle("정보게시판 1번 게시글 제목");
+        params.setContent("정보게시판 1번 게시글 내용");
+        params.setWriterNo(1);
+        postMapper.save(params);
 
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
+        List<PostResponse> posts = postMapper.findFree(null);
+        System.out.println("전체 게시글 개수는 : " + posts.size() + "개입니다.");
     }
+
+//    @Test
+//    void findByInfoTypeId() {
+//        PostResponse post = postMapper.findByInfoTypeId(2L);
+//        try {
+//            String postJson = new ObjectMapper().registerModule(new JavaTimeModule()).writeValueAsString(post);
+//            System.out.println(postJson);
+//
+//        } catch (JsonProcessingException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
    
     
 //    @Test
