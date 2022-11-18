@@ -5,10 +5,10 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface MainMapper {
+public interface BridgeMapper {
 	/*
 	 * @param = 분석정보
 	 */
-	public List<MainDTO> getResult(MainDTO params);
+	public List<BridgeDTO> getResult(BridgeDTO params);
 
 }

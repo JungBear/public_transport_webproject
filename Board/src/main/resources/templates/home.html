@@ -12,8 +12,8 @@
 			<div>
 				<ul class="class1">
 					<li class="inputSelect">
-						<label for="bridge">다리명 : </label>
-						<select name="bridge" id="bridge" class="bridge">
+						<label for="birdge">다리명 : </label>
+						<select name="birdge" id="birdge" class="bridge">
 							<option value="성산대교">성산대교</option>
 							<option value="청담대교">청담대교</option>
 							<option value="한남대교">한남대교</option>
@@ -29,7 +29,7 @@
 					</li>
 					 <!-- <li class="inputSelect"><input type="submit" id=selSubmit value="검색"></li> -->
 					<li class="inputSelect">
-						<button onclick="submitInputSelect()" class="btn btn-dark">검색</button>
+						<button onclick="submitInputSelect()" type = "button" class="btn btn-dark">검색</button>
 					</li>
 				</ul>
 			</div>
@@ -44,7 +44,7 @@
 
 /*<![CDATA[*/
  	window.onload = () => {
-		drawMap(bridge);
+		drawMap("성산대교");
     }
 	
 	
@@ -103,9 +103,7 @@
 		    strokeOpacity: 0.8, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
 		    strokeStyle: 'solid' // 선의 스타일입니다
 		});
-		alert("지도에 맵 세팅하기 직전");
 		polyline2.setMap(map);
-		console.log("지도에 맵 세팅완료");
 	}
 
 	//document.getElementById('selectDate').value = new Date().toISOString().substring(0, 10);	//현재 날짜로 지정 
@@ -122,36 +120,36 @@
 
 	//검색버튼 눌렀을때 실행
 	function submitInputSelect() {
+		
 //    	alert("insertComment 실행됨");
-    	var bridge = document.getElementById("bridge").value;
+    	var name = document.getElementById("birdge").value;
 //		alert(typeof bridge);
 //    	alert(bridge);
-    	var selectDate = document.getElementById("selectDate").value;
+    	var date = document.getElementById("selectDate").value;
 //    	alert(date);
 	//    	var selHour = document.getElementById("selHour").value;
-    	var selHour = '12:00';	//임시로 데이터 있는 곳
+   		var time = '12:00:00';	//임시로 데이터 있는 곳
     	
 //    	alert(time);
 // 		alert("uri가져오기전");
 //		alert(typeof date);
 //		alert(typeof time);
     	var uri = /*[[ @{/congestionrate} ]]*/null;
-    	var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "GET"};
-    	var params = {"bridge": bridge, "selectDate": selectDate, "selHour": selHour};	
+    	var headers = {"Content-Type": "application/json"};
+    	var params = {"name": name, "date": date, "time": time};
+    	alert("아작스로 넘기는 파라미터 : "+params);
 //	  	alert(JSON.stringify(params));  	
 //    	alert("아작스전");
     	$.ajax({
-    		
     		url: uri,
     		type: "GET",
     		headers: headers,
  	 		dataType: "json",
     		data: params,
     		success: function(response) {		
-    			alert(bridge);
 //   			alert(congestionRate);
-//    			alert(JSON.stringify(response));
-   				drawMap(bridge);
+    			alert(JSON.stringify(response));
+   				drawMap(name);
     			}
     		,
     		error: function(xhr, status, error) {

@@ -6,7 +6,7 @@ import java.sql.Time;
 import lombok.Data;
 
 @Data
-public class MainDTO {
+public class BridgeDTO {
 	private String name;
 	private String startPosition;
 	private Date date;

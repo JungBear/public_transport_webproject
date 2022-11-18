@@ -312,7 +312,7 @@ input[readonly], select[readonly], textarea[readonly], .readonly, input[disabled
 /*메인페이지 */
 .class1{display:inline-block;position:relative;background-color:#cbd0d9;width:100%}
 .inputSelect{padding: 10px 20px; display:inline-block}
-#bridge{width: 158px;}
+#name{width: 158px;}
 #selectDate{width: 158px;}
 #selHour{width: 158px;}
 #selSubmit{width:158px;}

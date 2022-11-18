@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service;
 public class MainServicelmpl implements MainService{
 	
 	@Autowired
-	private MainMapper mainMapper;
+	private BridgeMapper bridgeMapper;
 	
 	@Override
-	public List<MainDTO> getcongestionRate(MainDTO params) {
-		return mainMapper.getResult(params);
+	public List<BridgeDTO> getcongestionRate(BridgeDTO params) {
+		return bridgeMapper.getResult(params);
 	}
 	
 	

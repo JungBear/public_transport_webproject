@@ -7,18 +7,18 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.study.domain.main.MainDTO;
-import com.study.domain.main.MainMapper;
+import com.study.domain.main.BridgeDTO;
+import com.study.domain.main.BridgeMapper;
 
 @SpringBootTest
 public class MainMapperTest {
 
 	@Autowired
-	MainMapper mainMapper;
+	BridgeMapper mainMapper;
 
 	@Test
 	void getResult() {
-		MainDTO main = new MainDTO();
+		BridgeDTO main = new BridgeDTO();
 		main.setName("성산대교");
 		Date d = Date.valueOf("2022-11-16");
 		main.setDate(d);

@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.study.domain.main.MainDTO;
+import com.study.domain.main.BridgeDTO;
 import com.study.domain.main.MainService;
 import com.study.domain.post.PostResponse;
 
@@ -20,7 +20,7 @@ public class MainServiceTest {
 	
 	@Test
 	void getcongestionRate() {
-		MainDTO params = new MainDTO();
+		BridgeDTO params = new BridgeDTO();
 		System.out.println("테스트호출");
 		params.setName("성산대교");
 		params.setStartPosition("성산대교남단");
@@ -28,7 +28,7 @@ public class MainServiceTest {
 		params.setDate(d);
 		Time T = Time.valueOf("12:00:00");
 		params.setTime(T);
-		List<MainDTO> result = MainService.getcongestionRate(params);
+		List<BridgeDTO> result = MainService.getcongestionRate(params);
 		System.out.println("결과 :"+result);
 	}
 }
