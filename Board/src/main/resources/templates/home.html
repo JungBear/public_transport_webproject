@@ -21,7 +21,7 @@
 					</li>
 					<li class="inputSelect">
 						<label for="selectDate" id="selectDateLabel">날짜 : </label>
-						<input type="date" name="selectDate" id="selectDate" >
+						<input type="date" name="selectDate" id="selectDate">
 					</li>
 					<li class="inputSelect">
 						<label for="selHour">시간 : </label>
@@ -43,27 +43,30 @@
 <script th:inline="javascript">
 
 /*<![CDATA[*/
-    
+ 	window.onload = () => {
+		drawMap(bridge);
+    }
 	
 	
 	function drawMap(bridge){
+		console.log("drawMap호출");
 		switch (bridge){
-		case "성산대교":
-			var latitude = 37.552167;
-			var longitude = 126.891178;
-			break;
-		case "청담대교":
-			var latitude = 37.526490;
-			var longitude = 127.064388;
-			break;
-		case "한남대교":
-			var latitude = 37.527201;
-			var longitude = 127.012782;
-			break;
-		default:
-			var latitude = 37.552167;
-			var longitude = 126.891178;
-			break;
+			case "성산대교":
+				var latitude = 37.552167;
+				var longitude = 126.891178;
+				break;
+			case "청담대교":
+				var latitude = 37.526490;
+				var longitude = 127.064388;
+				break;
+			case "한남대교":
+				var latitude = 37.527201;
+				var longitude = 127.012782;
+				break;
+			default:
+				var latitude = 37.552167;
+				var longitude = 126.891178;
+				break;
 		}
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		mapOption = { 
@@ -100,10 +103,15 @@
 		    strokeOpacity: 0.8, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
 		    strokeStyle: 'solid' // 선의 스타일입니다
 		});
-		polyline2.setMap(map);  
+		alert("지도에 맵 세팅하기 직전");
+		polyline2.setMap(map);
+		console.log("지도에 맵 세팅완료");
 	}
 
-	document.getElementById('selectDate').value = new Date().toISOString().substring(0, 10);; 
+	//document.getElementById('selectDate').value = new Date().toISOString().substring(0, 10);	//현재 날짜로 지정 
+	document.getElementById('selectDate').value = new Date("2022-11-16").toISOString().substring(0, 10);	//임시로 데이터 있는곳
+	
+	// 시간 select박스 동적으로 삽입
 	var $select = jQuery("#selHour");
 	for (var hr = 0; hr < 24; hr++) {
 	  	var hrStr = hr.toString().padStart(2, "0")+ ":";
@@ -112,6 +120,7 @@
 
 	}
 
+	//검색버튼 눌렀을때 실행
 	function submitInputSelect() {
 //    	alert("insertComment 실행됨");
     	var bridge = document.getElementById("bridge").value;
@@ -119,48 +128,32 @@
 //    	alert(bridge);
     	var selectDate = document.getElementById("selectDate").value;
 //    	alert(date);
-    	var selHour = document.getElementById("selHour").value;
+	//    	var selHour = document.getElementById("selHour").value;
+    	var selHour = '12:00';	//임시로 데이터 있는 곳
+    	
 //    	alert(time);
 // 		alert("uri가져오기전");
 //		alert(typeof date);
 //		alert(typeof time);
     	var uri = /*[[ @{/congestionrate} ]]*/null;
-    	var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "POST"};
+    	var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "GET"};
     	var params = {"bridge": bridge, "selectDate": selectDate, "selHour": selHour};	
 //	  	alert(JSON.stringify(params));  	
 //    	alert("아작스전");
     	$.ajax({
+    		
     		url: uri,
     		type: "GET",
     		headers: headers,
  	 		dataType: "json",
     		data: params,
-    		success: function(response) {
-    			var birdge = response[bridge];
-//    			alert(bridge);
+    		success: function(response) {		
+    			alert(bridge);
 //   			alert(congestionRate);
-//    			alert(bridge)
-    			switch(bridge){
-    			case "성산대교":
-    				alert("case시작");
-    				drawMap(bridge);
-    				alert("맵그림");
-    				break;
-    			case "청담대교":
-    				alert("case시작");
-    				drawMap(bridge);
-    				alert("맵그림");
-    				break;
-    			case "한남대교":
-    				alert("case시작");
-    				drawMap(bridge);
-    				alert("맵그림");
-    				break;
+//    			alert(JSON.stringify(response));
+   				drawMap(bridge);
     			}
-
-    			printCommentList();
-    			content.value = "";
-    		},
+    		,
     		error: function(xhr, status, error) {
     			console.log("code:"+xhr.status+"\n"+"message:"+xhr.responseText+"\n"+"error:"+error);
     			alert("code:"+xhr.status+"\n"+"message:"+xhr.responseText+"\n"+"error:"+error);
@@ -168,6 +161,7 @@
     		}
     	});
     };
+    
     function panTo(latitude,longitude) {
         // 이동할 위도 경도 위치를 생성합니다 
         var moveLatLon = new kakao.maps.LatLng(latitude, longitude);
