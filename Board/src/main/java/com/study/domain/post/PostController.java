@@ -1,7 +1,5 @@
 package com.study.domain.post;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
