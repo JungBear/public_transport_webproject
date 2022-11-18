@@ -16,4 +16,20 @@ public class UserController {
 		return "user/signinAndsignup";
 	}
 	
+
+	//마이페이지 
+	@GetMapping("/user/UserMyPage.do")
+	public String mypage() {
+		return "user/UserMyPage";
+	}
+	
+	//마이페이지 진입 전 비밀번호 확인하는 페이지
+	@GetMapping("/user/UserMyPageChk.do")
+	public String mypageconfirm() {
+		return "user/UserMyPageChk";
+	}
+	
+	
+	
 }
+

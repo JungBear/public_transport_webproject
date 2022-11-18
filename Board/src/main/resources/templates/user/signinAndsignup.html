@@ -354,12 +354,19 @@ h5 {
 	
 	
 	<script>
+	/* 회원가입이 성공했을 때(DB 연동하고 승인?받았을 때 alert를 띄워야한다. - 추후 예정) */
 	function signupcomplete() {
-		alert("환영합니다");
+		alert("회원가입에 성공했습니다.");
 		window.location.href='http://localhost:8080/';
+	}
 	
+	/* 로그인이 성공했을 때(alert를 띄우지 말자.) */
+	function signincomplete(){
+		window.location.href="http://localhost:8080/"
 	}
 	</script>
+	
+	
 	
 	
 	
