@@ -1,40 +1,21 @@
 <!doctype html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
-layout:decorate="layout/basic">
+layout:decorate="~{layout/basic}">
 
 <th:block layout:fragment="title">
   <title>마이 페이지 MyPage</title>
 </th:block>
 
-<header th:replace="layout/basic :: header"></header>
-<body class="text-center d-flex flex-column h-100">
+<!-- <header th:replace="layout/basic :: header"></header> -->
 
-
-<h2>마이페이지</h2>
-아이디 : [[${userDto.getid()]]
-<br>
-닉네임 : [[${userDto.getnickname()]]
-<br>
-비밀번호 : [[${userDto.getpwd()]]
-<br>
-힌트 질문 : [[${userDto.gethintQ()]]
-<br>
-힌트 정답 : [[${userDto.gethintA()]]
-<br>
-이메일 : [[${userDto.getEmail()]]
-<br>
-이름 : [[${userDto.getname()]]
-<br>
-성별 : [[${userDto.getsex()]]
-<br>
-생일 : [[${userDto.getbirth()]]
-
-
-
-
-
-
-</body>
+<th:block layout:fragment="content">
+	<h1>블라블라</h1>
+	<h2>마이페이지</h2>
+	
+	
+ 
+	
+</th:block>
 
 </html>

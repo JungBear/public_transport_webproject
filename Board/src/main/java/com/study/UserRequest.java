@@ -1,12 +1,18 @@
 package com.study;
 
-import java.net.PasswordAuthentication;
-
 import lombok.Data;
 
 @Data
 public class UserRequest {
-	private Long id;            
-    private PasswordAuthentication pwd;     
-    
+	//board 
+	private Long id;          //PK  
+    private String name;
+    private String nickname;
+    private String email;
+    private String pwd;
+    private String pwd_hint;
+    private String pwd_hint_ans;
+    private int gender;
+    private int age;
+        
 }
