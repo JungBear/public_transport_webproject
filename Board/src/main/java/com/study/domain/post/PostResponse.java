@@ -3,7 +3,7 @@ package com.study.domain.post;
 import java.time.LocalDateTime;
 
 import lombok.Data;
-
+//DTO = response + request
 @Data
 public class PostResponse {
 
