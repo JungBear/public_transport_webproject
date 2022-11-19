@@ -15,7 +15,6 @@
         , del_yn
         , del_date
         , notice
-        , nickname
     </sql>
     
       <!-- 게시글 검색 -->
