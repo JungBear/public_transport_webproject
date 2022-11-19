@@ -1,4 +1,4 @@
-package com.study;
+package com.study.domain.user;
 
 import java.time.LocalDateTime;
 

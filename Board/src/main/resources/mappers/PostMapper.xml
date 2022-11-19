@@ -5,7 +5,7 @@
 
     <!-- tb_post 테이블 전체 컬럼 -->
     <sql id="postColumns">
-          id
+          id 
         , type
         , title
         , content

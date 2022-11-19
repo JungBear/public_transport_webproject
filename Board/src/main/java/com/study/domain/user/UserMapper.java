@@ -1,4 +1,4 @@
-package com.study;
+package com.study.domain.user;
 
 import org.apache.ibatis.annotations.Mapper;
 
