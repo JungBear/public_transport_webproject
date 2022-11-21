@@ -24,6 +24,7 @@ header .head .top_menu > div.login_user {margin-right:20px;}
 header .head .top_menu > div.login_user strong, header .head .top_menu > div.login_user strong i {color:#333;}
 header .head .top_menu > div.login_user strong i {font-size:16px; vertical-align:bottom;}
 
+hList{display:inline;}
 
 
 footer {background:#fff; box-shadow:0 0 20px rgba(80,80,80,0.1); height:40px; line-height:40px; font-size:12px; color:#999; text-align:center; letter-spacing:0; position:absolute; bottom:0; left:0; width:100%;}

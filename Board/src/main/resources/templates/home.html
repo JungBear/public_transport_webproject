@@ -36,6 +36,11 @@
 		</form>
 	</div>
 	<div id="map" style="width:100%;height:600px;"></div>
+	<br>
+	<div>
+		<h3 class = hList><a href="post/infolist.do">정보게시판</a></h3>
+		<h3 class = hList><a href="post/freelist.do">자유게시판</a></h3>
+	</div>
 	</th:block>
 
 <th:block layout:fragment="script">
@@ -48,9 +53,12 @@
     }
 	
 	
-	function drawMap(bridge){
-		console.log("drawMap호출");
-		switch (bridge){
+	function drawMap(response){
+		// response[0] : 남단 -> 북단
+		// response[1] : 북단 -> 남단
+		let bridgeName = response[0].name;
+//		console.log(bridgeName);
+		switch (bridgeName){
 			case "성산대교":
 				var latitude = 37.552167;
 				var longitude = 126.891178;
@@ -68,42 +76,126 @@
 				var longitude = 126.891178;
 				break;
 		}
-		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 메이플 브금
 		mapOption = { 
 		    center: new kakao.maps.LatLng(latitude, longitude), // 지도의 중심좌표
-//		    draggable: false, // 지도를 생성할때 지도 이동 및 확대/축소를 막으려면 draggable: false 옵션을 추가하세요
-//		    disableDoubleClickZoom: true,
+		    draggable: false, // 지도를 생성할때 지도 이동 및 확대/축소를 막으려면 draggable: false 옵션을 추가하세요
+		    disableDoubleClickZoom: true,
 		    level: 4  // 지도의 확대 레벨
 		};
 		
 		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 		// 지도에 표시할 선을 생성합니다
 		
+		let startPosition1 = response[0].startPosition;   //남단시작
+		let startLatitude1 = 0;
+		let startLongitude1 = 0;
+		let endLatitude1 = 0;
+		let endLongitude1 = 0
+		switch (startPosition1){
+			case "성산대교남단":
+				startLatitude1 = 37.547892;    //남단 
+				startLongitude1 = 126.888868;  //남단
+				endLatitude1 = 37.556244;      //북단
+				endLongitude1 = 126.893926;    //북단
+				break;
+			case "청담대교남단":
+				startLatitude1 = 37.523133;    //남단 
+				startLongitude1 = 127.063126;  //남단
+				endLatitude1 = 37.529678;      //북단
+				endLongitude1 = 127.066068;    //북단
+				break;
+			case "한남대교남단":
+				startLatitude1 = 37.525178;    //남단 
+				startLongitude1 = 127.014995;  //남단
+				endLatitude1 = 37.529858;      //북단
+				endLongitude1 = 127.010649;    //북단
+				break;
+		}				
+		
+		
+		let congestionRate1 = response[0].congestionRate; //남단->북단의 혼잡도
+		
+		let color1 = '';   // 남단-> 북단 혼잡도에 따른 색
+		if(0<congestionRate1 && congestionRate1<=25){
+			color1 = '#0000FF';     //블루
+		}else if(25<congestionRate1 && congestionRate1<=50){
+			color1 = '#008000';     // 그린
+		}else if(50<congestionRate1 && congestionRate1<=75){
+			color1 = '#FFFF00'      // 옐로우
+		}else if(75<congestionRate1 && congestionRate1<=100){
+			color1 = '#FF0000';     // 레드
+		}
+		
 		var linePath1 = [
-		    new kakao.maps.LatLng(37.556064, 126.893470),
-		    new kakao.maps.LatLng(37.548038, 126.888631) 
+		// 남단 -> 북단 선
+		    new kakao.maps.LatLng(startLatitude1, startLongitude1),  //startLatitude1, startLongitude1
+		    new kakao.maps.LatLng(endLatitude1, endLongitude1)   //endLatitude1 , endLongitude1
 		];
 		var polyline1 = new kakao.maps.Polyline({
 		    path: linePath1, // 선을 구성하는 좌표배열 입니다
-		    strokeWeight:  6, // 선의 두께 입니다
-		    strokeColor: '#FFAE00', // 선의 색깔입니다
+		    strokeWeight:  13, // 선의 두께 입니다
+		    strokeColor: color1, // 선의 색깔입니다
 		    strokeOpacity: 0.8, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
 		    strokeStyle: 'solid' // 선의 스타일입니다
 		});
 		polyline1.setMap(map);  
 		
+		let startPosition2 = response[1].startPosition;   //북단시작
+		let congestionRate2 = response[1].congestionRate; //북단->남단의 혼잡도
+		
+		let startLatitude2 = 0;
+		let startLongitude2 = 0;
+		let endLatitude2 = 0;
+		let endLongitude2 = 0
+		switch (startPosition2){
+		case "성산대교북단":
+			startLatitude2 = 37.556512;    //북단 
+			startLongitude2 = 126.893540;  //북단
+			endLatitude2 = 37.548110;      //남단
+			endLongitude2 = 126.888431;    //남단
+			break;
+		case "청담대교북단":
+			startLatitude2 = 37.529906;    //북단 
+			startLongitude2 = 127.065718;  //북단
+			endLatitude2 = 37.523292;      //남단
+			endLongitude2 = 127.062701;    //남단
+			break;
+		case "한남대교북단":
+			startLatitude2 = 37.529688;    //북단 
+			startLongitude2 = 127.010231;  //북단
+			endLatitude2 = 37.525029;      //남단
+			endLongitude2 = 127.014693;    //남단
+			break;
+	}		
+		
+		let color2 = '';   // 북단-> 남단 혼잡도에 따른 색
+		if(0<congestionRate2 && congestionRate2<=25){
+			color2 = '#0000FF';     //블루
+		}else if(25<congestionRate2 && congestionRate2<=50){
+			color2 = '#008000';     // 그린
+		}else if(50<congestionRate2 && congestionRate2<=75){
+			color2 = '#FFFF00'      // 옐로우
+		}else if(75<congestionRate2 && congestionRate2<=100){
+			color2 = '#FF0000';     // 레드
+		}
+		
+		
 		var linePath2 = [
-		    new kakao.maps.LatLng(37.556014, 126.893595),
-		    new kakao.maps.LatLng(37.547991, 126.888734) 
+		// 북단 -> 남단 선
+		    new kakao.maps.LatLng(startLatitude2, startLongitude2),
+		    new kakao.maps.LatLng(endLatitude2, endLongitude2) 
 		];
 		var polyline2 = new kakao.maps.Polyline({
 		    path: linePath2, // 선을 구성하는 좌표배열 입니다
-		    strokeWeight: 6, // 선의 두께 입니다
-		    strokeColor: '#FF0000', // 선의 색깔입니다
+		    strokeWeight: 13, // 선의 두께 입니다
+		    strokeColor: color2, // 선의 색깔입니다
 		    strokeOpacity: 0.8, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
 		    strokeStyle: 'solid' // 선의 스타일입니다
 		});
 		polyline2.setMap(map);
+		console.log("startPostiont1 : "+ startPosition1 + "startPostion2 : "+startPosition2);
+		console.log("congestionRate1 : "+ congestionRate1 + "congestionRate2 : "+congestionRate2);
 	}
 
 	//document.getElementById('selectDate').value = new Date().toISOString().substring(0, 10);	//현재 날짜로 지정 
@@ -137,7 +229,6 @@
     	var uri = /*[[ @{/congestionrate} ]]*/null;
     	var headers = {"Content-Type": "application/json"};
     	var params = {"name": name, "date": date, "time": time};
-    	alert("아작스로 넘기는 파라미터 : "+params);
 //	  	alert(JSON.stringify(params));  	
 //    	alert("아작스전");
     	$.ajax({
@@ -148,8 +239,8 @@
     		data: params,
     		success: function(response) {		
 //   			alert(congestionRate);
-    			alert(JSON.stringify(response));
-   				drawMap(name);
+//    			alert(JSON.stringify(response));
+   				drawMap(response);
     			}
     		,
     		error: function(xhr, status, error) {

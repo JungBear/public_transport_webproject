@@ -27,6 +27,7 @@ public class MainController {
 		System.out.println("컨트롤러 진입");
 		List<BridgeDTO> bridgeList = MainService.getcongestionRate(bridgeDTO);
 		model.addAttribute("bridgeList", bridgeList);
+		System.out.println("bridgeList값 : "+bridgeList);
 		System.out.println("bridgeList의 크기 : " + bridgeList.size());
 		return bridgeList;
 	}
