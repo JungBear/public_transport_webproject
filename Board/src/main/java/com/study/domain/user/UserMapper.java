@@ -11,7 +11,7 @@ public interface UserMapper { //mapper.xml을 불러오는 기능 //왜 인터�
 	 * void는 return 값이 없는 함수.
      * 오랜만에 보니 뭐지 했네..
 	 */
-	 void usersave(UserResponse params);
+	 void userSave(UserResponse params);
    
 	 
 	 /**
