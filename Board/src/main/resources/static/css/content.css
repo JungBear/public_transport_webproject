@@ -1,6 +1,5 @@
 @charset "utf-8";
 /* CSS Document */
-
 #container {overflow:hidden;}
 #container .rcontent {padding:25px 30px 25px 40px;}
 #container .rcontent .content {background:#fff; border-radius:12px; box-shadow:0 0 20px rgba(80,80,80,0.1); padding:40px 40px 70px 40px; min-height:600px; overflow:hidden;}
@@ -312,8 +311,11 @@ input[readonly], select[readonly], textarea[readonly], .readonly, input[disabled
 /*메인페이지 */
 .class1{display:inline-block;position:relative;background-color:#cbd0d9;width:100%}
 .inputSelect{padding: 10px 20px; display:inline-block}
+.hList{display:inline;}
+#h3InfoList{margin-right:42%}
 #name{width: 158px;}
 #selectDate{width: 158px;}
 #selHour{width: 158px;}
 #selSubmit{width:158px;}
 #map{margin-top:10px;}
+

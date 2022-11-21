@@ -88,5 +88,21 @@ public interface PostMapper {
      * @return 게시글 수
      */
     int freeCount(SearchDto params);
+    
+    /*
+     * 메인페이지 정보게시글 요약
+     * @return 요약정보게시글 리스트
+     * */
+   List<PostResponse> summaryInfoList(PostResponse params);
+   
+   /*
+    * 메인페이지 정보게시글 요약
+    * @return 요약정보게시글 리스트
+    * */
+  List<PostResponse> summaryFreeList(PostResponse params);
+  
+  int summaryInfoCount();
+  
+  int summaryFreeCount();
 
 }
