@@ -29,8 +29,4 @@ public class UserController {
 	public String mypageconfirm() {
 		return "user/UserMyPageChk";
 	}
-	
-	
-	
 }
-
