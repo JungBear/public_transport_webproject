@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class UserRequest {
-	//board 
+	//user 
 	private Long id;          //PK  
     private String name;	//이름
     private String nickname;	//닉네임
