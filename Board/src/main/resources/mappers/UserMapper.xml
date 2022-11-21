@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.study.mappers.UserMapper">
+
+<!-- tb_user 테이블 전체 컬럼 -->
+<sql id="usercolumns">
+	 no,
+	 id,
+	 name,
+	 nickname,
+	 email,
+	 pwd,
+	 pwd_hint,
+	 pwd_hint_ans,
+	 gender,
+	 age,
+	 signin_date,
+	 exp,
+	 del_yn,
+	 del_date,
+	 modified_date,
+	 Administrator,
+	 attendance_date,
+	 now_login_time,
+	 recent_login_time,
+	 recent_logout_time,
+	
+</sql>
+
+
+<!-- 회원가입 정보 저장 -->
+<insert id = "usersave" parameterType="com.study.domain.user.userRequest" >
+
+	INSERT INTO user(
+		<include refid="UserColumns"/>
+	) VALUES (
+		${no},
+		#{id},
+		#{name},
+		#{nickname},
+		#{email},
+		#{pwd},
+		#{pwd_hint},
+		#{pwd_hint_ans},
+		#{gender},
+		#{age},
+		#{sign_date},
+		0,
+		0,
+		NULL,
+		NULL,
+		0,
+		0,
+		NOW(),
+		NOW(),
+		NOW()	 
+	)
+</insert>
+
+<!-- 마이 페이지 정보 수정 -->
+<update id = "userupdate" parameterType="com.study.domain.user.UserRequest">
+	UPDATE user
+	SET
+		modified_date=NOW(),
+		
+</update>
+
+
+
+
+
+</mapper>

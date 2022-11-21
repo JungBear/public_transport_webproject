@@ -12,6 +12,10 @@ public interface PostMapper {
     /**
      * 게시글 저장
      * @param params - 게시글 정보
+     * 
+     * void는 return 값이 없는 함수.
+     * 오랜만에 보니 뭐지 했네..
+     * 
      */
     void save(PostRequest params);
     
