@@ -101,7 +101,7 @@ public class PostService {
      */
     public PagingResponse<PostResponse> findInfoPost(final SearchDto params) {
 
-        int count = postMapper.count(params);
+        int count = postMapper.infoCount(params);
         if (count < 1) {
             return new PagingResponse<>(Collections.emptyList(), null);
         }

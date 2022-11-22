@@ -10,5 +10,4 @@ public interface BridgeMapper {
 	 * @param = 분석정보
 	 */
 	public List<BridgeDTO> getResult(BridgeDTO params);
-
 }
