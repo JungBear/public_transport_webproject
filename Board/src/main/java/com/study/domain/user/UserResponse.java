@@ -19,7 +19,7 @@ public class UserResponse {
    
     private int gender;//성별
     private LocalDate age;//나이
-    private int experence;//경험치
+    private int experience;//경험치
     private int delYn;//삭제여부
     private int Administrator;//관리자 여부
     private int attendanceDate;//출석일
