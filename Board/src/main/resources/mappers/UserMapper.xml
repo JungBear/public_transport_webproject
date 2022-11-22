@@ -16,7 +16,7 @@
 	 gender,
 	 age,
 	 signin_date,
-	 experence,
+	 experience,
 	 del_yn,
 	 del_date,
 	 modified_date,
