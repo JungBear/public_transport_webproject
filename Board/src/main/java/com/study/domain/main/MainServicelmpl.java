@@ -21,13 +21,11 @@ public class MainServicelmpl implements MainService{
 	public List<BridgeDTO> getcongestionRate(BridgeDTO params) {
 		return bridgeMapper.getResult(params);
 	}
-	public List<PostResponse> summaryInfoList(PostResponse params){
-		List<PostResponse> summaryInfoList = postmapper.summaryInfoList(params);
-		return summaryInfoList;
+	public List<PostResponse> summaryInfoList(){
+		return postmapper.summaryInfoList();
 	}
-	public List<PostResponse> summaryFreeList(PostResponse params){
-		List<PostResponse> summaryFreeList = postmapper.summaryInfoList(params);
-		return summaryFreeList;
+	public List<PostResponse> summaryFreeList(){
+		return postmapper.summaryFreeList();
 	}
 	
 }

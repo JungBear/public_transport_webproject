@@ -11,12 +11,12 @@ public interface MainService {
      * 메인페이지 정보게시글 요약
      * @return 요약정보게시글 리스트
      * */
-   List<PostResponse> summaryInfoList(PostResponse params);
+   List<PostResponse> summaryInfoList();
    
    /*
     * 메인페이지 정보게시글 요약
     * @return 요약정보게시글 리스트
     * */
-  List<PostResponse> summaryFreeList(PostResponse params);
+  List<PostResponse> summaryFreeList();
 
 }

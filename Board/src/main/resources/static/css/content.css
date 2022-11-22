@@ -6,7 +6,8 @@
 .snb_none #container .lcontent {display:none; padding:0px 0px 10px 0px;}
 .snb_none #container .rcontent {margin-left:0;}
 .snb_none #container:after {display:none;}
-
+th{text-align: center;}
+td .tl{text-align: center;}
 
 
 #container h3 {font-size:22px; position:relative; padding-left:17px;}
@@ -312,7 +313,9 @@ input[readonly], select[readonly], textarea[readonly], .readonly, input[disabled
 .class1{display:inline-block;position:relative;background-color:#cbd0d9;width:100%}
 .inputSelect{padding: 10px 20px; display:inline-block}
 .hList{display:inline;}
-#h3InfoList{margin-right:42%}
+.mainLeftInfoList{float: left;}
+.mainRightInfoList{float:right}
+#h3FreeList{float:right; right : 39%}
 #name{width: 158px;}
 #selectDate{width: 158px;}
 #selHour{width: 158px;}

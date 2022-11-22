@@ -100,7 +100,7 @@
                 <td>${row.notice === 0 ? num-- : '공지'}</td>
                 <td class="tl"><a href="/post/view.do?id=${row.id}">${row.title}</a></td>
                 <td>${row.nickname}</td>
-                <td>${dayjs(row.createdDate).format('YYYY-MM-DD HH:mm')}</td>
+                <td>${dayjs(row.createdDate).format('MM-DD HH:mm')}</td>
 
             </tr>
         `;

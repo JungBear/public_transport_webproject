@@ -208,7 +208,7 @@
     </select>
     
         <!-- 메인페이지 정보게시글 요약 리스트 조회 -->
-    <select id="summaryInfoList" parameterType="com.study.domain.post.PostResponse" resultType="com.study.domain.post.PostResponse">
+    <select id="summaryInfoList" resultType="com.study.domain.post.PostResponse">
         SELECT
 			  a.id
 	        , a.type
