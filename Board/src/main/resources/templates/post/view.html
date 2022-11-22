@@ -148,12 +148,14 @@
    			$.get(uri, function(response) {
    				if (response!=null) {
    					var commentsHtml = "";
+   					alert(JSON.stringify(response.commentList));
    					$(response.commentList).each(function(id, comment) {
+   						alert("되냐?");
    						commentsHtml += `
    							<li>
-   								<span class="name">${comment.nickname}</span>
+   								<span class="nickname">${comment.nickname}</span>
    								<span class="desc">${comment.content}</span>
-   								<span class="time">${moment(comment.createdDate).format('YYYY-MM-DD HH:mm:ss')}</span>
+   								<span class="commentTime">${moment(comment.createdDate).format('YYYY-MM-DD HH:mm:ss')}</span>
    								<button type="button" class="btn btn-xs btn-circle"><i class="fa fa-close" aria-hidden="true"></i></button>
    							</li>
    						`;

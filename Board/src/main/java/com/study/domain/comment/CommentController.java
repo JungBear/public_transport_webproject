@@ -51,10 +51,10 @@ public class CommentController {
 	/* /comments?boardId=xxx/ comments/xx */
 	@GetMapping(value = "/comments")
 	@ResponseBody 
-	public List<CommentDTO> getCommentList(@RequestParam("boardId") int postId,Model model) {
+	public List<CommentDTO> getCommentList(@RequestParam("boardId") int boardId,Model model) {
 		System.out.println("getCommentList실행");
 		CommentDTO CDTO = new CommentDTO();
-		CDTO.setBoardId(postId);
+		CDTO.setBoardId(boardId);
 		List<CommentDTO> commentList = commentService.getCommentList(CDTO);
 		System.out.println("받아온 댓글 리스트 commentList : "+commentList);
 		if (CollectionUtils.isEmpty(commentList) == false) {

@@ -25,7 +25,7 @@ class CommentTests {
 
 		for (int i = 1; i <= number; i++) {
 			CommentDTO params = new CommentDTO();
-			params.setBoardId(11); // 댓글을 추가할 게시글 번호
+			params.setBoardId(1); // 댓글을 추가할 게시글 번호
 			params.setBoardType(0);
 			params.setContent(i + "번 댓글을 추가합니다!");
 			params.setWriterNo(1);
