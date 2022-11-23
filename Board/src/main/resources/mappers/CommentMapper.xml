@@ -111,7 +111,7 @@
 			a.created_date DESC
 	</select>
 
-	<select id="selectCommentTotalCount" parameterType="com.study.domain.comment.CommentDTO" resultType="int">
+	<select id="commentCount" parameterType="com.study.domain.comment.CommentDTO" resultType="int">
 		SELECT
 			COUNT(*)
 		FROM

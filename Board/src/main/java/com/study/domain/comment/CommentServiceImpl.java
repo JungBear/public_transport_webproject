@@ -43,7 +43,7 @@ public class CommentServiceImpl implements CommentService {
 	public List<CommentDTO> getCommentList(CommentDTO params) {
 		List<CommentDTO> commentList = Collections.emptyList();
 
-		int commentTotalCount = commentMapper.selectCommentTotalCount(params);
+		int commentTotalCount = commentMapper.commentCount(params);
 		if (commentTotalCount > 0) {
 			commentList = commentMapper.selectCommentList(params);
 		}
