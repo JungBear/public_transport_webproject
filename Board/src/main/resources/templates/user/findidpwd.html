@@ -2,19 +2,31 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>MY page Pwd Confirm</title>
+<title>Find ID Or Password</title>
 </head>
 <body>
 <div class="root">
  	<div class="signin-wrapper form active">
  		<form name="signIn">
 			<div class="form-wrapper">
-				<h5>비밀번호 확인</h5>
-							
-				<input  type="password" placeholder="비밀번호" class="form-field" required></input>
+				<h5>아이디 찾기</h5>
 				
-				<button class="button primary" onclick=signincomplete()>마이페이지 입장</button>
-								
+				
+				
+				
+				<input type="text" placeholder="이름" class="form-field" required></input>
+				
+				<input type="email" placeholder="이메일" class="form-field" required></input>
+				
+				<input type="date"  class=form-field required></input>
+				
+				<button class="button primary" onclick=signincomplete()>아이디 찾기</button>
+				
+				<button type="button" class="button secondary" id="click-signup" 
+				onclick="location.href='signup.do'">회원가입하러 가기</button>
+				
+				<button type="button" class ="findIdPwd" onclick="location.href='findpwd.do'"> 비밀번호 찾기</button>
+				
 			</div>
 		</form>
 	</div>

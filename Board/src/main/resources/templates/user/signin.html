@@ -2,19 +2,25 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>MY page Pwd Confirm</title>
+<title>Insert title here</title>
 </head>
 <body>
 <div class="root">
  	<div class="signin-wrapper form active">
  		<form name="signIn">
 			<div class="form-wrapper">
-				<h5>비밀번호 확인</h5>
-							
+				<h5>로그인</h5>
+				<input type="text" placeholder="아이디" class="form-field" required></input>
+				
 				<input  type="password" placeholder="비밀번호" class="form-field" required></input>
 				
-				<button class="button primary" onclick=signincomplete()>마이페이지 입장</button>
-								
+				<button class="button primary" onclick=signincomplete()>로그인하기</button>
+				
+				<button type="button" class="button secondary" id="click-signup" 
+				onclick="location.href='signup.do'">회원가입하러 가기</button>
+				
+				<button type="button" class ="findIdPwd" onclick="location.href='findidpwd.do'"> 아이디,비밀번호 찾기</button>
+				
 			</div>
 		</form>
 	</div>
@@ -172,5 +178,58 @@ h5 {
 }
 
 </style>
+
+
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.slim.js" 
+	integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" 
+	crossorigin="anonymous"> 
+	// $로 시작하는 것은 jQuery인데 이걸 추가해줘야 한다.  integrity랑 crossorigin은 왜 있는지 모르겠다.
+</script> -->
+
+<!-- <script> 
+
+	
+		
+
+	// signup이랑 반대로 해야겠네.
+	//액티브 설정
+/* 		$( "#click-signup" ).click(function() {
+	 	  $(".signup-wrapper").addClass('active')
+		  $(".signin-wrapper").removeClass('active')
+				  
+		//인액티브 설정 (숨겨진 것)-디폴트로는 회원가입이 인액티브  
+		  $(".signin-wrapper").addClass('inactive')
+		  $(".signup-wrapper").removeClass('inactive')
+		});
+		
+		//'로그인 <-> 회원가입' 왔다갔다 할 때 액티브로 바꿔주는 기능인 것 같다.
+		$( "#click-signin" ).click(function() {
+		  $(".signin-wrapper").addClass('active')
+		  $(".signup-wrapper").removeClass('active')
+		// 위에 처럼 '로그인 <-> 회원가입' 인액티브로 바꿔주는 기능인것 같다.  
+		  $(".signup-wrapper").addClass('inactive')
+		  $(".signin-wrapper").removeClass('inactive')
+		});
+	
+		//이건 왜있는지 모르겠음.
+		$("#mobile").click(function(){
+		  $(".root").addClass('mobile-root')
+		})
+		// 이걸 보아하니 데스크탑에서랑 폰에서의 차이 같음.
+		$("#desk").click(function(){
+		  $(".root").removeClass('mobile-root')
+		}) */
+	</script>
+	
+	
+	<script>
+	/* 로그인이 성공했을 때(alert를 띄우지 말자.) */
+	function signincomplete(){
+		window.location.href="http://localhost:8080/"
+	}
+</script> -->
+
+	
+
 </body>
 </html>

@@ -20,8 +20,8 @@ public class UserMapperTest {
 	@Test
 	void userSave() {
 		UserResponse params = new UserResponse();
-		params.setId("lysyeah5");
-		params.setNickname("가나다라4");
+		params.setId("lysyeah6");
+		params.setNickname("가나다라3");
 		String str = "1992-05-05";
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.KOREA);
 		LocalDate date = LocalDate.parse(str, formatter);
@@ -34,8 +34,15 @@ public class UserMapperTest {
 		params.setPwdHintAns("간다라마");
 		
 		usermapper.userSave(params);
+	}
+	@Test
+	void userSignin() {
 		
+		UserResponse params = new UserResponse();
+		params.setId("lysyeah5");
+		params.setPwd("123123qq");
 		
+	}
 		
 		
 		
@@ -48,6 +55,6 @@ public class UserMapperTest {
 		#{gender},
 		#{age},
 		#{sign_date},*/
-	}
-
 }
+
+
