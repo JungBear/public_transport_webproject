@@ -6,7 +6,7 @@ import lombok.Data;
 public class UserRequest {
 	//user 
 	private int userNo;
-	private String id;          //아이디  
+	private String id;          //PK  
     private String userName;	//이름
     private String nickname;	//닉네임
     private String email;	//이메일
