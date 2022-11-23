@@ -1,12 +1,23 @@
 package com.study.domain.user;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.WebApplicationContext;
+
 import lombok.Data;
+
 //DTO = response + request
 @Data
-public class UserResponse {
+@Component
+@Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
+//@Data 안에 getter, setter, ToString이 포함되어 있다.
+
+public class UserResponse implements Serializable{
 	//user 
 	private int userNo;//PK 
 	private String id;//id
