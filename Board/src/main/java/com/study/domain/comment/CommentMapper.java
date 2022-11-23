@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.study.common.dto.SearchDto;
+
 @Mapper
 public interface CommentMapper {
 	
@@ -23,5 +25,5 @@ public interface CommentMapper {
 
 	public List<CommentDTO> selectCommentList(CommentDTO params);
 
-	public int selectCommentTotalCount(CommentDTO params);
+	public int commentCount(CommentDTO params);
 }
