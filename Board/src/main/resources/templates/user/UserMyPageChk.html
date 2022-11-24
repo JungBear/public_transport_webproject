@@ -2,6 +2,11 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
 layout:decorate="~{layout/basic}">
+<head>
+	<meta charset="utf-8">
+</head>
+
+<body>
 
 <th:block layout:fragment="title">
   <title>마이 페이지 MyPage</title>
@@ -17,15 +22,46 @@ layout:decorate="~{layout/basic}">
 		</p>
 	</div>
 	
-	<div class="content">
-		<section>
-			<form id="SaveForm" method="post" autocomplete="off">
-								
-			</form>
-		</section>
+	<div class="form-field">
+		<form>
+			
+			<h5>비밀번호 확인</h5>
+				<input type="password" placeholder="비밀번호" width=10px required></input>	
+				<button type="button" id=click-confirm onclick=checkpassword() >확인</button>		
+	
+		</form>
 	</div>
  
 	
 </th:block>
 
+<script>
+
+	function checkPassword(){	
+		var idx = $('input[name=idx]').val();
+		var password = $('input[name=password]').val();
+	
+		$.ajax({
+			type: 'GET',
+			url: '/board/delete/getPassword',
+			data : {idx,password},
+			success: function(result) {
+				if(result.password == password){
+					$('#submiBtn').attr('disabled',false);
+				}
+				else{
+					alert("비밀번호가 일치하지않습니다");
+				}
+			}
+			,
+			error: function(result) {
+			},
+			complete: function() {
+			}
+	
+		})
+	}		
+		
+</script>
+</body>
 </html>
