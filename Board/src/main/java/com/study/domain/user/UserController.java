@@ -1,7 +1,11 @@
 package com.study.domain.user;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
 // view -> Controller -> service -> mapper -> xml -> mapper -> service -> controller -> view // 화살표마다 DTO 실행
@@ -11,11 +15,39 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserController {
 	
+	public final Logger logger = LoggerFactory.getLogger(UserController.class);
+	
+	private final UserService userService;
+	
 	//회원가입 페이지
 	@GetMapping("/user/signup.do")
 	public String signup() {
 		return "user/signup";
 	}
+	
+	// 아이디중복검사
+    @PostMapping("/getId")
+    @ResponseBody
+    public String getId(UserRequest params) {
+        logger.info("MemberController getId()");
+        boolean b = userService.getId(params);
+        if(b) {
+            return "no";
+        }
+        return "ok";
+    }
+    
+	// 닉네임중복검사
+    @PostMapping("/getNickname")
+    @ResponseBody
+    public String getNickname(UserRequest params) {
+        logger.info("MemberController getId()");
+        boolean b = userService.getNickname(params);
+        if(b) {
+            return "no";
+        }
+        return "ok";
+    }
 	
 	//로그인 페이지
 	@GetMapping("/user/signin.do")

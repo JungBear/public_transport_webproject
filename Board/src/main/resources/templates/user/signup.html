@@ -30,9 +30,9 @@
 			  <!-- minlength에 노란색으로 밑줄이 있지만 작동 잘함. -->
 			  <!-- required는 빈칸일 경우 입력하라고 경고창을 띄어준다. -->
 			  
-			  <input type="text" placeholder="아이디" id="id1" class="form-field" required 
+			  <input type="text" placeholder="아이디" id="userid" class="form-field" required 
 			  onkeyup="checkCharOnlyEngNum(event)" minlength="5" maxlength="20"></input>
-			  
+			  <p id="idcheck"></p>
 			  <!-- 아이디 중복 확인하기 버튼 -->	
 			  <button type="button" id="idCheckBtn">아이디 중복확인</button>
 			  
@@ -41,8 +41,11 @@
 			  <div id="alert-id-danger" class="form-field">사용 가능하지 않은 아이디입니다.</div>	 -->		   			  
 			  
 			  <!-- 닉네임 / 한글만 입력 가능-->
-			  <input type="text" placeholder="닉네임" class="form-field" required
+			  <input type="text" placeholder="닉네임" id="userNickname" class="form-field" required
 			  onkeyup="checkCharOnlyKor(event)" minlength="2" maxlength="6" ></input>
+			  <p id="nicknamecheck"></p>
+			  <!-- 아이디 중복 확인하기 버튼 -->	
+			  <button type="button" id="nicknameCheckBtn">닉네임 중복확인</button>
 			  
 			  <!-- 비밀번호 / 영어와 숫자만 입력 가능-->
 		      <input type="password" placeholder="비밀번호" id=password1 class="form-field" required
@@ -262,10 +265,7 @@ h5 {
 
 </style>
 	<!-- $로 시작하는 것은 jQuery인데 이걸 추가해줘야 한다.  integrity랑 crossorigin은 왜 있는지 모르겠다. -->	
-	<script src="https://code.jquery.com/jquery-3.6.0.slim.js" 
-	integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" 
-	crossorigin="anonymous"> </script>
-
+<script th:src="@{/js/jquery-3.6.0.min.js}"></script>
 
 	
 	<script type="text/javascript">
@@ -326,6 +326,7 @@ h5 {
 
 		$(document).ready(function(){
 			$("#idCheckBtn").click(function() {
+//				alert($("#userid").val());
 		        $.ajax({
 		            url: "http://localhost:8080/getId",
 		            type: "POST",
@@ -341,13 +342,42 @@ h5 {
 		                    $("#userid").focus();
 		                }
 		            },
-		            error: function() {
-			                alert('error')
-					}
+		            error: function(xhr, status, error) {
+		    			console.log("code:"+xhr.status+"\n"+"message:"+xhr.responseText+"\n"+"error:"+error);
+		    			alert("code:"+xhr.status+"\n"+"message:"+xhr.responseText+"\n"+"error:"+error);
+		    			return false;
+		    		}
 				});
 			});
 		});
-		
+	 
+		<!--  닉네임 중복검사-->  
+		$(document).ready(function(){
+			$("#nicknameCheckBtn").click(function() {
+//				alert($("#userid").val());
+		        $.ajax({
+		            url: "http://localhost:8080/getNickname",
+		            type: "POST",
+		            data: { "nickname": $("#userNickname").val() },
+		            success: function(res) {
+		                // alert('success')
+		                if(res.trim() == 'ok') {
+		                    $("#nicknamecheck").html("사용 가능한 아이디입니다.");
+		                    $("#id").val($("#userNickname").val());
+		                } else {
+		                    $("#nicknamecheck").html("사용할 수 없는 아이디입니다.");
+		                    $("#userNickname").val("");
+		                    $("#userNickname").focus();
+		                }
+		            },
+		            error: function(xhr, status, error) {
+		    			console.log("code:"+xhr.status+"\n"+"message:"+xhr.responseText+"\n"+"error:"+error);
+		    			alert("code:"+xhr.status+"\n"+"message:"+xhr.responseText+"\n"+"error:"+error);
+		    			return false;
+		    		}
+				});
+			});
+		});
 
 
 
