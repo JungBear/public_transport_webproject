@@ -1,11 +1,10 @@
 package com.study.domain.user;
 
-import java.time.LocalDate;
 
 import lombok.Data;
 
 @Data
-public class UserRequest {
+public class UserViewtoControllerDTO {
 	//user 
 	private int userNo;
 	private String id;          //PK  
@@ -16,6 +15,6 @@ public class UserRequest {
     private String pwdHint;	//비밀번호 힌트 질문
     private String pwdHintAns;	//비밀번호 힌트에 대한 답
     private int gender;	//성별
-    private LocalDate age;	//나이
+    private String age;	//나이
         
 }

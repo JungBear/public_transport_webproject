@@ -48,11 +48,11 @@
 			  <button type="button" id="nicknameCheckBtn">닉네임 중복확인</button>
 			  
 			  <!-- 비밀번호 / 영어와 숫자만 입력 가능-->
-		      <input type="password" placeholder="비밀번호" id=password1 class="form-field" required
-		      onkeyup="checkCharOnlyEngNum(event)" minlength="8" maxlength="20"></input>
+		      <input type="password" placeholder="비밀번호" id=pwd class="form-field" required
+		      onkeyup="checkCharOnlyEngNum(event)" minlength="8" maxlength="20" i></input>
 		     
 		      <!-- 위에 쓴 비밀번호와 일치하게 입력하라고 확인하는 기능 -->
-		      <input type="password" placeholder="비밀번호 확인" id=password2 class="form-field" required></input>
+		      <input type="password" placeholder="비밀번호 확인" id=pwdCheck class="form-field" required></input>
 		      
 		      <!--css와 jQuery에서 id를 #id로 해서 쓸거임. <style>에서 쓴다는 말임. -->
 		      <!-- 비밀번호가 일치하는지 일치하지 않는지 비밀번호 확인 칸 밑에 칸이 새로 생성된 후 그 칸에 출력된다. -->
@@ -62,31 +62,30 @@
 		      <!-- 비밀번호 힌트 질문 고르기 -->
 		      <select name="pwhint" id="pwdhint" class="form-field" required>
 		        <option value="">힌트 고르기</option>
-		        <option value="35">자신의 보물 1호는?</option>
+		        <option value="자신의 보물 1호는?">자신의 보물 1호는?</option>
 		      </select>
 		      
 		      <!-- 비밀번호 힌트 -->
-		      <input type ="text" placeholder="비밀번호 힌트" class="form-field" required></input>
+		      <input type ="text" id="pwdhintans" placeholder="비밀번호 힌트" class="form-field" required></input>
 		      
 		      <!-- 이메일 -->
-		      <input type="email" placeholder="이메일" class="form-field" required></input>
+		      <input type="email" id="userEmail" placeholder="이메일" class="form-field" required></input>
 		      
 		      <!-- 이름 -->
-		      <input type="text" placeholder="이름" id="name" class="form-field" required
+		      <input type="text" placeholder="이름" id="username" class="form-field" required
 		      onkeyup="checkCharOnlyKor(event)" minlength="2" maxlength="6"></input>
 		      
 		      <!-- 성별 -->
-		      <select name="sex" id="sex" class="form-field" required>
-		      	<option value="">성별</option>
-		      	<option value="35">남자</option>
-		      	<option value="35">여자</option>
+		      <select name="gender" id="gender" class="form-field" required>
+		      	<option value="0">남자</option>
+		      	<option value="1">여자</option>
 		      </select>
 		      
 		      <!-- 달력 및 나이 계산. 와..나이 계산 어떻게 해야하냐... -->
-		      <input type="date"  class=form-field required></input>
+		      <input type="date" id="age" class=form-field required></input>
 		      
 		      <!-- 회원가입 버튼 -->
-		      <button id="click-signup2" class="button primary" onclick=signupcomplete() >회원가입 하기</button>
+		      <button type="button" id="account" class="button primary">회원가입 하기</button>
 		      <!-- 로그인하러 가기 버튼 -->
 		      <button type="button" class="button secondary" id="click-signin" onclick="location.href='signin.do'">로그인하러 가기</button>
 		      
@@ -306,8 +305,8 @@ h5 {
         $("#alert-success").hide();
         $("#alert-danger").hide();
         $("input").keyup(function(){
-            var password1=$("#password1").val();
-            var password2=$("#password2").val();
+            var password1=$("#pwd").val();
+            var password2=$("#pwdCheck").val();
             if(password1 != "" || password2 != ""){
                 if(password1 == password2){
                     $("#alert-success").show();
@@ -351,10 +350,11 @@ h5 {
 			});
 		});
 	 
-		<!--  닉네임 중복검사-->  
+		/*  닉네임 중복검사  */  
 		$(document).ready(function(){
 			$("#nicknameCheckBtn").click(function() {
 //				alert($("#userid").val());
+				
 		        $.ajax({
 		            url: "http://localhost:8080/getNickname",
 		            type: "POST",
@@ -424,15 +424,61 @@ h5 {
 		};
 		*/
 
-	
+	/* 회원가입 버튼을 눌렀을 경우 작동 */
+	  $("#account").click(function() {
+				alert("버튼클릭");
+				var params = {
+                        "id": $("#userid").val(),
+                        "userName": $("#username").val(),
+                        "nickname": $("#userNickname").val(),
+                        "email": $("#userEmail").val(),
+                        "pwd": $("#pwd").val(),
+                        "pwdHint" : $("#pwdhint").val(),
+                        "pwdHintAns" : $("#pwdhintans").val(),
+                        "gender" : $("#gender").val(),
+                        "age" :$("#age").val()
+                    };
+				
+//				alert(JSON.stringify(params));
+                $.ajax({
+                    url: "http://localhost:8080/user/signup.do",
+                    type: "POST",
+                    data: params,
+
+                    // 마찬가지로 리턴받은 메시지(res)의 결과에 따라 처리해준다.
+                    success: function(res) {
+                    	alert(JSON.stringify(res));
+                        if(res.trim() == 'ok') {
+                            console.log(res);
+                            alert("가입되었습니다!");
+                            location.href="http://localhost:8080/user/signin.do";
+                        } else {
+                            alert("가입되지 않았습니다!");
+                            $("#userid").val("");
+                            $("#pwd").val("");
+                            $("#username").val("");
+                            $("#userEmail").val("");
+                        }
+                    },
+                    error: function(xhr, status, error) {
+		    			console.log("code:"+xhr.status+"\n"+"message:"+xhr.responseText+"\n"+"error:"+error);
+		    			alert("code:"+xhr.status+"\n"+"message:"+xhr.responseText+"\n"+"error:"+error);
+		    			return false;
+		    		}
+                });
+            });
 	
 	
 
 	/* 회원가입이 성공했을 때(DB 연동하고 승인?받았을 때 alert를 띄워야한다. - 추후 예정) */
+	
+	/*
 	function signupcomplete() {
 		alert("회원가입에 성공했습니다.");
 		window.location.href='http://localhost:8080/';
 	}
+		
+	*/
 	
 	/* 로그인이 성공했을 때(alert를 띄우지 말자.) */
 	/* function signincomplete(){

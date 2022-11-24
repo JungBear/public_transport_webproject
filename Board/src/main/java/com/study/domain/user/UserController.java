@@ -1,7 +1,11 @@
 package com.study.domain.user;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,7 +33,7 @@ public class UserController {
     @PostMapping("/getId")
     @ResponseBody
     public String getId(UserRequest params) {
-        logger.info("MemberController getId()");
+        logger.info("UserController getId()");
         boolean b = userService.getId(params);
         if(b) {
             return "no";
@@ -41,7 +45,7 @@ public class UserController {
     @PostMapping("/getNickname")
     @ResponseBody
     public String getNickname(UserRequest params) {
-        logger.info("MemberController getId()");
+        logger.info("UserController getId()");
         boolean b = userService.getNickname(params);
         if(b) {
             return "no";
@@ -49,6 +53,25 @@ public class UserController {
         return "ok";
     }
 	
+    // 회원가입
+    @PostMapping("/user/signup.do")
+    @ResponseBody
+    public String addMember(UserViewtoControllerDTO params) {
+    	UserRequest userrequest = new UserRequest();
+    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate dateTime = LocalDate.parse(params.getAge(), formatter);
+    	BeanUtils.copyProperties(params, userrequest,"age");
+    	userrequest.setAge(dateTime);  	
+    	logger.info("UserController addMember()");
+        boolean b = userService.addMember(userrequest);
+        logger.info(params.toString());
+        if(b) {
+            return "ok";
+        }
+        System.out.println("b뭐 어쩌라고 "+b);
+        return "no";
+    }
+    
 	//로그인 페이지
 	@GetMapping("/user/signin.do")
 	public String signin() {

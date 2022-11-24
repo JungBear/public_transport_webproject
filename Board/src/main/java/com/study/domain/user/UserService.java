@@ -24,18 +24,34 @@ public class UserService {
     void saveUser(final UserResponse params) {
         userMapper.userSave(params);
     }
+    
     /**
-     * 회원 정보 저장
+     * 아이디체크
      * @param params - 아이디 정보
-     * @return Generated PK
+     * @return  true, false
      */
     public boolean getId(UserRequest params) {
         int n = userMapper.getId(params);
         return n > 0;
     }
-
+    
+    /**
+     * 닉네임체크
+     * @param params - 닉네임 정보
+     * @return  true, false
+     */
     public boolean getNickname(UserRequest params) {
         int n = userMapper.getNickname(params);
+        return n > 0;
+    }
+    
+    /**
+     * 회원가입
+     * @param params - 사용자가 작성한 정보
+     * @return  true, false
+     */
+    public boolean addMember(UserRequest params) {
+        int n = userMapper.addMember(params);
         return n > 0;
     }
 }

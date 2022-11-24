@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.study.domain.user.UserMapper;
+import com.study.domain.user.UserRequest;
 import com.study.domain.user.UserResponse;
 
 @SpringBootTest
@@ -19,7 +20,7 @@ public class UserMapperTest {
 	
 	@Test
 	void userSave() {
-		UserResponse params = new UserResponse();
+		UserRequest params = new UserRequest();
 		params.setId("lysyeah6");
 		params.setNickname("가나다라3");
 		String str = "1992-05-05";
@@ -33,7 +34,7 @@ public class UserMapperTest {
 		params.setPwdHint("자신의 보물 1호는?");
 		params.setPwdHintAns("간다라마");
 		
-		usermapper.userSave(params);
+		usermapper.addMember(params);
 	}
 	@Test
 	void userSignin() {

@@ -91,4 +91,32 @@
         SELECT IFNULL(COUNT(*), 0) FROM USER
         WHERE nickname = #{nickname}
     </select>
+    
+     <!-- 회원 가입 -->
+    <insert id="addMember" parameterType="com.study.domain.user.UserRequest" useGeneratedKeys="true" keyProperty="userNo">
+        INSERT INTO user(
+		<include refid="UserColumns"/>
+       ) VALUES (
+		#{userNo},
+		#{id},
+		#{userName},
+		#{nickname},
+		#{email},
+		#{pwd},
+		#{pwdHint},
+		#{pwdHintAns},
+		#{gender},
+		#{age},
+		NOW(),
+		0,
+		0,
+		NULL,
+		NULL,
+		0,
+		0,
+		NOW(),
+		NOW(),
+		NOW()	 
+	)
+    </insert>
 </mapper>

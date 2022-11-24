@@ -20,7 +20,21 @@ public interface UserMapper { //mapper.xml을 불러오는 기능 //왜 인터�
 	  */
 	 void userSignIn(UserResponse params);
 	 
-	 int getId(UserRequest dto);
+	 /**
+	  * 아이디 중복 확인
+	  * @param User - 입력한 아이디 
+	  */
+	 int getId(UserRequest params);
 	 
-	 int getNickname(UserRequest dto);
+	 /**
+	  * 닉네임 중복 확인
+	  * @param User - 입력한 닉네임 
+	  */
+	 int getNickname(UserRequest params);
+	 
+	 /**
+	  * 회원가입
+	  * @param User - 사용자가 입력한 정보 
+	  */
+	 int addMember(UserRequest params);
 }
