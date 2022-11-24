@@ -19,4 +19,29 @@ public interface UserMapper { //mapper.xml을 불러오는 기능 //왜 인터�
 	  * @param User - 저장된 아이디, 비밀번호 확인  
 	  */
 	 void userSignIn(UserResponse params);
+	 
+	 /**
+	  * 아이디 중복 확인
+	  * @param User - 입력한 아이디 
+	  */
+	 int getId(UserRequest params);
+	 
+	 /**
+	  * 닉네임 중복 확인
+	  * @param User - 입력한 닉네임 
+	  */
+	 int getNickname(UserRequest params);
+	 
+	 /**
+	  * 회원가입
+	  * @param User - 사용자가 입력한 정보 
+	  */
+	 int addMember(UserRequest params);
+	 
+	  /**
+	     * 로그인
+	     * @param UserRequest
+	     * @return UserResponse(유저의 모든 정보)
+	     */
+	 UserResponse login(UserResponse params) throws Exception;
 }

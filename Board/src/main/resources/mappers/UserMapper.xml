@@ -28,13 +28,31 @@
 	
 </sql>
 
+<!-- 아아디 중복 확인 -->
+    <select id="getId" parameterType="com.study.domain.user.UserRequest" resultType="int">
+        SELECT 
+        	IFNULL(COUNT(*), 0) 
+        FROM 
+       		USER
+        WHERE 
+        	id = #{id}
+    </select>
 
-<!-- 회원가입 정보 저장 -->
-<insert id = "userSave" parameterType="com.study.domain.user.UserResponse" useGeneratedKeys="true" keyProperty="userNo">
-
-	INSERT INTO user(
+<!-- 닉네임 중복 확인 -->
+    <select id="getNickname" parameterType="com.study.domain.user.UserRequest" resultType="int">
+        SELECT 
+        	IFNULL(COUNT(*), 0) 
+        FROM
+        	USER
+        WHERE 
+        	nickname = #{nickname}
+    </select>
+    
+     <!-- 회원 가입 -->
+    <insert id="addMember" parameterType="com.study.domain.user.UserRequest" useGeneratedKeys="true" keyProperty="userNo">
+        INSERT INTO user(
 		<include refid="UserColumns"/>
-	) VALUES (
+       ) VALUES (
 		#{userNo},
 		#{id},
 		#{userName},
@@ -56,31 +74,18 @@
 		NOW(),
 		NOW()	 
 	)
-</insert>
-
-<!-- 마이 페이지 정보 수정 -->
-<update id = "userupdate" parameterType="com.study.domain.user.UserRequest">
-	UPDATE user
-	SET
-		modified_date=NOW(),
-		
-</update>
-
-<select id="userSignIn" parameterType="com.study.domain.user.UserRequest" resultType="com.study.domain.user.UserRequest">
-	
-	SELECT
-		id
-		, pwd
-	FROM 
-		user
-	WHERE 
-		id=#{id}
-	AND
-		pwd=#{pwd}
-
-</select>
-
-
-
-
+    </insert>
+    
+    <!-- 로그인 -->
+    <select id="login" parameterType="com.study.domain.user.UserResponse" resultType="com.study.domain.user.UserResponse">
+        SELECT 
+        	 <include refid="UserColumns" />
+       	FROM
+       		user
+        WHERE 
+        	id = #{id} 
+        AND 
+        	pwd = #{pwd}
+    </select>
+    
 </mapper>
