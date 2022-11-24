@@ -334,3 +334,8 @@ input[readonly], select[readonly], textarea[readonly], .readonly, input[disabled
 @media (min-width: 1025px) {.notice-list .nickname:hover {color: #1d84df;}}
 .notice-list .commentTime {font-size: 12px; text-overflow: ellipsis; white-space: nowrap; display: block; color: #aab2bd; position: absolute; right: 20px; top: 17px;}
 .notice-list #delButton{display:inline;float: right;}
+
+/*마이페이지*/
+
+
+
