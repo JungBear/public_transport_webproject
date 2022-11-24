@@ -75,6 +75,7 @@
     function findAllPost() {
 
       const list = [[ ${response.list} ]];
+//      alert(list);
       if ( !list.length ) {
         document.getElementById('list').innerHTML = '<td colspan="6"><div className="no_data_msg">검색된 결과가 없습니다.</div></td>';
         drawPage();
@@ -93,7 +94,7 @@
     function drawList(list, num) {
 
       let html = '';
-
+	  //alert(list);
       list.forEach(row => {
         html += `
             <tr>

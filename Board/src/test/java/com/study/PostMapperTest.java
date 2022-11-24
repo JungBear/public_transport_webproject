@@ -32,17 +32,17 @@ public class PostMapperTest {
         System.out.println("전체 게시글 개수는 : " + posts.size() + "개입니다.");
     }
 
-//    @Test
-//    void findByInfoTypeId() {
-//        PostResponse post = postMapper.findByInfoTypeId(2L);
-//        try {
-//            String postJson = new ObjectMapper().registerModule(new JavaTimeModule()).writeValueAsString(post);
-//            System.out.println(postJson);
-//
-//        } catch (JsonProcessingException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
+    @Test
+    void findByInfoTypeId() {
+        PostResponse post = postMapper.findByInfoTypeId(2L);
+        try {
+            String postJson = new ObjectMapper().registerModule(new JavaTimeModule()).writeValueAsString(post);
+            System.out.println(postJson);
+
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
    
     
 //    @Test

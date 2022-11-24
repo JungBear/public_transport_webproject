@@ -38,23 +38,23 @@ public class PostService {
         return postMapper.findById(id);
     }    
     
-    /**
-     * 정보 게시글 상세정보 조회
-     * @param id - PK
-     * @return 게시글 상세정보
-     */
-    public PostResponse findByInfoTypeId(final Long id) {
-        return postMapper.findByInfoTypeId(id);
-    }
-    
-    /**
-     * 자유 게시글 상세정보 조회
-     * @param id - PK
-     * @return 게시글 상세정보
-     */
-    public PostResponse findByFreeTypeId(final Long id) {
-        return postMapper.findByFreeTypeId(id);
-    }
+//    /**
+//     * 정보 게시글 상세정보 조회
+//     * @param id - PK
+//     * @return 게시글 상세정보
+//     */
+//    public PostResponse findByInfoTypeId(final Long id) {
+//        return postMapper.findByInfoTypeId(id);
+//    }
+//    
+//    /**
+//     * 자유 게시글 상세정보 조회
+//     * @param id - PK
+//     * @return 게시글 상세정보
+//     */
+//    public PostResponse findByFreeTypeId(final Long id) {
+//        return postMapper.findByFreeTypeId(id);
+//    }
 
     /**
      * 게시글 수정
@@ -82,19 +82,19 @@ public class PostService {
      * @param params - search conditions
      * @return 게시글 리스트
      */
-    public PagingResponse<PostResponse> findAllPost(final SearchDto params) {
-
-        int count = postMapper.count(params);
-        if (count < 1) {
-            return new PagingResponse<>(Collections.emptyList(), null);
-        }
-
-        Pagination pagination = new Pagination(count, params);
-        params.setPagination(pagination);
-
-        List<PostResponse> list = postMapper.findAll(params);
-        return new PagingResponse<>(list, pagination);
-    }
+//    public PagingResponse<PostResponse> findAllPost(final SearchDto params) {
+//
+//        int count = postMapper.count(params);
+//        if (count < 1) {
+//            return new PagingResponse<>(Collections.emptyList(), null);
+//        }
+//
+//        Pagination pagination = new Pagination(count, params);
+//        params.setPagination(pagination);
+//
+//        List<PostResponse> list = postMapper.findAll(params);
+//        return new PagingResponse<>(list, pagination);
+//    }
     /**
      * 정보 게시글 리스트 조회
      * @return 게시글 리스트

@@ -31,15 +31,15 @@ public interface PostMapper {
      * @param id - PK
      * @return 게시글 상세정보
      */
-    PostResponse findByInfoTypeId(Long id);
-    
-    /**
-     * 자유 게시글 상세정보 조회
-     * @param id - PK
-     * @return 게시글 상세정보
-     */
-    PostResponse findByFreeTypeId(Long id);
-    
+//    PostResponse findByInfoTypeId(Long id);
+//    
+//    /**
+//     * 자유 게시글 상세정보 조회
+//     * @param id - PK
+//     * @return 게시글 상세정보
+//     */
+//    PostResponse findByFreeTypeId(Long id);
+//    
     /**
      * 게시글 수정
      * @param params - 게시글 정보
@@ -56,7 +56,7 @@ public interface PostMapper {
      * 모든 게시글 리스트 조회
      * @return 게시글 리스트
      */
-    List<PostResponse> findAll(SearchDto params);
+//    List<PostResponse> findAll(SearchDto params);
     
     /**
      * 정보 게시글 리스트 조회
@@ -69,13 +69,7 @@ public interface PostMapper {
      * @return 게시글 리스트
      */
     List<PostResponse> findFree(SearchDto params);
-
-    /**
-     * 정보 게시글 수 카운팅
-     * @return 게시글 수
-     */
-    int count(SearchDto params);
-    
+   
     
     /**
      * 정보 게시글 수 카운팅
@@ -100,9 +94,6 @@ public interface PostMapper {
     * @return 요약정보게시글 리스트
     * */
   List<PostResponse> summaryFreeList();
-  
-  int summaryInfoCount();
-  
-  int summaryFreeCount();
+
 
 }
