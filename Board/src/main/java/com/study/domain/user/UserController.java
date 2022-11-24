@@ -78,6 +78,13 @@ public class UserController {
 		return "user/signin";
 	}
 	
+	@PostMapping("/user/signin.do")
+	@ResponseBody
+    public UserResponse login(UserRequest params) {
+        logger.info("MemberController login()");
+        return userService.login(params);
+    }
+	
 	//아이디,비밀번호찾기 페이지
 	@GetMapping("/user/findidpwd.do")
 	public String findidpwd() {

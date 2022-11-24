@@ -14,11 +14,11 @@
  		<form name="signIn">
 			<div class="form-wrapper">
 				<h5>로그인</h5>
-				<input type="text" placeholder="아이디" class="form-field" required></input>
+				<input type="text" id="userId" placeholder="아이디" class="form-field" required></input>
 								
-				<input  type="password" placeholder="비밀번호" class="form-field" required></input>
+				<input  type="password" id="pwd" placeholder="비밀번호" class="form-field" required></input>
 				
-				<button class="button primary" onclick=signincomplete()>로그인하기</button>
+				<button type="button" id="login" class="button primary">로그인하기</button>
 				
 				<button type="button" class="button secondary" id="click-signup" 
 				onclick="location.href='signup.do'">회원가입하러 가기</button>
@@ -42,7 +42,7 @@
 	          url: "http://localhost:8080/user/signin.do",
 	          type: "POST",
 	          data: {
-	              id: $("#id").val(),
+	              id: $("#userId").val(),
 	              pwd: $("#pwd").val()
 	          },
 	          success: function(json) {
@@ -56,11 +56,13 @@
 	                  // 로그인 정보를 세션에 저장
 	                  sessionStorage.setItem("login", JSON.stringify(json));
 	                  alert(`${json.name}님 환영합니다!`);
-	                  location.href = "../boards/boards.html";
+	                  location.href = "http://localhost:8080";
 	              }
 	          },
-	          error: function() {
-	              alert('error');
+	          error: function(xhr, status, error) {
+	        	  console.log("code:"+xhr.status+"\n"+"message:"+xhr.responseText+"\n"+"error:"+error);
+	    			alert("code:"+xhr.status+"\n"+"message:"+xhr.responseText+"\n"+"error:"+error);
+	    			return false;
 	          }
 	      });
 	  });

@@ -37,4 +37,11 @@ public interface UserMapper { //mapper.xml을 불러오는 기능 //왜 인터�
 	  * @param User - 사용자가 입력한 정보 
 	  */
 	 int addMember(UserRequest params);
+	 
+	  /**
+	     * 로그인
+	     * @param UserRequest
+	     * @return UserResponse(유저의 모든 정보)
+	     */
+	 UserResponse login(UserRequest params);
 }

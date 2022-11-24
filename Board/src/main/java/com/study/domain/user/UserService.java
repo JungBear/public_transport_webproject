@@ -14,16 +14,6 @@ import lombok.RequiredArgsConstructor;
 public class UserService {
 
 	private final UserMapper userMapper;
-
-    /**
-     * 회원 정보 저장
-     * @param params - 게시글 정보
-     * @return 
-     * @return Generated PK
-     */
-    void saveUser(final UserResponse params) {
-        userMapper.userSave(params);
-    }
     
     /**
      * 아이디체크
@@ -53,5 +43,9 @@ public class UserService {
     public boolean addMember(UserRequest params) {
         int n = userMapper.addMember(params);
         return n > 0;
+    }
+    
+    public UserResponse login(UserRequest params) {
+        return userMapper.login(params);
     }
 }
