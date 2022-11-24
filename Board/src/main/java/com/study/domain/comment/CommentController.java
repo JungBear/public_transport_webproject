@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -61,5 +62,27 @@ public class CommentController {
 //		System.out.println("if문 끝나고 받아온 댓글 리스트 commentList :"+commentList);
 		return commentList;
 	}
+	
+	@DeleteMapping(value = "/comments/{id}")
+	public int deleteComment(@PathVariable("id") final int id ,Model model) {
+		
+//		System.out.println("범인은 너냐?");
+		try {
+			boolean isDeleted = commentService.deleteComment(id);
+			System.out.println(isDeleted);
+			model.addAttribute("result", isDeleted);
+
+		} catch (DataAccessException e) {
+			model.addAttribute("message", "데이터베이스 처리 과정에 문제가 발생하였습니다.");
+
+		} catch (Exception e) {
+			model.addAttribute("message", "시스템에 문제가 발생하였습니다.");
+		}
+//		System.out.println("범인은 너냐?");
+		return id;
+	}
+	
+	
+	
 
 }

@@ -210,6 +210,38 @@
     		}
     	});
     }
+    // modal에서 댓글삭제를 눌렀을경우
+    function deleteComment(id) {
+
+    	if (!confirm('댓글을 삭제하시겠어요?')) {
+    		return false;
+    	}
+
+    	var uri = [[ @{/comments/} ]] + id;
+    	var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "DELETE"};
+
+    	$.ajax({
+    		url: uri,
+    		type: "DELETE",
+    		headers: headers,
+    		dataType: "json",
+    		success: function(response) {
+//    			alert(JSON.stringify(response.result));
+    			if (response.result == false) {
+    				alert("댓글 삭제에 실패하였습니다.");
+    				return false;
+    			}
+
+    			printCommentList();
+    			$("#commentModal").modal("hide");
+    		},
+    		error: function(xhr, status, error) {
+    			alert("에러가 발생하였습니다.");
+    			alert("code:"+xhr.status+"\n"+"message:"+xhr.responseText+"\n"+"error:"+error);
+    			return false;
+    		}
+    	});
+    }
     
     	// 게시글 리스트 보여주기		
     	function printCommentList() {
@@ -236,7 +268,8 @@
    			}, "json");
    		}
     		/*[- end of function -]*/
-    // 게시글 삭제
+    
+    		// 게시글 삭제
     function deletePost() {
       const id = [[ ${post.id} ]];
       const type = [[ ${post.type} ]];

@@ -19,7 +19,8 @@
 		, del_date
 		, secret
 	</sql>
-
+	
+	<!-- 댓글 작성 -->
 	<insert id="insertComment" parameterType="com.study.domain.comment.CommentDTO">
 		INSERT INTO comment (
 			<include refid="commentColumns" />
@@ -40,7 +41,8 @@
 		)
 	</insert>
 
-	<select id="selectCommentDetail" parameterType="long" resultType="com.study.domain.comment.CommentDTO">
+	<!-- 댓글 수정 및 삭제를 위한 댓글 조회 -->
+	<select id="selectCommentDetail" parameterType="int" resultType="com.study.domain.comment.CommentDTO">
 		SELECT
 			a.id
 		, a.board_id
@@ -58,13 +60,17 @@
 		, b.nickname
 		FROM
 			comment as a
-			, user as b
+		JOIN
+			user as b
+		ON
+			a.writer_no = b.user_no
 		WHERE
 			a.del_yn = 0
 		AND
 			a.id = #{id}
 	</select>
-
+	
+	<!--  댓글 수정 -->
 	<update id="updateComment" parameterType="com.study.domain.comment.CommentDTO">
 		UPDATE comment
 		SET
@@ -73,8 +79,9 @@
 		WHERE
 			id = #{id}
 	</update>
-
-	<update id="deleteComment" parameterType="long">
+	
+	<!--  댓글 삭제 -->
+	<update id="deleteComment" parameterType="int">
 		UPDATE comment
 		SET
 			  del_yn = 1
@@ -82,7 +89,7 @@
 		WHERE
 			id = #{id}
 	</update>
-
+	<!--  댓글 리스트 출력 -->
 	<select id="selectCommentList" parameterType="com.study.domain.comment.CommentDTO" resultType="com.study.domain.comment.CommentDTO">
 		SELECT
 		a.id
@@ -101,7 +108,10 @@
 		, b.nickname
 		FROM
 			comment as a
-			, user as b
+		JOIN
+			user as b
+		ON
+			a.writer_no = b.user_no
 		WHERE
 			a.del_yn = 0
 		AND

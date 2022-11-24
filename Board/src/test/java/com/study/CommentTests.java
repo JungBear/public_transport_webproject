@@ -39,7 +39,6 @@ class CommentTests {
 	@Test
 	public void deleteComment() {
 		commentService.deleteComment(10); // 삭제할 댓글 번호
-
 		getCommentList();
 	}
 
