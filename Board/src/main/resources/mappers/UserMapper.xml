@@ -77,7 +77,7 @@
     </insert>
     
     <!-- 로그인 -->
-    <select id="login" parameterType="com.study.domain.user.UserRequest" resultType="com.study.domain.user.UserResponse">
+    <select id="login" parameterType="com.study.domain.user.UserResponse" resultType="com.study.domain.user.UserResponse">
         SELECT 
         	 <include refid="UserColumns" />
        	FROM

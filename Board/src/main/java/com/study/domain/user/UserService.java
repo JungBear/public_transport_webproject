@@ -45,7 +45,7 @@ public class UserService {
         return n > 0;
     }
     
-    public UserResponse login(UserRequest params) {
+    public UserResponse login(UserResponse params) throws Exception {
         return userMapper.login(params);
     }
 }

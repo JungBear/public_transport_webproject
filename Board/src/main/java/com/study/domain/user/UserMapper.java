@@ -43,5 +43,5 @@ public interface UserMapper { //mapper.xml을 불러오는 기능 //왜 인터�
 	     * @param UserRequest
 	     * @return UserResponse(유저의 모든 정보)
 	     */
-	 UserResponse login(UserRequest params);
+	 UserResponse login(UserResponse params) throws Exception;
 }

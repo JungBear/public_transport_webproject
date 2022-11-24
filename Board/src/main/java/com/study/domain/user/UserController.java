@@ -3,12 +3,15 @@ package com.study.domain.user;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
@@ -80,10 +83,13 @@ public class UserController {
 	
 	@PostMapping("/user/signin.do")
 	@ResponseBody
-    public UserResponse login(UserRequest params) {
-        logger.info("MemberController login()");
-        return userService.login(params);
-    }
+	public String login(UserResponse params, HttpSession session) throws Exception{
+		params = userService.login(params);
+		if(params != null) {
+			session.setAttribute("user", params);
+		}
+		return "redirect:/";
+	}
 	
 	//아이디,비밀번호찾기 페이지
 	@GetMapping("/user/findidpwd.do")
