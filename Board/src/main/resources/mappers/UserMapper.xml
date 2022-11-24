@@ -66,6 +66,19 @@
 		
 </update>
 
+<select id="userSignIn" parameterType="com.study.domain.user.UserRequest" resultType="com.study.domain.user.UserRequest">
+	
+	SELECT
+		id
+		, pwd
+	FROM 
+		user
+	WHERE 
+		id=#{id}
+	AND
+		pwd=#{pwd}
+
+</select>
 
 
 

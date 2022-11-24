@@ -11,13 +11,31 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserController {
 	
-	//로그인 페이지 및 회원가입 페이지
-	@GetMapping("/user/signinandsignup.do")
-	public String signin() {
-		return "user/signinAndsignup";
+	//회원가입 페이지
+	@GetMapping("/user/signup.do")
+	public String signup() {
+		return "user/signup";
 	}
 	
-
+	//로그인 페이지
+	@GetMapping("/user/signin.do")
+	public String signin() {
+		return "user/signin";
+	}
+	
+	//아이디,비밀번호찾기 페이지
+	@GetMapping("/user/findidpwd.do")
+	public String findidpwd() {
+		return "user/findidpwd";
+	}
+	
+	//비밀번호 찾기 페이지
+	@GetMapping("/user/findpwd.do")
+	public String findpwd() {
+		return "user/findpwd";
+		
+	}
+	
 	//마이페이지 
 	@GetMapping("/user/UserMyPage.do")
 	public String mypage() {
@@ -29,4 +47,5 @@ public class UserController {
 	public String mypageconfirm() {
 		return "user/UserMyPageChk";
 	}
+	
 }

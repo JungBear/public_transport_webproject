@@ -15,7 +15,8 @@ public interface UserMapper { //mapper.xml을 불러오는 기능 //왜 인터�
    
 	 
 	 /**
-	  *  
+	  * 로그인 되는지 확인
+	  * @param User - 저장된 아이디, 비밀번호 확인  
 	  */
-	
+	 void userSignIn(UserResponse params);
 }
