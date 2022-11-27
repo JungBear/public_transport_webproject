@@ -10,12 +10,39 @@ layout:decorate="~{layout/basic}">
 <!-- <header th:replace="layout/basic :: header"></header> -->
 
 <th:block layout:fragment="content">
+	<div class="page_tits">
+		<h3>마이페이지</h3>
+		<p class="path">
+			<strong>현재 위치 :</strong> <span>마이페이지</span> 
+		</p>
+		
+	</div>
 	
-
-<button type="submit" class="first secondary" id="click-modify" 
-				onclick="location.href='signup.do'">수정하기</button>
-
-	
+	<div class="content">
+		<!-- <section>
+			<form id="SaveForm" method="post" autocomplete="off">
+				<div sec:authentication="userName"></div>
+				
+				이름
+				<div th:text="${userresponse.getName()}"></div>
+				
+				가입일
+				<div th:text="${userresponse.getSigninDate}"></div>
+				<div th:if="${user.response.getEmailCheck()!='true'}">
+					<input type="text" th:value="${userresponse.getEmail()}" disabled></input>
+						<input type="button class="sendEmail" value="인증번호 전송">
+							<input type="text" id="randnum" placeholder="인증번호를 입력해주세요>
+								<input type="button" id="confirmRandum" value="제출">
+				</div>
+				<div th:if="#{userresponse.getEmailCheck()=='true'}">
+					이메일 인증이 완료되었습니다.
+				</div>
+					<a href="/userMyPageModify"></a>
+				<script src="../static/mypagelib.js"></script>
+				
+			</form>
+		</section> -->
+	</div>
  
 	
 </th:block>
