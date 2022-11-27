@@ -18,7 +18,7 @@ public interface UserMapper { //mapper.xml을 불러오는 기능 //왜 인터�
 	  * 로그인 되는지 확인
 	  * @param User - 저장된 아이디, 비밀번호 확인  
 	  */
-	 void userSignIn(UserResponse params);
+//	 void userSignIn(UserResponse params);
 	 
 	 /**
 	  * 아이디 중복 확인
@@ -43,5 +43,12 @@ public interface UserMapper { //mapper.xml을 불러오는 기능 //왜 인터�
 	     * @param UserRequest
 	     * @return UserResponse(유저의 모든 정보)
 	     */
-	 UserResponse login(UserResponse params) throws Exception;
+	 UserResponse login(UserResponse params);
+	 
+	 /*
+	  * 마이페이지 입장시 비밀번호 체크
+	  * */
+	 
+	 UserResponse checkPwd(String params);
+	 
 }

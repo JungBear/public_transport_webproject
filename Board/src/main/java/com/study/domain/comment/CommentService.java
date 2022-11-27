@@ -9,5 +9,7 @@ public interface CommentService {
 	public boolean deleteComment(int id);
 
 	public List<CommentDTO> getCommentList(CommentDTO params);
+	
+	public CommentDTO getCommentDetail(int id);
 
 }

@@ -337,5 +337,7 @@ input[readonly], select[readonly], textarea[readonly], .readonly, input[disabled
 
 /*마이페이지*/
 
+/*로그인이 필요한 서비스입니다*/
+#needLogin{display: flex; flex-direction:column; justify-content:center; place-items: center; align-items:center;}
 
 

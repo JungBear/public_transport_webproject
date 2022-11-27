@@ -45,7 +45,11 @@ public class UserService {
         return n > 0;
     }
     
-    public UserResponse login(UserResponse params) throws Exception {
+    public UserResponse login(UserResponse params) {
         return userMapper.login(params);
+    }
+    
+    public UserResponse checkPwd(String params) {
+    	return userMapper.checkPwd(params);
     }
 }

@@ -6,8 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.study.domain.post.PostResponse;
+import com.study.domain.user.UserResponse;
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,12 +20,11 @@ public class MainController {
 	private final MainService MainService;
 
 	@GetMapping(value = "/")
-	public String main(Model model) {
+	public String main(Model model, UserResponse user) {
 		List<PostResponse> freePosts = MainService.summaryFreeList();
 		List<PostResponse> infoPosts = MainService.summaryInfoList();
         model.addAttribute("freePosts", freePosts);
         model.addAttribute("infoPosts", infoPosts);
-		
 		return "home";
 	}
 
