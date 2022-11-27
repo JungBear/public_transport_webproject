@@ -22,9 +22,6 @@ public class PostController {
 
     private final PostService postService;
     
-    
-    
-    
     // 정보 게시글 작성 페이지
     @GetMapping("/post/write.do")
     public String openInfoPostWrite(@RequestParam(value = "id", required = false) final Long id, Model model) {

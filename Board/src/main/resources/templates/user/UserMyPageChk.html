@@ -23,13 +23,18 @@ layout:decorate="~{layout/basic}">
 	</div>
 	
 	<div class="form-field">
-		<form>
-			
-			<h5>비밀번호 확인</h5>
-				<input type="password" placeholder="비밀번호" width=10px required></input>	
-				<button type="button" id=click-confirm onclick=checkpassword() >확인</button>		
-	
-		</form>
+		<div>	
+			<form name="passwordCheck" action="user/UserMyPageChk.do" autocomplete="off" method="post">
+				
+				<h5>비밀번호 확인</h5>
+					<input type="hidden" name="idx" th:value="${idx}">
+					
+					<input type="password" id="password" name="passowrd" placeholder="비밀번호" required></input>	
+					<button type="button" id=click-confirm 
+					class="btn btn-outline-primary mr-7" onclick=checkpassword() >비밀번호 확인</button>		
+		
+			</form>
+		</div>
 	</div>
  
 	
@@ -38,15 +43,15 @@ layout:decorate="~{layout/basic}">
 <script>
 
 	function checkPassword(){	
-		var idx = $('input[name=idx]').val();
-		var password = $('input[name=password]').val();
+		var id = $('input[name=id]').val();
+		var pwd = $('input[name=pwd]').val();
 	
 		$.ajax({
-			type: 'GET',
-			url: '/board/delete/getPassword',
-			data : {idx,password},
+			type: 'get',
+			url: '/user/mypage/getPassword',
+			data : {id,pwd},
 			success: function(result) {
-				if(result.password == password){
+				if(result.pwd == pwd){
 					$('#submiBtn').attr('disabled',false);
 				}
 				else{
@@ -58,7 +63,6 @@ layout:decorate="~{layout/basic}">
 			},
 			complete: function() {
 			}
-	
 		})
 	}		
 		

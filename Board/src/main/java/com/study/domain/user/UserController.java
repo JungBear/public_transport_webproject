@@ -132,9 +132,16 @@ public class UserController {
 	
 	
 	//마이페이지 진입 전 비밀번호 확인하는 페이지
-	@GetMapping("/user/UserMyPageChk.do")
+	@PostMapping("/user/UserMyPageChk.do")
 	public String mypageconfirm() {
+		
 		return "user/UserMyPageChk";
+	}
+	
+	//마이페이지에서 수정하는 페이지
+	@PostMapping("/user/UserMypageModify.do")
+	public String mypagemodify() {
+		return "user/UserMypageModify";
 	}
 	
 	
