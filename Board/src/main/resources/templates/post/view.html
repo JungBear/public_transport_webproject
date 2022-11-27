@@ -93,7 +93,7 @@
 					<div class="input-group margin-bottom-20">
 						<input type="text" id="content" class="form-control" />
 						<div class="input-group-btn">
-							<button  type="button" class="btn waves-effect waves-light" th:onclick="insertComment([[ ${post.id} ]])">
+							<button  type="button" class="btn waves-effect waves-light" th:onclick="insertComment([[ ${post.id} ]], [[ ${post.type} ]])">
 							<i class="fa fa-commenting" aria-hidden="true"></i>
 							</button>
 						</div>
@@ -133,7 +133,7 @@
 
     
     	
-    function insertComment(boardId) {
+    function insertComment(boardId,boardType) {
 //    	alert("insertComment 실행됨");
     	var content = document.getElementById("content");
 //   	alert("content.value : "+content.value);
@@ -144,10 +144,11 @@
     		return false;
     	}
 
+
     //  alert("uri가져오기전");
     	var uri = /*[[ @{/comments} ]]*/null;
     	var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "POST"};
-    	var params = {"boardId": boardId, "content": content.value, "writerNo": 1};
+    	var params = {"boardId": boardId,"boardType":boardType, "content": content.value, "writerNo": 1};
     	
 //   	alert(JSON.stringify(params));
     	
