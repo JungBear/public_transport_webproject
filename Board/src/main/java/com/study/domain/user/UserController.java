@@ -104,7 +104,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/user/UserMyPageChk.do")
-	public String checkPwd(@SessionAttribute(name = "userInfo", required = false)UserResponse user) {
+	public String checkPwd(String pwd, @SessionAttribute(name = "userInfo", required = false)UserResponse user) {
 		return "R";
 	}
 	

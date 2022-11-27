@@ -29,7 +29,7 @@
 		                </form>
 		            </div>
 		            <div class="modal-footer">
-		                <button type="button" id="btnModalCancel" class="btn btn-default waves-effect waves-light" data-dismiss="modal">취소하기</button>
+		                <button type="button" id="btnModalCancel" class="btn btn-default waves-effect waves-light" onclick="removeModal()">취소하기</button>
 		                <button type="button" id="btnCommentUpdate" class="btn btn-primary waves-effect waves-light" onclick="updateComment()">수정하기</button>
 		                <button type="button" id="btnCommentDelete" class="btn btn-danger waves-effect waves-light">삭제하기</button>
 		            </div>
@@ -76,8 +76,8 @@
                 </tbody>
             </table>
             <p class="btn_set">
-                <a th:href="@{/post/write.do( id=${post.id} )}" class="btns btn_bdr4 btn_mid">수정</a>
-                <button type="button" onclick="deletePost();" class="btns btn_bdr1 btn_mid">삭제</button>
+                <a th:if="${userInfo.userNo} == ${post.writerNo}" th:href="@{/post/write.do( id=${post.id} )}" class="btns btn_bdr4 btn_mid">수정</a>
+                <button th:if="${userInfo.userNo} == ${post.writerNo}"  type="button" onclick="deletePost();" class="btns btn_bdr1 btn_mid">삭제</button>
                 <a href="#" onClick="history.back()" class="btns btn_bdr3 btn_mid">뒤로</a>
             </p>
 
@@ -303,7 +303,11 @@
 		document.getElementById("btnCommentUpdate").setAttribute("onclick", "updateComment("+ id +")");
 		document.getElementById("btnCommentDelete").setAttribute("onclick", "deleteComment("+ id +")");
 	}
-
+	
+    function removeModal(){
+    	$("#commentModal").modal("hide");
+    }
+    
     /*]]>*/
   </script>
 </th:block>
