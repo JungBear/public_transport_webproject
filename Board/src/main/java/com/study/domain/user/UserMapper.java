@@ -1,6 +1,10 @@
 package com.study.domain.user;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface UserMapper { //mapper.xml을 불러오는 기능 //왜 인터페이스로 만든 깃이지?
@@ -58,6 +62,15 @@ public interface UserMapper { //mapper.xml을 불러오는 기능 //왜 인터�
 	  *  @return UserResponse(유저의 모든 정보)
 	  * */
 	 UserRequest findPwd(UserRequest params);
+	 
+	 
+	 //전체조회
+	 @Select("SELECT * FROM user")
+	 public List<UserRequest> selectAll();
+
+	 //일부조회
+	 @Select("SELECT * FROM user WHERE like '%'||#{id}||'%'")
+	 public List<UserRequest> selectOne(@Param("id") String id);
 	 
 	 
 }
