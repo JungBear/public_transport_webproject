@@ -118,7 +118,6 @@ public class UserController {
 	@GetMapping("/user/findpwd.do")
 	public String findpwd() {
 		return "user/findpwd";
-		
 	}
 	
 	//마이페이지 
