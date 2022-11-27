@@ -48,11 +48,14 @@
 	          },
 	          success: function(json) {
 	              // alert('success');
+	              alert(JSON.stringify(json));
 	              if(json === "") {
 	                  alert("아이디 또는 비밀번호를 확인하세요.");
 	                  $("#userId").val("");
 	                  $("#pwd").val("");
 	              } else {
+	                  // 로그인 정보를 세션에 저장
+	                  alert(`${json.nickname}님 환영합니다!`);
 	                  location.href = "http://localhost:8080";
 	              }
 	          },

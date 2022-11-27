@@ -1,35 +1,176 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/basic">
-<th:block layout:fragment="title">
-    <title>상세 페이지</title>
-</th:block>
-
-<th:block layout:fragment="content">
-
+<html>
+<head>
+<meta charset="utf-8">
+<title>MY page Pwd Confirm</title>
+</head>
+<body>
+<div class="root">
+ 	<div class="signin-wrapper form active">
+ 		<form name="signIn">
+			<div class="form-wrapper">
 				<h5>비밀번호 확인</h5>
-				<form>			
-					<input type="password" name="pwd" placeholder="비밀번호" class="form-control" id="inputPwd" required></input>
-					<button class="button primary" onclick="signincomplete()">마이페이지 입장</button>
-				</form>								
-</th:block>
-
-<th:block layout:fragment="script">
-  <script th:inline="javascript">
-    /*<![CDATA[*/
-    	
-    function signincomplete(){
-    		var inputPwd = Document.getElementById("inputPwd");
-    		var sessionPwd = [[ ${userInfo.pwd} ]];
-    		alert("입력 비밀번호 : "+inputPwd);
-    		alert("세션에 입력된 비밀번호 : "+sessionPwd);
-    }
-    	
-    	
-    	
-    	
- 	/*]]>*/
-  </script>
-</th:block>   	
+							
+				<input  type="password" placeholder="비밀번호" class="form-field" required></input>
+				
+				<button class="button primary" onclick=signincomplete()>마이페이지 입장</button>
+								
+			</div>
+		</form>
+	</div>
+</div>
 
 
+<style>
+.root {
+	display: flex;
+	width: 100%;
+	height: 100%;
+}
+
+.mobile-root {
+	flex-direction: column;
+}
+
+.mobile-root .inactive {
+	display: none;
+}
+
+.signin-wrapper {
+	flex-grow: 1;
+	background: #d5d5d5;
+	transition: all 0.32s ease-in;
+}
+
+.signup-wrapper {
+	flex-grow: 1;
+	background: #0F3758;
+	transition: all 0.32s ease-in-out;
+}
+
+.active {
+	flex-grow: 6;
+}
+
+.active.form {
+	z-index: 5;
+}
+
+.inactive {
+	pointer-events: none;
+	filter: blur(2px) grayscale(80%);
+	transform: scale(1.1);
+}
+
+.inactive .form-wrapper {
+	filter: opacity(55%);
+}
+
+html, body {
+	font-family: "Roboto";
+	height: 100vh;
+	padding: 0;
+	margin: 0;
+}
+
+h5 {
+	color: #212121;
+	font-size: 20px;
+	margin: 15px 0 30px 0;
+	text-align: center;
+}
+
+.form, .form-wrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.form-wrapper {
+	
+	background-color: white;
+	width: 300px;	/* 회원가입 로그인에서 흰색 바탕 크기 = 너비*/
+	height: 650px; /* 회원가입 로그인에서 흰색 바탕 크기 = 높이*/
+	padding: 20px 0;
+	margin: 10px auto;
+	border-radius: 15px;
+}
+
+.form-wrapper button {
+	cursor: pointer;
+	font-weight: bold;
+	width: 230px;
+	margin: 0 35px 20px;
+	height: 45px;
+	padding: 6px 15px;
+	border-radius: 5px;
+	outline: none;
+	border: none;
+	font-size: 14px;
+}
+
+.form-wrapper button.primary {
+	color: white;
+	background: #0F3758;
+}
+
+.form-wrapper button.primary:hover {
+	opacity: 0.9;
+}
+
+.form-wrapper button.secondary {
+	background: white;
+	color: #0F3758;
+}
+
+.form-wrapper button.secondary:hover {
+	background: #f5f5f5;
+}
+
+.form-wrapper .form-field {
+	font-weight: bold;
+	/* width: 200px; */
+	margin: 0 35px 20px;
+	height: 35px;
+	padding: 6px 15px;
+	border-radius: 5px;
+	outline: none;
+	border: none;
+	background: #f5f5f5;
+	color: #748194;
+	font-size: 13px;
+}
+/* 이거랑 이거 밑에는 무슨 기능인지 모르겠네.. 이래저래 바꿔봐도 보이는게 없어. */
+.form-wrapper p {
+	color: #424242;
+	font-size: 14px;
+	text-align: center;
+}
+
+.form-wrapper p a {
+	cursor: pointer;
+	color: #0F3758;
+}
+
+.form-wrapper p a:hover {
+	color: #009688;
+}
+
+#alert-success {
+	color:black;
+	background: #CCFFCC;
+}
+
+#alert-danger {
+	color:black;
+	background: #F9D7DA;
+}
+
+.findIdPwd {
+	color : #F26F51;
+	background: #ffffff;	
+}
+
+</style>
+</body>
 </html>

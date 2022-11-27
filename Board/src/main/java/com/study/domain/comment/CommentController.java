@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,13 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttribute;
-
-import com.study.domain.user.UserResponse;
+import org.springframework.web.bind.annotation.RestController;
 
 
-@Controller
+@RestController
 public class CommentController {
 
 	@Autowired
@@ -28,11 +24,9 @@ public class CommentController {
 	
 	// /comments - 댓글작성, /comments/{id} - 댓글수정
 	@RequestMapping(value = { "/comments", "/comments/{id}" }, method = { RequestMethod.POST, RequestMethod.PATCH })
-	@ResponseBody
-	public CommentDTO registerComment(@PathVariable(value = "id", required = false) Integer id, @RequestBody final CommentDTO params,
-			@SessionAttribute(name = "userInfo", required = false)UserResponse user,Model model) {
+	public CommentDTO registerComment(@PathVariable(value = "id", required = false) Integer id, @RequestBody final CommentDTO params,Model model) {
 		System.out.println("registerComment 컨트롤러 인식됨");
-		params.setWriterNo(user.getUserNo());
+		params.setWriterNo(1);
 		System.out.println("보드타입"+params.getBoardType());
 		try {
 			if (id != null) {
@@ -57,7 +51,6 @@ public class CommentController {
 
 	/* /comments?boardId=xxx/ comments/xx */
 	@GetMapping(value = "/comments")
-	@ResponseBody
 	public List<CommentDTO> getCommentList(@RequestParam("boardId") int boardId,Model model) {
 //		System.out.println("getCommentList실행");
 		CommentDTO CDTO = new CommentDTO();
@@ -73,9 +66,7 @@ public class CommentController {
 	}
 	
 	@DeleteMapping(value = "/comments/{id}")
-	@ResponseBody
-	public int deleteComment(@PathVariable("id") final int id ,
-			@SessionAttribute(name = "userInfo", required = false)UserResponse user,Model model) {
+	public int deleteComment(@PathVariable("id") final int id ,Model model) {
 		
 //		System.out.println("범인은 너냐?");
 		try {

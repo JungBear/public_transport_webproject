@@ -88,14 +88,4 @@
         	pwd = #{pwd}
     </select>
     
-    <!-- 마이페이지 입장시 비밀번호 체크하기 -->
-    <select id="checkPwd" parameterType="String" resultType="com.study.domain.user.UserResponse">
-    	SELECT
-pwd
-    	FROM 
-    		user
-    	WHERE 
-    		pwd = #{pwd} 
-    
-    </select>
 </mapper>

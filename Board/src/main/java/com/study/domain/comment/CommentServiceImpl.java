@@ -50,10 +50,4 @@ public class CommentServiceImpl implements CommentService {
 
 		return commentList;
 	}
-	@Override
-	public CommentDTO getCommentDetail(int id) {
-		CommentDTO comment = commentMapper.selectCommentDetail(id);
-		return comment;
-	}
-	
 }

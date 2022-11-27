@@ -9,12 +9,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttribute;
 
 import lombok.RequiredArgsConstructor;
 // view -> Controller -> service -> mapper -> xml -> mapper -> service -> controller -> view // 화살표마다 DTO 실행
@@ -88,23 +86,10 @@ public class UserController {
 	public String login(UserResponse params, HttpSession session) throws Exception{
 		params = userService.login(params);
 		if(params != null) {
-			session.setAttribute("userInfo", params);
+			session.setAttribute("user", params);
 		}
 		return "redirect:/";
 	}
-	
-	@GetMapping("/user/UserMyPageChk.do")
-	public String checkPwd(
-			@SessionAttribute(name = "userInfo", required = false)UserResponse user,Model model) {
-		if(user == null) {
-        	return "user/needLogin";
-        }
-		System.out.println("세선에 저장된 비밀번호 : "+user.getPwd());
-		return "user/UserMyPageChk";
-	}
-	
-	@PostMapping("/user/UserMyPageChk.do")
-	
 	
 	//아이디,비밀번호찾기 페이지
 	@GetMapping("/user/findidpwd.do")
@@ -123,5 +108,12 @@ public class UserController {
 	@GetMapping("/user/UserMyPage.do")
 	public String mypage() {
 		return "user/UserMyPage";
-	}	
+	}
+	
+	//마이페이지 진입 전 비밀번호 확인하는 페이지
+	@GetMapping("/user/UserMyPageChk.do")
+	public String mypageconfirm() {
+		return "user/UserMyPageChk";
+	}
+	
 }
