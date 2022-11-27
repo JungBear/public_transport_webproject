@@ -2,9 +2,14 @@ package com.study.domain.main;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.study.domain.post.PostResponse;
@@ -37,5 +42,13 @@ public class MainController {
 		System.out.println("bridgeList의 크기 : " + bridgeList.size());
 		return bridgeList;
 	}
+	
+    /* 메인페이지 로그아웃 */
+    @GetMapping("/logout.do")
+    public String logoutMainGET(HttpServletRequest request) throws Exception{
+        HttpSession session = request.getSession();
+        session.invalidate();
+        return "redirect:/main";        
+    }
 
 }

@@ -49,6 +49,12 @@ public class UserService {
         return userMapper.login(params);
     }
     
+    public UserRequest findId(UserRequest params) {
+    	return userMapper.findId(params);
+    }
     
     
+   public UserRequest findPwd(UserRequest params) {
+	   return userMapper.findPwd(params);
+   }
 }

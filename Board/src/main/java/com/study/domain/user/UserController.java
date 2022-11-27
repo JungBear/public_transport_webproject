@@ -12,9 +12,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
+
+import com.study.domain.comment.CommentDTO;
 
 import lombok.RequiredArgsConstructor;
 // view -> Controller -> service -> mapper -> xml -> mapper -> service -> controller -> view // 화살표마다 DTO 실행
@@ -114,11 +117,26 @@ public class UserController {
 		return "user/findidpwd";
 	}
 	
+	@PostMapping(value = "/findid")
+	@ResponseBody
+	public UserRequest findIdAction(@RequestBody final UserRequest params, Model model) {
+		UserRequest id = userService.findId(params);
+		model.addAttribute("id", id);
+		return id;
+	}
+	
 	//비밀번호 찾기 페이지
 	@GetMapping("/user/findpwd.do")
 	public String findpwd() {
 		return "user/findpwd";
-		
+	}
+	
+	@PostMapping(value = "/findpwd")
+	@ResponseBody
+	public UserRequest findPwdAction(@RequestBody final UserRequest params, Model model) {
+		UserRequest pwd = userService.findPwd(params);
+		model.addAttribute("id", pwd);
+		return pwd;
 	}
 	
 	//마이페이지 

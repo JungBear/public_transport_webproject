@@ -1,38 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 <meta charset="utf-8">
 <title>Find ID Or Password</title>
-</head>
-<body>
-<div class="root">
- 	<div class="signin-wrapper form active">
- 		<form name="signIn">
-			<div class="form-wrapper">
-				<h5>아이디 찾기</h5>
-				
-				
-				
-				
-				<input type="text" placeholder="이름" class="form-field" required></input>
-				
-				<input type="email" placeholder="이메일" class="form-field" required></input>
-				
-				<input type="date"  class=form-field required></input>
-				
-				<button class="button primary" onclick=signincomplete()>아이디 찾기</button>
-				
-				<button type="button" class="button secondary" id="click-signup" 
-				onclick="location.href='signup.do'">회원가입하러 가기</button>
-				
-				<button type="button" class ="findIdPwd" onclick="location.href='findpwd.do'"> 비밀번호 찾기</button>
-				
-			</div>
-		</form>
-	</div>
-</div>
-
-
+<script th:src="@{/js/function.js}"></script>
+<script th:src="@{/js/jquery-3.6.0.min.js}"></script>
+<script th:src="@{/js/common.js}"></script>
+<script th:src="@{/js/moment.js}"></script>
+<script src="https://kit.fontawesome.com/79613ae794.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 <style>
 .root {
 	display: flex;
@@ -184,5 +161,68 @@ h5 {
 }
 
 </style>
+</head>
+<body>
+<div class="root">
+ 	<div class="signin-wrapper form active">
+ 		<form method="post" name="findId">
+			<div class="form-wrapper">
+				<h5>아이디 찾기</h5>
+				<input type="text" id="inputName" placeholder="이름" class="form-field" required></input>
+				<input type="email" id="inputEmail" placeholder="이메일" class="form-field" required></input>
+				<input type="date" id="inputAge" class=form-field required></input>
+
+				<button type="button" class="button primary" onclick="actionFindId()">아이디 찾기</button>
+				<button type="button" class="button secondary" id="click-signup" 
+				onclick="location.href='signup.do'">회원가입하러 가기</button>
+				
+				<button type="button" class ="findIdPwd" onclick="location.href='findpwd.do'"> 비밀번호 찾기</button>
+				
+			</div>
+		</form>
+	</div>
+</div>
+
+
+
 </body>
+<script th:inline="javascript">
+	 /*<![CDATA[*/
+	function actionFindId(){
+		var userName=document.getElementById("inputName").value;
+		var email=document.getElementById("inputEmail").value;
+		var age=document.getElementById("inputAge").value;
+//		alert(JSON.stringify(id));
+
+//	    alert("uri가져오기전");
+	    var uri = /*[[ @{/findid} ]]*/null;
+	    var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "POST"};
+	    var params = {"userName": userName,"email":email, "age": age};
+	    	
+//	   	alert(JSON.stringify(params));
+	    	
+	    	
+//	    	alert("아작스전");
+	    	$.ajax({
+	    		url: uri,
+	    		type: "POST",
+	    		headers: headers,
+	    		dataType: "json",
+	    		data: JSON.stringify(params),
+				
+	    		success: function(response) {
+					var id=JSON.stringify(response.id);
+					alert(userName+"님의 아이디는 "+id+"입니다");
+	    		},
+	    		error: function(xhr, status, error) {
+	    			alert("해당하는 사용자가 없습니다. 다시 입력부탁드립니다.");
+	    			userName.focus();
+	    		}
+	    	});
+		
+		
+	 }
+
+	/*]]>*/
+</script>
 </html>

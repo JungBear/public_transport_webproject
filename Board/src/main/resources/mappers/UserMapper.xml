@@ -88,4 +88,33 @@
         	pwd = #{pwd}
     </select>
     
+    <select id="findId" parameterType="com.study.domain.user.UserRequest" resultType="com.study.domain.user.UserRequest">
+        SELECT 
+        	 id
+       	FROM
+       		user
+        WHERE 
+        	user_name = #{userName} 
+        AND 
+        	email = #{email}
+        AND
+        	age = #{age}
+    </select>
+    
+       <select id="findPwd" parameterType="com.study.domain.user.UserRequest" resultType="com.study.domain.user.UserRequest">
+        SELECT 
+        	 pwd,
+        	 user_name
+       	FROM
+       		user
+        WHERE 
+        	id = #{id} 
+        AND
+        	email = #{email}
+        AND
+        	pwd_hint = #{pwdHint}
+        AND 
+        	pwd_hint_ans = #{pwdHintAns}
+    </select>
+    
 </mapper>

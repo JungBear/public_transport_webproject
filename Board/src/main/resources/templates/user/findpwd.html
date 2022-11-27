@@ -1,35 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 <meta charset="utf-8">
-<title>Insert title here</title>
-</head>
-<body>
-<div class="root">
- 	<div class="signin-wrapper form active">
- 		<form name="signIn">
-			<div class="form-wrapper">
-				<h5>비밀번호 찾기</h5>
-				
-				
-				<input type="text" placeholder="아이디" class="form-field" required></input>
-				
-				<input type="text" placeholder="이름" class="form-field" required></input>
-				
-				<input type="email" placeholder="이메일" class=form-field required></input>
-				
-				<button class="button primary" onclick=signincomplete()>비밀번호 찾기</button>
-				
-				<button type="button" class="button secondary" id="click-signin" 
-				onclick="location.href='signup.do'">회원가입하러 가기</button>
-				
-				<button type="button" class ="button thirdary" onclick="location.href='findpwd.do'"> 로그인 하러가기</button>
-				
-			</div>
-		</form>
-	</div>
-</div>
-
+<title>Find Password</title>
+<script th:src="@{/js/function.js}"></script>
+<script th:src="@{/js/jquery-3.6.0.min.js}"></script>
+<script th:src="@{/js/common.js}"></script>
+<script th:src="@{/js/moment.js}"></script>
+<script src="https://kit.fontawesome.com/79613ae794.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<title>비밀번호찾기</title>
 <style>
 .root {
 	display: flex;
@@ -181,5 +162,72 @@ h5 {
 }
 
 </style>
+</head>
+<body>
+<div class="root">
+ 	<div class="signin-wrapper form active">
+ 		<form method="post" name="findId">
+			<div class="form-wrapper">
+				<h5>비밀번호 찾기</h5>
+				<input type="text" id="inputId" placeholder="아이디" class="form-field" required></input>
+				<input type="email" id="inputEmail" placeholder="이메일" class="form-field" required></input>
+				<select name="pwhint" id="inputPwdHint" class="form-field" required>
+		        	<option value="">힌트 고르기</option>
+		        	<option value="자신의 보물 1호는?">자신의 보물 1호는?</option>
+		     	</select>
+				<input type="text" id="inputPwdHintAns" placeholder="비밀번호 힌트" class="form-field" required></input>
+				
+				
+				<button type="button" class="button primary" onclick="actionFindPwd()">비밀번호 찾기</button>
+				<button type="button" class="button secondary" id="click-signup" 
+				onclick="location.href='signup.do'">회원가입하러 가기</button>
+				
+				<button type="button" class ="findIdPwd" onclick="location.href='signin.do'"> 로그인 하러가기</button>
+				
+			</div>
+		</form>
+	</div>
+</div>
+
+
 </body>
+<script th:inline="javascript">
+	 /*<![CDATA[*/
+	function actionFindPwd(){
+		var id = document.getElementById("inputId").value;
+		var email = document.getElementById("inputEmail").value;
+		var pwdHint = document.getElementById("inputPwdHint").value;
+		var pwdHintAns = document.getElementById("inputPwdHintAns").value;
+//		alert(JSON.stringify(id));
+
+//	    alert("uri가져오기전");
+	    var uri = /*[[ @{/findpwd} ]]*/null;
+	    var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "POST"};
+	    var params = {"id": id,"email":email, "pwdHint": pwdHint, "pwdHintAns":pwdHintAns};
+	    	
+//	   	alert(JSON.stringify(params));
+	    	
+	    	
+//	    	alert("아작스전");
+	    	$.ajax({
+	    		url: uri,
+	    		type: "POST",
+	    		headers: headers,
+	    		dataType: "json",
+	    		data: JSON.stringify(params),
+				
+	    		success: function(response) {
+					var pwd=JSON.stringify(response.pwd);
+					alert(JSON.stringify(response.userName)+"님의 비밀번호는 "+pwd+"입니다");
+	    		},
+	    		error: function(xhr, status, error) {
+	    			alert("해당하는 사용자가 없습니다. 다시 입력부탁드립니다.");
+	    		}
+	    	});
+		
+		
+	 }
+
+	/*]]>*/
+</script>
 </html>
