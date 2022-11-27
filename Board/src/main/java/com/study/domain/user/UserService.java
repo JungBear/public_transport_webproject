@@ -1,10 +1,11 @@
 package com.study.domain.user;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-
 
 import lombok.RequiredArgsConstructor;
 
@@ -12,7 +13,8 @@ import lombok.RequiredArgsConstructor;
 @Transactional
 @RequiredArgsConstructor
 public class UserService {
-
+	
+	
 	private final UserMapper userMapper;
     
     /**
@@ -45,10 +47,24 @@ public class UserService {
         return n > 0;
     }
     
+    /*
+     * 로그인
+     *  
+     */
     public UserResponse login(UserResponse params) throws Exception {
         return userMapper.login(params);
     }
     
+    @Autowired
+    UserMapper mapper;
+    public List<UserRequest> getAll(){
+    	return mapper.selectAll();
+    }
     
+    
+    //넘겨받은 id 파라미터로 selectOne 메서드 실행
+    public List<UserRequest> getOne(String id){
+    	return mapper.selectOne(id);
+    }
     
 }
