@@ -27,6 +27,7 @@ public class CommentController {
 	public CommentDTO registerComment(@PathVariable(value = "id", required = false) Integer id, @RequestBody final CommentDTO params,Model model) {
 		System.out.println("registerComment 컨트롤러 인식됨");
 		params.setWriterNo(1);
+		System.out.println("보드타입"+params.getBoardType());
 		try {
 			if (id != null) {
 				params.setId(id);
@@ -43,6 +44,7 @@ public class CommentController {
 			model.addAttribute("message", "시스템에 문제가 발생하였습니다.");
 		}
 		model.addAttribute("CDTO",params);
+		System.out.println(params);
 
 		return params;
 	}
