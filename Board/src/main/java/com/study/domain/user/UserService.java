@@ -7,6 +7,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.study.domain.post.PostRequest;
+
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -42,6 +44,7 @@ public class UserService {
      * @param params - 사용자가 작성한 정보
      * @return  true, false
      */
+    @Transactional
     public boolean addMember(UserRequest params) {
         int n = userMapper.addMember(params);
         return n > 0;
@@ -80,6 +83,28 @@ public class UserService {
    public int deleteUser(final int id) {
 	   userMapper.deleteUser(id);
        return id;
+   }
+   
+   /**
+    * 회원 수정
+    * @param params - 유저 정보
+    * @return PK
+    */
+   @Transactional
+   public int modifyUser(final UserRequest params) {
+       userMapper.modifyUser(params);
+       return params.getUserNo();
+   }
+  
+   /**
+    * 회원 수정
+    * @param params - 유저 정보
+    * @return PK
+    */
+   @Transactional
+   public int modifyPwd(final UserRequest params) {
+       userMapper.modifyPwd(params);
+       return params.getUserNo();
    }
    
     public List<UserRequest> getAll(){

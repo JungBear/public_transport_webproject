@@ -2,9 +2,13 @@ package com.study.domain.user;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+
+import com.study.domain.post.PostRequest;
 
 @Mapper
 public interface UserMapper { //mapper.xml을 불러오는 기능 //왜 인터페이스로 만든 깃이지?
@@ -71,10 +75,22 @@ public interface UserMapper { //mapper.xml을 불러오는 기능 //왜 인터�
 	 UserRequest checkPwd(UserRequest params);
 	 
 	 /**
-	     * 게시글 삭제
+	     * 유저 삭제
 	     * @param id - PK
 	     */
 	 void deleteUser(int id);
+	 
+	    /**
+	     * 회원정보 수정
+	     * @param params - 회원 정보
+	     */
+	 void modifyUser(UserRequest params);
+	 
+	   /**
+	     * 회원정보 수정
+	     * @param params - 회원 정보
+	     */
+	 void modifyPwd(UserRequest params);
 	 
 	 //전체조회
 	 @Select("SELECT * FROM user")

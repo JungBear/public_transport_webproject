@@ -1,10 +1,81 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>마이페이지 수정</title>
-</head>
-<body>
-11
-</body>
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+layout:decorate="~{layout/basic}">
+
+<th:block layout:fragment="title">
+  <title>마이 페이지 MyPage</title>
+</th:block>
+<th:block layout:fragment="content">
+	<div class="page_tits">
+		<h3>마이페이지</h3>
+		<p class="path">
+			<strong>현재 위치 :</strong> <span>마이페이지</span> 
+		</p>
+	</div>
+	<nav class="navbar navbar-expand-lg bg-light">
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				<li class="navbar-brand">
+					<a class="nav-link" href="http://localhost:8080/user/UserMyPage.do">내정보확인</a>
+				</li>
+				<li class="navbar-brand">
+					<a class="nav-link" href="http://localhost:8080/user/modify.do">내정보수정</a>
+				</li>
+				<li class="navbar-brand">
+					<a class="nav-link" href="/post/infolist.do">내 글 보기</a>
+				</li>
+				<li class="navbar-brand">
+					<a class="nav-link" href="/user/UserMyPageChk.do">내 댓글 보기</a>
+				</li>
+				<li class="navbar-brand">
+					<a class="nav-link" href="/user/UserMyPageChk.do">비밀번호 변경</a>
+				</li>
+			</ul>
+	</nav>
+	<div class="content">			
+		<section>
+			<form class="modifyUserInfo" id="modifyUserInfo" method="post" autocomplete="off">
+				
+				<input type="hidden" name="userNo"  class="inputUserInfo" id="inputUserNo"th:value="${userInfo.userNo}"></input>
+				<input type="text" name="id" class="inputUserInfo" id="inputId" readonly th:value="${userInfo.id}"></input>
+				<input type="text" name="nickname" class="inputUserInfo" id="inputNickname" readonly th:value="${userInfo.nickname}"></input>
+				<select name="PwdHint" id="inputPwdHint" class="inputUserInfo" th:value="${userInfo.pwdHint}" required>
+		        	<option th:selected="${userInfo.pwdHint}=='자신의 보물 1호는?'">자신의 보물 1호는?</option>
+		        	<option th:selected="${userInfo.pwdHint}=='자신이 졸업한 초등학교의 이름은?'">자신이 졸업한 초등학교의 이름은?</option>
+		     	</select>
+				<input type="text" name="pwdHintAns" class="inputUserInfo" id="inputPwdHintAns" th:value="${userInfo.pwdHintAns}" required></input>
+				<input type="email" name="email" class="inputUserInfo" id="inputEmail" th:value="${userInfo.email}" required></input>
+				<input type="text" name="userName" class="inputUserInfo" id="inputUserName"  th:value="${userInfo.userName}" readonly></input>
+				<input type="date"  class="inputUserInfo" id="inputAge" th:value="${#dates.format(date, 'yyyy-MM-dd')}" readonly></input>
+				<input th:if="${userInfo.gender==0}"type="text" class="inputUserInfo" id="inputId" value="남자"readonly ></input>
+				<input th:unless="${userInfo.gender==0}" type="text" class="inputUserInfo" id="inputId" value="여자" readonly></input>
+
+			</form>
+		</section> 
+		<button type="button" onclick="modifyCheck()">수정하기</button>
+	</div>
+</th:block>
+
+<th:block layout:fragment="script">
+	<script th:inline="javascript">
+    	/*<![CDATA[*/
+   		//수정하기전 물어보기 함수
+	    function modifyCheck(){
+	    	if(confirm("정말 수정하시겠습니까??")==true){
+	    		modifyUser();	
+	    	}else{
+	    		return false;
+	    	}
+	    }
+    	
+        function modifyUser() {
+            const form = document.getElementById('modifyUserInfo');
+            form.action = '/user/modify.do';
+            form.submit();
+        }
+    	
+    		
+    	/*]]>*/
+	</script>
+</th:block>	
 </html>

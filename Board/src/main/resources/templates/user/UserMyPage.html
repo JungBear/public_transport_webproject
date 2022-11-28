@@ -15,10 +15,27 @@ layout:decorate="~{layout/basic}">
 		<p class="path">
 			<strong>현재 위치 :</strong> <span>마이페이지</span> 
 		</p>
-		
 	</div>
-	
-	<div class="content">
+	<nav class="navbar navbar-expand-lg bg-light">
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				<li class="navbar-brand">
+					<a class="nav-link" href="http://localhost:8080/user/UserMyPage.do">내정보확인</a>
+				</li>
+				<li class="navbar-brand">
+					<a class="nav-link" href="http://localhost:8080/user/modify.do">내정보수정</a>
+				</li>
+				<li class="navbar-brand">
+					<a class="nav-link" href="/post/infolist.do">내 글 보기</a>
+				</li>
+				<li class="navbar-brand">
+					<a class="nav-link" href="/user/UserMyPageChk.do">내 댓글 보기</a>
+				</li>
+				<li class="navbar-brand">
+					<a class="nav-link" href="/user/UserMyPageChk.do">비밀번호 변경</a>
+				</li>
+			</ul>
+	</nav>
+	<div class="content">			
 		<section>
 			<dl class="outputUserInfo">
 				<dt class="key" id="userIdKey">아이디</dt>
@@ -86,7 +103,7 @@ layout:decorate="~{layout/basic}">
 	    	}
 	    }
     	
-    	
+    	// 회원탈퇴 함수
 	    function deleteUser() {
 	        const userNo = [[ ${userInfo.userNo} ]];
 	        const formHtml = `
@@ -100,12 +117,6 @@ layout:decorate="~{layout/basic}">
 	        document.getElementById('deleteForm').submit();
 	      }
 	  	
-    	
-    	
-    	
-    	
-    	
-    	
     	/*]]>*/
 	</script>
 </th:block>

@@ -48,8 +48,7 @@
 	          },
 	          success: function(json) {
 	              // alert('success');
-//	              alert(JSON.stringify(json));
-	              if(json === "") {
+	              if(json == null || json =='') {
 	                  alert("아이디 또는 비밀번호를 확인하세요.");
 	                  $("#userId").val("");
 	                  $("#pwd").val("");

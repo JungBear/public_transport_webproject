@@ -1,5 +1,6 @@
 package com.study.domain.user;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -89,12 +90,12 @@ public class UserController {
 	
 	@PostMapping("/user/signin.do")
 	@ResponseBody
-	public String login(UserResponse params, HttpSession session) throws Exception{
+	public UserResponse login(UserResponse params, HttpSession session) throws Exception{
 		params = userService.login(params);
 		if(params != null) {
 			session.setAttribute("userInfo", params);
 		}
-		return "redirect:/";
+		return params;
 	}
 	
 	//아이디,비밀번호찾기 페이지
@@ -159,13 +160,60 @@ public class UserController {
     // 회원탈퇴
     @PostMapping("/user/secession.do")
     public String deletePost(@RequestParam final int userNo
-    		,@SessionAttribute(name = "userInfo", required = false)UserResponse user, Model model) {
+    		,@SessionAttribute(name = "userInfo", required = false)UserResponse user,HttpServletRequest request, Model model) {
     	if(user == null) {
         	return "user/needLogin";
         }
     	userService.deleteUser(userNo);
     	MessageDto message = new MessageDto("탈퇴가 완료되었습니다.", "/", RequestMethod.GET, null);
+    	HttpSession session = request.getSession();
+        session.invalidate();
+    	
     	return showMessageAndRedirect(message,model);
+    }
+    
+    //회원정보 수정페이지
+    @GetMapping("/user/modify.do")
+    public String modifyUser(@SessionAttribute(name = "userInfo", required = false)UserResponse user, Model model) {
+    	if(user == null) {
+        	return "user/needLogin";
+        }
+    	System.out.println("user : "+user);
+    	Date date = java.sql.Date.valueOf(user.getAge());
+    	System.out.println(date);
+    	model.addAttribute("userInfo", user);
+    	model.addAttribute("date", date);
+        return "user/userMypageModify";
+    }
+    
+    // 회원 정보 수정
+    @PostMapping("/user/modify.do")
+    public String modifyUserAction(final UserRequest params
+    		,@SessionAttribute(name = "userInfo", required = false)UserResponse user,HttpServletRequest request
+    		,HttpSession session, Model model) {
+//    	System.out.println("컨트롤러 시작");
+    	if(user == null) {
+        	return "user/needLogin";
+        }
+//    	System.out.println("user : "+ user);
+        userService.modifyUser(params);
+        UserResponse user2 = new UserResponse();
+        // user의 값들을 user2로 복사해라("pwdHint", "pwdHintAns", "email" 빼고)
+        BeanUtils.copyProperties(user, user2, "pwdHint", "pwdHintAns", "email");
+//        System.out.println(user2);
+        user2.setPwdHint(params.getPwdHint());
+        user2.setPwdHintAns(params.getPwdHintAns());
+        user2.setEmail(params.getEmail());
+
+        HttpSession session2 = request.getSession();
+        //세션 제거
+        session2.removeAttribute("userInfo");
+        //세션 선언
+        session.setAttribute("userInfo", user2);
+        
+        MessageDto message = new MessageDto("내 정보 수정이 완료되었습니다.", "/user/UserMyPage.do", RequestMethod.GET, null);
+//        System.out.println("컨트롤러 끝");
+        return showMessageAndRedirect(message, model);
     }
 	
     /*  로그아웃 */
