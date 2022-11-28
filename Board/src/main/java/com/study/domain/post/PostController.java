@@ -60,17 +60,21 @@ public class PostController {
     
     // 자유 게시글 리스트 페이지
     @GetMapping("/post/freelist.do")
-    public String openFreePostList(@ModelAttribute("params") final SearchDto params,Model model) {
+    public String openFreePostList(@ModelAttribute("params") final SearchDto params,
+    		@SessionAttribute(name = "userInfo", required = false)UserResponse user,Model model) {
     	PagingResponse<PostResponse> response = postService.findFreePost(params);
     	model.addAttribute("response", response);
+    	model.addAttribute("userInfo", user);
         return "post/list";
     }
     
     // 정보 게시글 리스트 페이지
     @GetMapping("/post/infolist.do")
-    public String openInfoPostList(@ModelAttribute("params") final SearchDto params,Model model) {
+    public String openInfoPostList(@ModelAttribute("params") final SearchDto params,
+    		@SessionAttribute(name = "userInfo", required = false)UserResponse user,Model model) {
     	PagingResponse<PostResponse> response = postService.findInfoPost(params);
     	model.addAttribute("response", response);
+    	model.addAttribute("userInfo", user);
         return "post/list";
     } 
     

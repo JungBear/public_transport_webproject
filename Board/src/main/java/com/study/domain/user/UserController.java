@@ -3,6 +3,7 @@ package com.study.domain.user;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -13,11 +14,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
-import com.study.domain.comment.CommentDTO;
+import com.study.common.dto.MessageDto;
 
 import lombok.RequiredArgsConstructor;
 // view -> Controller -> service -> mapper -> xml -> mapper -> service -> controller -> view // 화살표마다 DTO 실행
@@ -76,7 +78,6 @@ public class UserController {
         if(b) {
             return "ok";
         }
-        System.out.println("b뭐 어쩌라고 "+b);
         return "no";
     }
     
@@ -94,21 +95,6 @@ public class UserController {
 			session.setAttribute("userInfo", params);
 		}
 		return "redirect:/";
-	}
-	
-	@GetMapping("/user/UserMyPageChk.do")
-	public String checkPwdpage(
-			@SessionAttribute(name = "userInfo", required = false)UserResponse user,Model model) {
-		if(user == null) {
-        	return "user/needLogin";
-        }
-		System.out.println("세선에 저장된 비밀번호 : "+user.getPwd());
-		return "user/UserMyPageChk";
-	}
-	
-	@PostMapping("/user/UserMyPageChk.do")
-	public String checkPwd(String pwd, @SessionAttribute(name = "userInfo", required = false)UserResponse user) {
-		return "R";
 	}
 	
 	//아이디,비밀번호찾기 페이지
@@ -141,7 +127,58 @@ public class UserController {
 	
 	//마이페이지 
 	@GetMapping("/user/UserMyPage.do")
-	public String mypage() {
+	public String mypage(@SessionAttribute(name = "userInfo", required = false)UserResponse user, Model model) {
+		if(user == null) {
+        	return "user/needLogin";
+        }
+		model.addAttribute("userInfo", user);
 		return "user/UserMyPage";
-	}	
+	}
+	
+	// 마이페이지 비번검사
+	@GetMapping("/user/UserMyPageChk.do")
+	public String checkPwdpage(
+			@SessionAttribute(name = "userInfo", required = false)UserResponse user,Model model) {
+		if(user == null) {
+        	return "user/needLogin";
+        }
+		model.addAttribute("userInfo", user);
+		System.out.println("세선에 저장된 비밀번호 : "+user.getPwd());
+		return "user/UserMyPageChk";
+	}
+	
+	@PostMapping("/user/UserMyPageChk")
+	@ResponseBody
+	public UserRequest checkPwdAction(@RequestBody final UserRequest params,
+			@SessionAttribute(name = "userInfo", required = false)UserResponse user,Model model) {
+		model.addAttribute("userInfo", user);
+		System.out.println("params : "+params);
+		return userService.checkPwd(params);
+	}
+	
+    // 회원탈퇴
+    @PostMapping("/user/secession.do")
+    public String deletePost(@RequestParam final int userNo
+    		,@SessionAttribute(name = "userInfo", required = false)UserResponse user, Model model) {
+    	if(user == null) {
+        	return "user/needLogin";
+        }
+    	userService.deleteUser(userNo);
+    	MessageDto message = new MessageDto("탈퇴가 완료되었습니다.", "/", RequestMethod.GET, null);
+    	return showMessageAndRedirect(message,model);
+    }
+	
+    /*  로그아웃 */
+    @GetMapping("/logout.do")
+    public String logoutMainGET(HttpServletRequest request) throws Exception{
+        HttpSession session = request.getSession();
+        session.invalidate();
+        return "redirect:/";        
+    }
+    
+    private String showMessageAndRedirect(final MessageDto params, Model model) {
+        model.addAttribute("params", params);
+        return "common/messageRedirect";
+    }
+	
 }

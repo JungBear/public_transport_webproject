@@ -19,8 +19,37 @@ layout:decorate="~{layout/basic}">
 	</div>
 	
 	<div class="content">
-		<!-- <section>
-			<form id="SaveForm" method="post" autocomplete="off">
+		<section>
+			<dl class="outputUserInfo">
+				<dt class="key" id="userIdKey">아이디</dt>
+					<dd class="value" id="userIdValue">[[ ${userInfo.id} ]]</dd>
+					
+				<dt class="key" id="userNicknameKey">닉네임</dt>
+					<dd class="value" id="userNicknameValue">[[ ${userInfo.nickname} ]]</dd>
+					
+				<dt class="key" id="userPwdHintKey">비밀번호힌트</dt>
+					<dd class="value" id="userPwdHintValue">[[ ${userInfo.pwdHint} ]]</dd>
+					
+				<dt class="key" id="userPwdHintAnsKey">비밀번호 힌트의 답</dt>
+					<dd class="value" id="userPwdHintAnsValue">[[ ${userInfo.pwdHintAns} ]]</dd>
+					
+				<dt class="key" id="userEmailKey">이메일</dt>
+					<dd class="value" id="userEmailValue">[[ ${userInfo.email} ]]</dd>
+					
+				<dt class="key" id="userNameKey">이름</dt>
+					<dd class="value" id="userNameValue">[[ ${userInfo.userName} ]]</dd>
+					
+				<dt class="key" id="userAgeKey">생년월일</dt>
+					<dd class="value" id="userAgeValue">[[ ${userInfo.age} ]]</dd>
+					
+				<dt class="key" id="userGenderKey">성별</dt>
+					<dd th:if="${userInfo.gender==0}" class="value" id="userGenderValue">남자</dd>
+					<dd th:unless="${userInfo.gender==0}" class="value" id="userGenderValue">여자</dd>
+			</dl>
+		</section> 
+		<button type="button" onclick="removeCheck()">탈퇴하기</button>
+	</div>
+ 		<!--<form id="SaveForm" method="post" autocomplete="off">
 				<div sec:authentication="userName"></div>
 				
 				이름
@@ -40,11 +69,44 @@ layout:decorate="~{layout/basic}">
 					<a href="/userMyPageModify"></a>
 				<script src="../static/mypagelib.js"></script>
 				
-			</form>
-		</section> -->
-	</div>
- 
+			</form> -->
 	
 </th:block>
 
+<th:block layout:fragment="script">
+	<script th:inline="javascript">
+    	/*<![CDATA[*/
+    	
+    	//삭제하기전 물어보기 함수
+	    function removeCheck(){
+	    	if(confirm("정말 탈퇴하시겠습니까??")==true){
+	    		deleteUser();	
+	    	}else{
+	    		return false;
+	    	}
+	    }
+    	
+    	
+	    function deleteUser() {
+	        const userNo = [[ ${userInfo.userNo} ]];
+	        const formHtml = `
+	            <form id="deleteForm" action="/user/secession.do" method="post">
+	               	 <input type="hidden" id="userNo" name="userNo" value="${userNo}" />
+	            </form>
+	        `;
+	        const doc = new DOMParser().parseFromString(formHtml, 'text/html');
+	        const form = doc.body.firstChild;
+	        document.body.append(form);
+	        document.getElementById('deleteForm').submit();
+	      }
+	  	
+    	
+    	
+    	
+    	
+    	
+    	
+    	/*]]>*/
+	</script>
+</th:block>
 </html>

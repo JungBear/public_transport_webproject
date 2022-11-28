@@ -14,17 +14,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
+
+import com.study.domain.user.UserResponse;
 
 
 @RestController
 public class CommentController {
-
+	
 	@Autowired
 	private CommentService commentService;
 	
 	// /comments - 댓글작성, /comments/{id} - 댓글수정
 	@RequestMapping(value = { "/comments", "/comments/{id}" }, method = { RequestMethod.POST, RequestMethod.PATCH })
-	public CommentDTO registerComment(@PathVariable(value = "id", required = false) Integer id, @RequestBody final CommentDTO params,Model model) {
+	public CommentDTO registerComment(@PathVariable(value = "id", required = false) Integer id,
+			@SessionAttribute(name = "userInfo", required = false)UserResponse user,
+			@RequestBody final CommentDTO params,Model model) {
 		System.out.println("registerComment 컨트롤러 인식됨");
 		params.setWriterNo(1);
 		System.out.println("보드타입"+params.getBoardType());
@@ -43,6 +48,7 @@ public class CommentController {
 		} catch (Exception e) {
 			model.addAttribute("message", "시스템에 문제가 발생하였습니다.");
 		}
+		model.addAttribute("userInfo", user);
 		model.addAttribute("CDTO",params);
 		System.out.println(params);
 
@@ -66,7 +72,9 @@ public class CommentController {
 	}
 	
 	@DeleteMapping(value = "/comments/{id}")
-	public int deleteComment(@PathVariable("id") final int id ,Model model) {
+	public int deleteComment(@PathVariable("id") final int id ,
+			@SessionAttribute(name = "userInfo", required = false)UserResponse user,Model model) {
+		
 		
 //		System.out.println("범인은 너냐?");
 		try {
@@ -80,6 +88,7 @@ public class CommentController {
 		} catch (Exception e) {
 			model.addAttribute("message", "시스템에 문제가 발생하였습니다.");
 		}
+		model.addAttribute("userInfo", user);
 //		System.out.println("범인은 너냐?");
 		return id;
 	}

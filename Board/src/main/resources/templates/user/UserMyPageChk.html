@@ -22,11 +22,11 @@ layout:decorate="~{layout/basic}">
 			<form name="passwordCheck" action="user/UserMyPageChk.do" autocomplete="off" method="post">
 				
 				<h5>비밀번호 확인</h5>
-					<input type="hidden" name="idx" th:value="${idx}">
-					
-					<input type="password" id="password" name="passowrd" placeholder="비밀번호" required></input>	
+					<input type="password" id="password" name="password" placeholder="비밀번호" required></input>
+					<p id="wrongPwd"></p>
 					<button type="button" id=click-confirm 
-					class="btn btn-outline-primary mr-7" onclick=checkpassword() >비밀번호 확인</button>		
+					class="btn btn-outline-primary mr-7" onclick=checkPassword() >비밀번호 확인</button>		
+					
 		
 			</form>
 		</div>
@@ -35,32 +35,45 @@ layout:decorate="~{layout/basic}">
 	
 </th:block>
 
-<script>
-
+<th:block layout:fragment="script">
+  <script th:inline="javascript">
+    /*<![CDATA[*/
 	function checkPassword(){	
-		var id = $('input[name=id]').val();
-		var pwd = $('input[name=pwd]').val();
+		var pwd = $('#password').val();
+		var id= [[ ${userInfo.id} ]];
+		
+//		alert(pwd);
+//		alert(id);
 	
-		$.ajax({
-			type: 'get',
-			url: '/user/mypage/getPassword',
-			data : {id,pwd},
-			success: function(result) {
-				if(result.pwd == pwd){
-					$('#submiBtn').attr('disabled',false);
-				}
-				else{
-					alert("비밀번호가 일치하지않습니다");
-				}
-			}
-			,
-			error: function(result) {
-			},
-			complete: function() {
-			}
-		})
+//	    alert("uri가져오기전");
+	    var uri = /*[[ @{/user/UserMyPageChk} ]]*/null;
+	    var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "POST"};
+	    var params = {"pwd": pwd, "id":id};
+	    	
+//	   	alert(JSON.stringify(params));
+	    	
+	    	
+//	    	alert("아작스전");
+	    	$.ajax({
+	    		url: uri,
+	    		type: "POST",
+	    		headers: headers,
+	    		dataType: "json",
+	    		data: JSON.stringify(params),
+				
+	    		success: function(reponse) {
+	    			location.href="http://localhost:8080/user/UserMyPage.do";
+	    			
+	    			
+	    		},
+	    		error: function(xhr, status, error) {
+	    			alert("비밀번호가 올바르지않습니다.");
+	    		}
+	    		
+	    	});
 	}		
 		
-</script>
-</body>
+    /*]]>*/
+	  </script>
+	</th:block>
 </html>

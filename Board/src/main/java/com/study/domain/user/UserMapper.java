@@ -63,6 +63,18 @@ public interface UserMapper { //mapper.xml을 불러오는 기능 //왜 인터�
 	  * */
 	 UserRequest findPwd(UserRequest params);
 	 
+	 /* 
+	  * 비번찾기
+	  *  @param UserRequest(id, pwd)
+	  *  @return String(pwd)
+	  * */
+	 UserRequest checkPwd(UserRequest params);
+	 
+	 /**
+	     * 게시글 삭제
+	     * @param id - PK
+	     */
+	 void deleteUser(int id);
 	 
 	 //전체조회
 	 @Select("SELECT * FROM user")

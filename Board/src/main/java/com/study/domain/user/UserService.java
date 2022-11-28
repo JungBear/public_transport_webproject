@@ -49,7 +49,6 @@ public class UserService {
     
     /*
      * 로그인
-     *  
      */
     public UserResponse login(UserResponse params) throws Exception {
         return userMapper.login(params);
@@ -63,6 +62,26 @@ public class UserService {
    public UserRequest findPwd(UserRequest params) {
 	   return userMapper.findPwd(params);
    }
+   
+   /**
+    * 마이페이지 전 비번확인
+    * @param params - 비밀번호
+    * @return  비밀번호
+    */
+   UserRequest checkPwd(UserRequest params) {
+	   return userMapper.checkPwd(params);
+   };
+   
+   /**
+    * 회원탈퇴
+    * @param params - 사용자번호
+    * @return  사용자번호
+    */
+   public int deleteUser(final int id) {
+	   userMapper.deleteUser(id);
+       return id;
+   }
+   
     public List<UserRequest> getAll(){
     	return userMapper.selectAll();
     }
@@ -72,5 +91,7 @@ public class UserService {
     public List<UserRequest> getOne(String id){
     	return userMapper.selectOne(id);
     }
+    
+    
     
 }
