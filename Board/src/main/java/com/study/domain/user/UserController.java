@@ -216,6 +216,37 @@ public class UserController {
         return showMessageAndRedirect(message, model);
     }
 	
+    //비밀번호 변경페이지
+    @GetMapping("/user/changepwd.do")
+    public String changePwd(@SessionAttribute(name = "userInfo", required = false)UserResponse user, Model model) {
+    	if(user == null) {
+        	return "user/needLogin";
+        }
+    	model.addAttribute("userInfo", user);
+        return "user/UserChangePwd";
+    }
+    
+    
+    @PostMapping("user/changepwd")
+    @ResponseBody
+    public UserRequest changePwdAction(@RequestBody final UserRequest params,
+    		@SessionAttribute(name = "userInfo", required = false)UserResponse user,
+    		HttpServletRequest request, HttpSession session, Model model) {
+    	System.out.println("params :"+params);
+    	UserRequest userRequest = new UserRequest();
+    	
+    	userService.changePwd(params);
+    	UserResponse user2 = new UserResponse();
+    	user2.setPwd(params.getPwd());
+        HttpSession session2 = request.getSession();
+        //세션 제거
+        session2.removeAttribute("userInfo");
+        //세션 선언
+        session.setAttribute("userInfo", user2);
+        
+    	return userRequest;
+    }	
+    
     /*  로그아웃 */
     @GetMapping("/logout.do")
     public String logoutMainGET(HttpServletRequest request) throws Exception{

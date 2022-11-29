@@ -87,10 +87,12 @@ public interface UserMapper { //mapper.xml을 불러오는 기능 //왜 인터�
 	 void modifyUser(UserRequest params);
 	 
 	   /**
-	     * 회원정보 수정
+	     * 비밀번호 변경
 	     * @param params - 회원 정보
 	     */
-	 void modifyPwd(UserRequest params);
+	 void changePwd(UserRequest params);
+	 
+	 
 	 
 	 //전체조회
 	 @Select("SELECT * FROM user")

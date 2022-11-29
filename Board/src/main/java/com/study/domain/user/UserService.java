@@ -97,13 +97,13 @@ public class UserService {
    }
   
    /**
-    * 회원 수정
+    * 비밀번호 변경
     * @param params - 유저 정보
     * @return PK
     */
    @Transactional
-   public int modifyPwd(final UserRequest params) {
-       userMapper.modifyPwd(params);
+   public int changePwd(final UserRequest params) {
+       userMapper.changePwd(params);
        return params.getUserNo();
    }
    

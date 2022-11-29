@@ -40,7 +40,7 @@ layout:decorate="~{layout/basic}">
     /*<![CDATA[*/
 	function checkPassword(){	
 		var pwd = $('#password').val();
-		var id= [[ ${userInfo.id} ]];
+		var userNo= [[ ${userInfo.userNo} ]];
 		
 //		alert(pwd);
 //		alert(id);
@@ -48,7 +48,7 @@ layout:decorate="~{layout/basic}">
 //	    alert("uri가져오기전");
 	    var uri = /*[[ @{/user/UserMyPageChk} ]]*/null;
 	    var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "POST"};
-	    var params = {"pwd": pwd, "id":id};
+	    var params = {"pwd": pwd, "userNo":userNo};
 	    	
 //	   	alert(JSON.stringify(params));
 	    	
