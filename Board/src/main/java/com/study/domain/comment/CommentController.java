@@ -19,10 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.study.common.dto.SearchDto;
-import com.study.common.dto.SearchDto2;
-import com.study.domain.post.PostResponse;
 import com.study.domain.user.UserResponse;
-import com.study.domain.user.UserService;
 import com.study.paging.PagingResponse;
 
 
@@ -104,7 +101,7 @@ public class CommentController {
 	}
 	
     @GetMapping("/user/mycommentlist.do")
-    public String openFreePostList(@ModelAttribute("params") final SearchDto2 params,
+    public String openFreePostList(@ModelAttribute("params") final SearchDto params,
     		@SessionAttribute(name = "userInfo", required = false)UserResponse user,Model model) {
     	if(user == null) {
         	return "user/needLogin";

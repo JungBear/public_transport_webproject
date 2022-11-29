@@ -133,7 +133,7 @@
 	</select>
 	
 	<!-- 내댓글리스트 출력 -->
-	<select id="UserCommentList" parameterType="com.study.common.dto.SearchDto2" resultType="com.study.domain.comment.UserCommentListDTO">
+	<select id="UserCommentList" parameterType="com.study.common.dto.SearchDto" resultType="com.study.domain.comment.UserCommentListDTO">
 		SELECT
 		a.id as commentId
 		, a.board_id
@@ -172,7 +172,7 @@
 	</select>
 	
 	<!-- 내댓글리스트 갯수 -->		
-	<select id="UserCommentListCount" parameterType="com.study.common.dto.SearchDto2" resultType="int">
+	<select id="UserCommentListCount" parameterType="com.study.common.dto.SearchDto" resultType="int">
 		SELECT
 			COUNT(*)
 		FROM

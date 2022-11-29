@@ -5,6 +5,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.study.common.dto.SearchDto;
+import com.study.common.dto.SearchDto2;
+import com.study.domain.comment.UserCommentListDTO;
 
 @Mapper
 public interface PostMapper {
@@ -93,7 +95,15 @@ public interface PostMapper {
     * 메인페이지 정보게시글 요약
     * @return 요약정보게시글 리스트
     * */
-  List<PostResponse> summaryFreeList();
+   List<PostResponse> summaryFreeList();
+  
+   /*
+    * 마이페이지 내 글보기
+    * @return 요약정보게시글 리스트
+    * */
+   List<PostResponse> userPostList(SearchDto params);
+   
+   int userPostListCount(SearchDto params);
 
 
 }

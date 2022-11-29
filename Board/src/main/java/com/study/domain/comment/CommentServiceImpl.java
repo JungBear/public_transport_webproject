@@ -6,8 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.study.common.dto.SearchDto2;
-import com.study.domain.user.UserResponse;
+import com.study.common.dto.SearchDto;
 import com.study.paging.Pagination;
 import com.study.paging.PagingResponse;
 
@@ -57,7 +56,7 @@ public class CommentServiceImpl implements CommentService {
 	}
 	
 	@Override
-	public PagingResponse<UserCommentListDTO> UserCommentList(final SearchDto2 params){
+	public PagingResponse<UserCommentListDTO> UserCommentList(final SearchDto params){
 		int count = commentMapper.UserCommentListCount(params);
         if (count < 1) {
             return new PagingResponse<>(Collections.emptyList(), null);

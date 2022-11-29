@@ -7,6 +7,8 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import com.study.common.dto.SearchDto;
+import com.study.common.dto.SearchDto2;
+import com.study.domain.comment.UserCommentListDTO;
 import com.study.paging.Pagination;
 import com.study.paging.PagingResponse;
 
@@ -129,5 +131,24 @@ public class PostService {
         List<PostResponse> list = postMapper.findFree(params);
         return new PagingResponse<>(list, pagination);
     }
+    
+	public PagingResponse<PostResponse> UserPostList(final SearchDto params){
+		int count = postMapper.userPostListCount(params);
+        if (count < 1) {
+            return new PagingResponse<>(Collections.emptyList(), null);
+        }
+
+        Pagination pagination = new Pagination(count, params);
+        params.setPagination(pagination);
+        System.out.println("여까지됨?");
+        List<PostResponse> list = postMapper.userPostList(params);
+        System.out.println("얘가안되나보네");
+		return new PagingResponse<>(list, pagination);
+	}
+    
+    
+    
+    
+    
 
 }

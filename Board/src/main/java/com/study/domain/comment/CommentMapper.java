@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.study.common.dto.SearchDto2;
+import com.study.common.dto.SearchDto;
 
 @Mapper
 public interface CommentMapper {
@@ -27,10 +27,10 @@ public interface CommentMapper {
 
 	public int commentCount(CommentDTO params);
 	
-	public int UserCommentListCount(SearchDto2 params);
+	public int UserCommentListCount(SearchDto params);
 	
 	/*
 	 * 나의 댓글리스트 출력
 	 */
-	public List<UserCommentListDTO> UserCommentList(SearchDto2 params);
+	public List<UserCommentListDTO> UserCommentList(SearchDto params);
 }
