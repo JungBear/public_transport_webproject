@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+layout:decorate="~{layout/basic}">
+
+<th:block layout:fragment="title">
+  <title>비밀번호 변경</title>
+</th:block>
+
+<th:block layout:fragment="content">
+	<div class="page_tits">
+		<h3>마이페이지</h3>
+		<p class="path">
+			<strong>현재 위치 :</strong> <span>마이페이지</span> <span>비밀번호 변경</span> 
+		</p>
+	</div>
+	<nav class="navbar navbar-expand-lg bg-light">
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				<li class="navbar-brand">
+					<a class="nav-link" href="http://localhost:8080/user/UserMyPage.do">내정보확인</a>
+				</li>
+				<li class="navbar-brand">
+					<a class="nav-link" href="http://localhost:8080/user/modify.do">내정보수정</a>
+				</li>
+				<li class="navbar-brand">
+					<a class="nav-link" href="http://localhost:8080/user/changepwd.do">내 글 보기</a>
+				</li>
+				<li class="navbar-brand">
+					<a class="nav-link" href="/user/UserMyPageChk.do">내 댓글 보기</a>
+				</li>
+				<li class="navbar-brand">
+					<a class="nav-link" href="http://localhost:8080/user/changepwd.do">비밀번호 변경</a>
+				</li>
+			</ul>
+	</nav>
+	
+	<div class="content">
+		<div class="form-field">
+			<form name="changePwd">
+				<input type="hidden" name="userNo" id="inputUserNo" th:value="${userInfo.userNo}"></input>
+				<input type="password" id="presentPwd"  placeholder="현재 비밀번호" required></input>
+				<input type="password" id="afterPwd" name="pwd" placeholder="새 비밀번호" required></input>
+				<input type="password" id="afterPwdCheck" placeholder="새 비밀번호 확인"required></input>
+				
+				
+				<button type="button" onclick="changePwd()">변경하기</button>
+			</form>
+		</div>
+	</div>
+	
+	
+</th:block>
+
+
+
+<th:block layout:fragment="script">
+	<script th:inline="javascript">
+    	/*<![CDATA[*/
+    	function changePwd(){
+    		
+    		
+    	}
+    	  	
+    	/*]]>*/
+	</script>
+</th:block>
+</html>

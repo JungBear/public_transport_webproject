@@ -132,7 +132,7 @@
        	FROM
        		user
         WHERE 
-        	id = #{id}
+        	user_no = #{userNo}
         AND
         	pwd = #{pwd}
         AND 
@@ -164,7 +164,7 @@
     </update>
     
     <!-- 비밀번호 변경 -->
-    <update id="modifyPwd" parameterType="com.study.domain.user.UserRequest">
+    <update id="changePwd" parameterType="com.study.domain.user.UserRequest">
         UPDATE user
         SET
               modified_date = NOW()
