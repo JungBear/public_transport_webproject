@@ -155,13 +155,18 @@ public class UserController {
 		return "user/UserMyPageChk";
 	}
 	
-	@PostMapping("/user/UserMyPageChk")
-	@ResponseBody
-	public UserRequest checkPwdAction(@RequestBody final UserRequest params,
+	@PostMapping("/user/UserMyPageChk.do")
+	public String checkPwdAction(final UserRequest params,
 			@SessionAttribute(name = "userInfo", required = false)UserResponse user,Model model) {
 		model.addAttribute("userInfo", user);
-		System.out.println("params : "+params);
-		return userService.checkPwd(params);
+		boolean b = userService.checkPwd(params);
+		if (b) {
+			return "user/UserMyPage";
+		}else {
+			MessageDto message = new MessageDto("비밀번호가 올바르지 않습니다.", "/user/UserMyPageChk.do", RequestMethod.GET, null);
+			return showMessageAndRedirect(message,model);
+		}
+     	
 	}
 	
     // 회원탈퇴
