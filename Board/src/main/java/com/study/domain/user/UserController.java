@@ -259,5 +259,18 @@ public class UserController {
         model.addAttribute("params", params);
         return "common/messageRedirect";
     }
+    
+	//마이페이지 내 글 보기 
+	@GetMapping("/user/UserListMyBoard.do")
+	public String mypageListBoard(@SessionAttribute(name = "userInfo", required = false)UserResponse user, Model model) {
+		if(user == null) {
+        	return "user/needLogin";
+        }
+		model.addAttribute("userInfo", user);
+		return "user/listmyboard";
+        
+		//model.addAttribute("userInfo", user);
+		//return "user/UserMyPage";
+	}
 	
 }
