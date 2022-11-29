@@ -66,20 +66,27 @@ public class UserController {
 	
     // 회원가입
     @PostMapping("/user/signup.do")
-    @ResponseBody
-    public String addMember(UserViewtoControllerDTO params) {
+    public String addMember(UserViewtoControllerDTO params, Model model) {
     	UserRequest userrequest = new UserRequest();
     	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate dateTime = LocalDate.parse(params.getAge(), formatter);
     	BeanUtils.copyProperties(params, userrequest,"age");
     	userrequest.setAge(dateTime);  	
-    	logger.info("UserController addMember()");
-        boolean b = userService.addMember(userrequest);
-        logger.info(params.toString());
+    	 boolean b = false;
+    	try {
+    		b = userService.addMember(userrequest);
+		} catch (Exception e) {
+			b= false;
+		}
         if(b) {
-            return "ok";
+        	 MessageDto message = new MessageDto("회원가입이 완료되었습니다.", "/user/signin.do", RequestMethod.GET, null);
+            	return showMessageAndRedirect(message, model);
+        }else {
+        	MessageDto message = new MessageDto("회원가입이 실패하였습니다. 중복검사를 실시해 주세요.", "/user/signup.do", RequestMethod.GET, null);
+          	 return showMessageAndRedirect(message, model);
         }
-        return "no";
+        
+        
     }
     
 	//로그인 페이지
@@ -148,13 +155,18 @@ public class UserController {
 		return "user/UserMyPageChk";
 	}
 	
-	@PostMapping("/user/UserMyPageChk")
-	@ResponseBody
-	public UserRequest checkPwdAction(@RequestBody final UserRequest params,
+	@PostMapping("/user/UserMyPageChk.do")
+	public String checkPwdAction(final UserRequest params,
 			@SessionAttribute(name = "userInfo", required = false)UserResponse user,Model model) {
 		model.addAttribute("userInfo", user);
-		System.out.println("params : "+params);
-		return userService.checkPwd(params);
+		boolean b = userService.checkPwd(params);
+		if (b) {
+			return "user/UserMyPage";
+		}else {
+			MessageDto message = new MessageDto("비밀번호가 올바르지 않습니다.", "/user/UserMyPageChk.do", RequestMethod.GET, null);
+			return showMessageAndRedirect(message,model);
+		}
+     	
 	}
 	
     // 회원탈퇴
@@ -227,24 +239,26 @@ public class UserController {
     }
     
     
-    @PostMapping("user/changepwd")
-    @ResponseBody
-    public UserRequest changePwdAction(@RequestBody final UserRequest params,
+    @PostMapping("user/changepwd.do")
+    public String changePwdAction(final UserRequest params,
     		@SessionAttribute(name = "userInfo", required = false)UserResponse user,
     		HttpServletRequest request, HttpSession session, Model model) {
     	System.out.println("params :"+params);
-    	UserRequest userRequest = new UserRequest();
     	
     	userService.changePwd(params);
     	UserResponse user2 = new UserResponse();
+    	BeanUtils.copyProperties(user, user2, "pwd");
     	user2.setPwd(params.getPwd());
         HttpSession session2 = request.getSession();
         //세션 제거
         session2.removeAttribute("userInfo");
         //세션 선언
         session.setAttribute("userInfo", user2);
+        System.out.println(session.getAttribute("userInfo"));
         
-    	return userRequest;
+        MessageDto message = new MessageDto("비밀번호 변경이 완료되었습니다.", "/user/UserMyPage.do", RequestMethod.GET, null);
+//      System.out.println("컨트롤러 끝");
+      return showMessageAndRedirect(message, model);
     }	
     
     /*  로그아웃 */

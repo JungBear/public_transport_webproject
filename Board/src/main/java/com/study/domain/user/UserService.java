@@ -71,8 +71,13 @@ public class UserService {
     * @param params - 비밀번호
     * @return  비밀번호
     */
-   UserRequest checkPwd(UserRequest params) {
-	   return userMapper.checkPwd(params);
+   boolean checkPwd(UserRequest params) {
+	   if(userMapper.checkPwd(params) != null) {
+		   return true;
+	   }else {
+		   return false;
+	   }
+	   
    };
    
    /**

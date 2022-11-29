@@ -19,13 +19,14 @@ layout:decorate="~{layout/basic}">
 	
 	<div class="form-field">
 		<div>	
-			<form name="passwordCheck" action="user/UserMyPageChk.do" autocomplete="off" method="post">
+			<form name="passwordCheck" autocomplete="off" method="post">
 				
 				<h5>비밀번호 확인</h5>
-					<input type="password" id="password" name="password" placeholder="비밀번호" required></input>
+					<input type="hidden" id="userNo" name="userNo" th:value="${userInfo.userNo}"></input>
+					<input type="password" id="password" name="pwd" placeholder="비밀번호" required></input>
 					<p id="wrongPwd"></p>
-					<button type="button" id=click-confirm 
-					class="btn btn-outline-primary mr-7" onclick=checkPassword() >비밀번호 확인</button>		
+					<button id=click-confirm 
+					class="btn btn-outline-primary mr-7">비밀번호 확인</button>		
 					
 		
 			</form>
@@ -38,7 +39,7 @@ layout:decorate="~{layout/basic}">
 <th:block layout:fragment="script">
   <script th:inline="javascript">
     /*<![CDATA[*/
-	function checkPassword(){	
+/*	function checkPassword(){	
 		var pwd = $('#password').val();
 		var userNo= [[ ${userInfo.userNo} ]];
 		
@@ -46,7 +47,7 @@ layout:decorate="~{layout/basic}">
 //		alert(id);
 	
 //	    alert("uri가져오기전");
-	    var uri = /*[[ @{/user/UserMyPageChk} ]]*/null;
+	    var uri = /*[[ @{/user/UserMyPageChk} ]]*//*null;
 	    var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "POST"};
 	    var params = {"pwd": pwd, "userNo":userNo};
 	    	
@@ -70,7 +71,7 @@ layout:decorate="~{layout/basic}">
 	    			alert("비밀번호가 올바르지않습니다.");
 	    		}
 	    		
-	    	});
+	    	});*/
 	}		
 	/*
     let frm = $("#frm");
