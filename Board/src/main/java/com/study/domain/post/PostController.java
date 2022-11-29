@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.study.common.dto.MessageDto;
 import com.study.common.dto.SearchDto;
-import com.study.common.dto.SearchDto2;
 import com.study.domain.comment.UserCommentListDTO;
 import com.study.domain.user.UserResponse;
 import com.study.paging.PagingResponse;

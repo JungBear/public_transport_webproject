@@ -7,8 +7,6 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import com.study.common.dto.SearchDto;
-import com.study.common.dto.SearchDto2;
-import com.study.domain.comment.UserCommentListDTO;
 import com.study.paging.Pagination;
 import com.study.paging.PagingResponse;
 

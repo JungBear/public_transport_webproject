@@ -1,7 +1,6 @@
 package com.study.paging;
 
 import com.study.common.dto.SearchDto;
-import com.study.common.dto.SearchDto2;
 
 import lombok.Getter;
 

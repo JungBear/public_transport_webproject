@@ -5,8 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.study.common.dto.SearchDto;
-import com.study.common.dto.SearchDto2;
-import com.study.domain.comment.UserCommentListDTO;
 
 @Mapper
 public interface PostMapper {
