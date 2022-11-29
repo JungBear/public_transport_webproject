@@ -131,5 +131,60 @@
 		AND
 			board_id = #{boardId}
 	</select>
+	
+	<!-- 내댓글리스트 출력 -->
+	<select id="UserCommentList" parameterType="com.study.common.dto.SearchDto2" resultType="com.study.domain.comment.UserCommentListDTO">
+		SELECT
+		a.id as commentId
+		, a.board_id
+		, a.board_type
+		, a.content
+		, a.cdepth
+		, a.group_no
+		, a.corder
+		, a.writer_no
+		, a.created_date
+		, a.modified_date
+		, a.del_yn
+		, a.del_date
+		, a.secret
+		, b.nickname
+		, c.title
+		, c.id
+		FROM
+			comment as a
+		JOIN
+			user as b
+		ON
+			a.writer_no = b.user_no
+		Join
+			board as c
+		ON 
+			a.board_id = c.id
+		WHERE
+			a.del_yn = 0
+		AND
+			b.user_no = #{userNo}
+		ORDER BY
+			a.id DESC,
+			a.created_date DESC
+		LIMIT #{pagination.limitStart}, #{recordSize}
+	</select>
+	
+	<!-- 내댓글리스트 갯수 -->		
+	<select id="UserCommentListCount" parameterType="com.study.common.dto.SearchDto2" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			comment as a
+		JOIN 
+			user as b
+		ON
+			a.writer_no=b.user_no	
+		WHERE
+			a.del_yn = 0
+		AND
+			b.user_no = #{userNo}
+	</select>
 
 </mapper>
