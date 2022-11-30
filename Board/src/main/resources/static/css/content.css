@@ -311,7 +311,7 @@ input[readonly], select[readonly], textarea[readonly], .readonly, input[disabled
 
 /*메인페이지 */
 .class1{display:inline-block;position:relative;background-color:#cbd0d9;width:100%}
-.inputSelect{padding: 10px 20px; display:inline-block}
+.inputSelect{ display:inline-block; padding: 10px 30px;}
 .hList{display:inline;}
 .mainLeftInfoList{float: left;}
 .mainRightInfoList{float:right}
@@ -322,8 +322,8 @@ input[readonly], select[readonly], textarea[readonly], .readonly, input[disabled
 #selSubmit{width:158px;}
 #map{margin-top:10px;}
 .drawMap{position: relative;}
-#insetImgLeft{position:absolute; z-index:1;top:400px}
-#insetImgRight{position:absolute; z-index:1;left:700px;top:400px}
+#insetImgLeft{position:absolute; z-index:1;top:475px; opacity: 0.8; width:400px}
+#insetImgRight{position:absolute; z-index:1;right:0px;top:475px; opacity: 0.8; width:400px}
 
 
 

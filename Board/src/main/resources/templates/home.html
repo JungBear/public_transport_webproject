@@ -163,14 +163,12 @@
 		let congestionRate1 = response[0].congestionRate; //남단->북단의 혼잡도
 		
 		let color1 = '';   // 남단-> 북단 혼잡도에 따른 색
-		if(0<congestionRate1 && congestionRate1<=25){
-			color1 = '#0000FF';     //블루
-		}else if(25<congestionRate1 && congestionRate1<=50){
-			color1 = '#008000';     // 그린
-		}else if(50<congestionRate1 && congestionRate1<=75){
-			color1 = '#FFFF00'      // 옐로우
-		}else if(75<congestionRate1 && congestionRate1<=100){
-			color1 = '#FF0000';     // 레드
+		if(0<congestionRate1 && congestionRate1<=33){
+			color1 = '#39D729';     //원활
+		}else if(33<congestionRate1 && congestionRate1<=66){
+			color1 = '#FFC829';     // 서행
+		}else if(66<congestionRate1 && congestionRate1<=100){
+			color1 = '#FF3829'      // 정체
 		}
 		
 		var linePath1 = [
@@ -216,14 +214,12 @@
 	}		
 		
 		let color2 = '';   // 북단-> 남단 혼잡도에 따른 색
-		if(0<congestionRate2 && congestionRate2<=25){
-			color2 = '#0000FF';     //블루
-		}else if(25<congestionRate2 && congestionRate2<=50){
-			color2 = '#008000';     // 그린
-		}else if(50<congestionRate2 && congestionRate2<=75){
-			color2 = '#FFFF00'      // 옐로우
-		}else if(75<congestionRate2 && congestionRate2<=100){
-			color2 = '#FF0000';     // 레드
+		if(0<congestionRate2 && congestionRate2<=33){
+			color1 = '#39D729';     //원활
+		}else if(33<congestionRate2 && congestionRate2<=66){
+			color1 = '#FFC829';     // 서행
+		}else if(66<congestionRate2 && congestionRate2<=100){
+			color1 = '#FF3829'      // 정체
 		}
 		
 		
@@ -343,16 +339,19 @@
     function insertImg(response){
     	switch(response[0].name){
     	case "성산대교":
-    		$("#insetImgLeft").attr("src", "https://www.google.com/imgres?imgurl=https%3A%2F%2Fimage.ytn.co.kr%2Fgeneral%2Fjpg%2F2022%2F0707%2F202207071212075693_t.jpg&imgrefurl=https%3A%2F%2Fwww.ytn.co.kr%2F_ln%2F0103_202207071212075693&tbnid=lCTIZ_DKlYk4AM&vet=12ahUKEwjdrruV0NT7AhWJPpQKHUkcDKcQMygAegUIARDgAQ..i&docid=ZnrfYA61TuX4SM&w=1280&h=720&q=%EC%84%B1%EC%82%B0%EB%8C%80%EA%B5%90&ved=2ahUKEwjdrruV0NT7AhWJPpQKHUkcDKcQMygAegUIARDgAQ");
-        	$("#insetImgRight").attr("src", "https://www.google.com/imgres?imgurl=https%3A%2F%2Fmblogthumb-phinf.pstatic.net%2F20160826_39%2Fmissymom582_1472198726283dsQ0o_JPEG%2FP1330183_%25BB%25E7%25BA%25BB.jpg%3Ftype%3Dw800&imgrefurl=http%3A%2F%2Fm.blog.naver.com%2Fmissymom582%2F220797473375&tbnid=Ws8k5MFNjDUyUM&vet=12ahUKEwjdrruV0NT7AhWJPpQKHUkcDKcQMygBegUIARDiAQ..i&docid=j08KvjPu9WlCdM&w=800&h=534&q=%EC%84%B1%EC%82%B0%EB%8C%80%EA%B5%90&ved=2ahUKEwjdrruV0NT7AhWJPpQKHUkcDKcQMygBegUIARDiAQ");
+    		//북단
+    		$("#insetImgLeft").attr("src", "https://raw.githubusercontent.com/JungBear/public_transport_webproject/main/Board/src/main/resources/static/images/%EC%84%B1%EC%82%B0%EB%8C%80%EA%B5%90%20%EB%B6%81%EB%B6%80.png");
+    		
+    		//남단
+        	$("#insetImgRight").attr("src", "https://raw.githubusercontent.com/JungBear/public_transport_webproject/main/Board/src/main/resources/static/images/%EC%84%B1%EC%82%B0%EB%8C%80%EA%B5%90%20%EB%B6%81%EB%B6%80.png");
         	break;
     	case "청담대교":
-    		$("#insetImgLeft").attr("src", imgurl);
-        	$("#insetImgRight").attr("src", imgurl);
+    		$("#insetImgLeft").attr("src", "https://raw.githubusercontent.com/JungBear/public_transport_webproject/main/Board/src/main/resources/static/images/%EC%B2%AD%EB%8B%B4%EB%8C%80%EA%B5%90%EB%B6%81%EB%8B%A8.png");
+        	$("#insetImgRight").attr("src", "https://raw.githubusercontent.com/JungBear/public_transport_webproject/main/Board/src/main/resources/static/images/%EC%B2%AD%EB%8B%B4%EB%8C%80%EA%B5%90%EB%82%A8%EB%8B%A8.png");
         	break;
     	case "한남대교":
-    		$("#insetImgLeft").attr("src", imgurl);
-        	$("#insetImgRight").attr("src", imgurl);
+    		$("#insetImgLeft").attr("src", "https://raw.githubusercontent.com/JungBear/public_transport_webproject/main/Board/src/main/resources/static/images/%ED%95%9C%EB%82%A8%EB%8C%80%EA%B5%90%EB%B6%81%EB%8B%A8.png");
+        	$("#insetImgRight").attr("src", "https://raw.githubusercontent.com/JungBear/public_transport_webproject/main/Board/src/main/resources/static/images/%ED%95%9C%EB%82%A8%EB%8C%80%EA%B5%90%EB%82%A8%EB%8B%A8.png");
         	break;
         default:
         	
