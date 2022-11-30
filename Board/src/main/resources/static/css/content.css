@@ -311,12 +311,13 @@ input[readonly], select[readonly], textarea[readonly], .readonly, input[disabled
 
 /*메인페이지 */
 .class1{display:inline-block;position:relative;background-color:#cbd0d9;width:100%}
-.inputSelect{ display:inline-block; padding: 10px 30px;}
+.inputSelect{display:inline-block; padding: 10px 30px;}
+.mainLabel{display:inline}
 .hList{display:inline;}
 .mainLeftInfoList{float: left;}
 .mainRightInfoList{float:right}
 #h3FreeList{float:right; right : 39%}
-#name{width: 158px;}
+#bridgeName{width: 158px;}
 #selectDate{width: 158px;}
 #selHour{width: 158px;}
 #selSubmit{width:158px;}
