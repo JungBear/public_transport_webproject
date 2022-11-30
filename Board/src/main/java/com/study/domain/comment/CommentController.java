@@ -36,7 +36,7 @@ public class CommentController {
 			@SessionAttribute(name = "userInfo", required = false)UserResponse user,
 			@RequestBody final CommentDTO params,Model model) {
 		System.out.println("registerComment 컨트롤러 인식됨");
-		params.setWriterNo(1);
+		params.setWriterNo(user.getUserNo());
 		System.out.println("보드타입"+params.getBoardType());
 		try {
 			if (id != null) {

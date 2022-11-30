@@ -246,7 +246,7 @@
     
     	// 게시글 리스트 보여주기		
     	function printCommentList() {
-
+    		var userNo = [[ ${ userInfo.userNo } ]]
     		var uri = /*[[ @{/comments}+ '?boardId=' + ${post.id} ]]*/null;
    			$.get(uri, function(response) {
    				if (response!=null) {
@@ -259,11 +259,11 @@
    								<span class="nickname">${comment.nickname}</span>
    								<span class="desc">${comment.content}</span>
    								<span class="commentTime">${moment(comment.createdDate).format('YYYY-MM-DD HH:mm')}</span>
-   								<button type="button" onclick="openModal(${comment.id}, '${comment.nickname}', '${comment.content}' )" class="btn btn-xs btn-circle"><i class="glyphicon glyphicon-pencil" aria-hidden="true"></i></button>
+   								<button th:if="${userNo} == ${comment.writerNo}" type="button" onclick="openModal(${comment.id}, '${comment.nickname}', '${comment.content}','${comment.writerNo}' )" class="btn btn-xs btn-circle"><img id="commentModify" src="https://cdn-icons-png.flaticon.com/512/3394/3394365.png" aria-hidden="true"></button>
+   								
    							</li>
    						`;
    					});
-
    					$(".notice-list").html(commentsHtml);
    				}
    			}, "json");
@@ -293,13 +293,18 @@
     }
 	
     // 수정하는 버튼을 눌렀을 때 실행
-    function openModal(id, nickname, content) {
-
+    function openModal(id, nickname, content,writerNo) {
+		var userNo = [[ ${userInfo.userNo} ]];
+		if(userNo != writerNo){
+			alert("댓글 수정 권한이 없습니다");
+			return false;
+		}
 		$("#commentModal").modal("toggle");
 
 		document.getElementById("modalWriter").value = nickname;
 		document.getElementById("modalContent").value = content;
-
+		
+		
 		document.getElementById("btnCommentUpdate").setAttribute("onclick", "updateComment("+ id +")");
 		document.getElementById("btnCommentDelete").setAttribute("onclick", "deleteComment("+ id +")");
 	}
