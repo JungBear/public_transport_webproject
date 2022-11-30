@@ -2,7 +2,7 @@
 /* CSS Document */
 #container {overflow:hidden;}
 #container .rcontent {padding:25px 30px 25px 40px;}
-#container .rcontent .content {background:#fff; border-radius:12px; box-shadow:0 0 20px rgba(80,80,80,0.1); padding:40px 40px 70px 40px; min-height:600px; overflow:hidden;}
+#container .rcontent .content {background:#fff; border-radius:12px; box-shadow:0 0 20px rgba(80,80,80,0.1); padding:40px 40px 70px 40px;}
 .snb_none #container .lcontent {display:none; padding:0px 0px 10px 0px;}
 .snb_none #container .rcontent {margin-left:0;}
 .snb_none #container:after {display:none;}
@@ -336,6 +336,255 @@ input[readonly], select[readonly], textarea[readonly], .readonly, input[disabled
 .notice-list #delButton{display:inline;float: right;}
 
 /*마이페이지*/
+.key{
+	font-size:20px;
+	height:40px;
+	margin:auto;	
+	/* width:fit-content; */
+}
+
+ .profile_wrap{
+	box-sizing : border-box;
+	width:350px;
+	height:600px;
+	margin :auto;
+} 
+
+.signout{
+	width:100px;
+	display:block;
+	margin:auto;
+} 
+
+/* .inputUserInfo::before{
+	content:'아이디';
+	display:inline-block;
+	
+}
+ */
+
+#userIdKey::before{
+ 	width :30px;
+	height : 40px;
+	display: inline-block;
+	content:'';
+	background : url("https://cdn-icons-png.flaticon.com/512/5617/5617164.png") no-repeat;
+	background-size : 100%;
+	background-position : left bottom;	
+	vertical-align : bottom;
+	margin-right : 10px;
+	/* margin-top : 2px;  */
+}
+
+#userNicknameKey ::before{
+	width :30px;
+	height : 40px;
+	display: inline-block;
+	content:'';
+ 	background : url("https://cdn-icons-png.flaticon.com/512/3706/3706178.png") no-repeat;
+	background-size : 100%;
+	background-position : left bottom;
+	vertical-align : bottom;
+	margin-right : 10px;
+}
+
+#userPwdHintKey ::before{
+	width :30px;
+	height : 40px;
+	display: inline-block;
+	content:'';
+ 	background : url("https://cdn-icons-png.flaticon.com/512/4498/4498471.png") no-repeat;
+	background-size : 100%;
+	background-position : left bottom;
+	vertical-align : bottom;
+	margin-right : 10px;
+}
+
+#userPwdHintAnsKey ::before{
+ 	width :30px;
+	height : 40px;
+	display: inline-block;
+	content:''; 
+ 	background : url("https://cdn-icons-png.flaticon.com/512/4498/4498471.png") no-repeat;
+	background-size : 100%;
+	background-position : left bottom;
+	vertical-align : bottom;
+	margin-right : 10px;
+	
+}
+
+#userEmailKey ::before{
+ 	width :30px;
+	height : 40px;
+	display: inline-block;
+	content:''; 
+ 	background : url("https://cdn-icons-png.flaticon.com/512/646/646094.png") no-repeat;
+	background-size : 100%;
+	background-position : left bottom;
+	vertical-align : bottom;
+	margin-right : 10px;
+	
+}
+
+#userNameKey ::before{
+ 	width :30px;
+	height : 40px;
+	display: inline-block;
+	content:''; 
+ 	background : url("https://cdn-icons-png.flaticon.com/512/1828/1828439.png") no-repeat;
+	background-size : 100%;
+	background-position : left bottom;
+	vertical-align : bottom;
+	margin-right : 10px;
+	
+}
+
+#userAgeKey ::before{
+ 	width :30px;
+	height : 40px;
+	display: inline-block;
+	content:''; 
+	background : url("https://cdn-icons-png.flaticon.com/512/5670/5670755.png") no-repeat;
+	background-size : 100%;
+	background-position : left bottom;
+	vertical-align : bottom;
+	margin-right : 10px; 
+	
+}
+/* ul 안의 <li>하면 점이 하나 생기는데, 그걸 지우는 기능*/
+ul{
+	list-style:none;
+}
+
+.modifyUserInfo{
+	/* background-color: blue; */
+	width : 370px;
+	/* align-items:center; */
+	/* text-align:center; */
+	display:inline-block;
+	margin-left:330px;
+	position:absolute;
+	text-align:center;
+	height: 900px
+}
+
+#content-button{
+	margin-top:30px;
+}
+/* 아이디 */
+.modifyIdLabel{
+	float:left;
+	width:45px;
+}
+.modifyIdSpan{
+	float:left;
+	width:57px;
+	margin-bottom:5px;
+}
+/* 닉네임 */
+.modifyNicknameLabel{
+	float:left;
+	width:45px;
+	margin-bottom:5px;
+	margin-top:10px;
+}
+.modifyNicknameSpan{
+	float:left;
+	width:57px;
+	margin-bottom:5px;
+	margin-top:10px;
+}
+/* 비밀번호 힌트 */
+.modifyPwdHintLabel{
+	float:left;
+	width:90px;
+	margin-bottom:5px;
+	margin-top:10px;
+}
+.modifyPwdHintSpan{
+	float:left;
+	width:52px;
+	margin-bottom:5px;
+	margin-top:10px;
+}
+
+/* 비밀번호 힌트 답 */
+.modifyPwdHintAnsLabel{
+	float:left;
+	width:75px;
+	margin-bottom:5px;
+	margin-top:10px;
+}
+.modifyPwdHintAnsSpan{
+	float:left;
+	width:52px;
+	margin-bottom:5px;
+	margin-top:10px;
+}
+
+/* 이메일 */
+.modifyEmailLabel{
+	float:left;
+	width:45px;
+	margin-bottom:5px;
+	margin-top:10px;
+}
+.modifyEmailSpan{
+	float:left;
+	width:57px;
+	margin-bottom:5px;
+	margin-top:10px;
+}
+
+/* 이름 */
+.modifyNameLabel{
+	float:left;
+	width:35px;
+	margin-bottom:5px;
+	margin-top:10px;
+}
+.modifyNameSpan{
+	float:left;
+	width:57px;
+	margin-bottom:5px;
+	margin-top:10px;
+}
+
+/* 생년월일 */
+.modifyAgeLabel{
+	float:left;
+	width:58px;
+	margin-bottom:5px;
+	margin-top:10px;
+}
+.modifyAgeSpan{
+	float:left;
+	width:57px;
+	margin-bottom:5px;
+	margin-top:10px;
+}
+
+/* 성별 */
+.modifyGenderLabel{
+	float:left;
+	width:35px;
+	margin-bottom:5px;
+	margin-top:10px;
+}
+.modifyGenderSpan{
+	float:left;
+	width:57px;
+	margin-bottom:5px;
+	margin-top:10px;
+}
+.modifyButton{
+	display:inline-block;
+	position:relative;
+	
+}
+.content5{
+	background:#fff; border-radius:12px; box-shadow:0 0 20px rgba(80,80,80,0.1); padding:40px 40px 70px 40px; min-height:750px; overflow:hidden;
+}
 
 /*로그인이 필요한 서비스입니다*/
 #needLogin{display: flex; flex-direction:column; justify-content:center; place-items: center; align-items:center;}

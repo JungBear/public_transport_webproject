@@ -1,10 +1,109 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
-</head>
-<body>
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+layout:decorate="~{layout/basic}">
 
-</body>
+<th:block layout:fragment="title">
+  <title>마이 페이지 MyPage</title>
+</th:block>
+<th:block layout:fragment="content">
+	<div class="page_tits">
+		<h3>마이페이지</h3>
+		<p class="path">
+			<strong>현재 위치 :</strong> <span>마이페이지</span> <span>내 글 보기</span> 
+		</p>
+	</div>
+	<nav class="navbar navbar-expand-lg bg-light">
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				<li class="navbar-brand">
+					<a class="nav-link" href="http://localhost:8080/user/UserMyPage.do">내정보확인</a>
+				</li>
+				<li class="navbar-brand">
+					<a class="nav-link" href="http://localhost:8080/user/modify.do">내정보수정</a>
+				</li>
+				<li class="navbar-brand">
+					<a class="nav-link" href="http://localhost:8080/user/UserListMyBoard.do">내 글 보기</a>
+				</li>
+				<li class="navbar-brand">
+					<a class="nav-link" href="/user/UserMyPageChk.do">내 댓글 보기</a>
+				</li>
+				<li class="navbar-brand">
+					<a class="nav-link" href="http://localhost:8080/user/changepwd.do">비밀번호 변경</a>
+				</li>
+			</ul>
+	</nav>
+	<div class="content">			
+		<section>
+		
+			<table>
+				<colgroup>
+ 				<col style="width:7.5%;" /><col style="width:auto;" /><col style="width:10%;" /><col style="width:15%;" />
+        		</colgroup>
+	        	<thead>
+	        	  <tr>
+	        	  	 <th class = boardType scope="col">게시글 종류</th>
+	           		 <th class = boardNumber scope="col">번호</th>
+	           		 <th class = boardTitle scope="col">제목</th>
+	          	 	 <th class = boardWriter scope="col">작성자</th>
+	          	 	 <th class = boardDate scope="col">등록일</th>
+	         	  </tr>
+	        	</thead>	
+        	
+	        <!--/* 리스트 데이터 렌더링 영역 */-->
+				<tbody id="list">
+	        
+				</tbody>
+	        
+	       	 <!--/* 리스트 데이터 렌더링 영역 */-->
+				<tbody id="paging">
+			       	 	
+				</tbody>
+			</table>
+		</section> 
+		
+	</div>
+</th:block>
+
+
+<th:block layout:fragment="script">
+	<script th:inline="javascript">
+    	
+		window.onload = () => {
+			findAllPosted
+		}
+		
+	    // 마이페이지에서 내 게시글 리스트 조회
+	    function findAllPost() {
+
+	      const list = [[ ${response.list} ]];
+//	      alert(list);
+	      if ( !list.length ) {
+	        document.getElementById('list').innerHTML = '<td colspan="6"><div className="no_data_msg">검색된 결과가 없습니다.</div></td>';
+	        drawPage();
+	      }
+
+	      const pagination = [[ ${response.pagination} ]];
+	      const params = [[ ${params} ]];
+	      let num = pagination.totalRecordCount - ((params.page - 1) * params.recordSize);
+
+	      drawList(list, num);
+	      drawPage(pagination, params);
+	    }
+	    
+	    //리스트 html 가져오기
+	    function drawMyList(list,num){
+	    	let html = '';
+	    	list.forEach(row => {
+	    		html += `
+	    			<tr>
+	    				<td>
+	    				<td>
+	    				<td>
+	    				<td>
+	    				<td>
+	    				
+	    	})
+	    }
+	</script>
+</th:block>	
 </html>

@@ -32,27 +32,54 @@ layout:decorate="~{layout/basic}">
 				</li>
 			</ul>
 	</nav>
-	<div class="content">			
+	<div class="content5">			
 		<section>
 			<form class="modifyUserInfo" id="modifyUserInfo" method="post" autocomplete="off">
 				
-				<input type="hidden" name="userNo"  class="inputUserInfo" id="inputUserNo"th:value="${userInfo.userNo}"></input>
-				<input type="text" name="id" class="inputUserInfo" id="inputId" readonly th:value="${userInfo.id}"></input>
-				<input type="text" name="nickname" class="inputUserInfo" id="inputNickname" readonly th:value="${userInfo.nickname}"></input>
-				<select name="PwdHint" id="inputPwdHint" class="inputUserInfo" th:value="${userInfo.pwdHint}" required>
+				<input type="hidden" name="userNo"  class="inputUserInfo" id="inputUserNo" th:value="${userInfo.userNo}"></input>
+				
+				<label class="modifyIdLabel">*아이디</label>
+				<span class="modifyIdSpan"  style="color:red">수정불가</span>
+				<input type="text" name="id" class="inputUserInfo" id="inputId"  readonly th:value="${userInfo.id}"></input>
+				
+				<label class="modifyNicknameLabel">*닉네임</label>
+				<span class="modifyNicknameSpan"  style="color:red">수정불가</span>
+				<input type="text" name="nickname" class="inputUserInfo" id="inputNickname"  readonly th:value="${userInfo.nickname}"></input>
+				
+				<label class="modifyPwdHintLabel">*비밀번호 힌트</label>
+				<span class="modifyPwdHintSpan"  style="color:blue">수정가능</span>
+				<select name="PwdHint" id="inputPwdHint" class="inputUserInfo"  th:value="${userInfo.pwdHint}" required>
 		        	<option th:selected="${userInfo.pwdHint}=='자신의 보물 1호는?'">자신의 보물 1호는?</option>
 		        	<option th:selected="${userInfo.pwdHint}=='자신이 졸업한 초등학교의 이름은?'">자신이 졸업한 초등학교의 이름은?</option>
 		     	</select>
+				
+				<label class="modifyPwdHintAnsLabel">*비밀번호 답</label>
+				<span class="modifyPwdHintAnsSpan"  style="color:blue">수정가능</span>
 				<input type="text" name="pwdHintAns" class="inputUserInfo" id="inputPwdHintAns" th:value="${userInfo.pwdHintAns}" required></input>
+				
+				<label class="modifyEmailLabel">*이메일</label>
+				<span class="modifyEmailSpan"  style="color:blue">수정가능</span>
 				<input type="email" name="email" class="inputUserInfo" id="inputEmail" th:value="${userInfo.email}" required></input>
+				
+				<label class="modifyNameLabel">*이름</label>
+				<span class="modifyNameSpan"  style="color:red">수정불가</span>
 				<input type="text" name="userName" class="inputUserInfo" id="inputUserName"  th:value="${userInfo.userName}" readonly></input>
+				
+				<label class="modifyAgeLabel">*생년월일</label>
+				<span class="modifyAgeSpan"  style="color:red">수정불가</span>
 				<input type="date"  class="inputUserInfo" id="inputAge" th:value="${#dates.format(date, 'yyyy-MM-dd')}" readonly></input>
+				
+				<label class="modifyGenderLabel">*성별</label>
+				<span class="modifyGenderSpan"  style="color:red">수정불가</span>
 				<input th:if="${userInfo.gender==0}"type="text" class="inputUserInfo" id="inputId" value="남자"readonly ></input>
+				
+				
 				<input th:unless="${userInfo.gender==0}" type="text" class="inputUserInfo" id="inputId" value="여자" readonly></input>
-
+				
+				<button type="button" class="modifyButton" onclick="modifyCheck()" id="content-button">수정하기</button>
 			</form>
 		</section> 
-		<button type="button" onclick="modifyCheck()">수정하기</button>
+	
 	</div>
 </th:block>
 
