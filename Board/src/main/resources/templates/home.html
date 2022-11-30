@@ -252,8 +252,12 @@
 	  	var hrStr = hr.toString().padStart(2, "0")+ ":";
 		var val = hrStr + "00";
 		$select.append('<option val="' + val + '">' + val + '</option>');
-
 	}
+	
+	var mmt = moment();
+	var nowTime = mmt.format("HH");
+	console.log(nowTime);
+
 
 	//검색버튼 눌렀을때 실행
 	function submitInputSelect() {
