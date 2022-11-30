@@ -12,8 +12,8 @@
 			<div>
 				<ul class="class1">
 					<li class="inputSelect">
-						<label for="birdge">다리명 : </label>
-						<select name="birdge" id="birdge" class="bridge">
+						<label for="bridge">다리명 : </label>
+						<select name="bridge" id="bridge" class="bridge">
 							<option value="성산대교">성산대교</option>
 							<option value="청담대교">청담대교</option>
 							<option value="한남대교">한남대교</option>
@@ -35,7 +35,11 @@
 			</div>
 		</form>
 	</div>
-	<div id="map" style="width:100%;height:600px;"></div>
+	<div class="drawMap">
+		<div id="map" style="width:100%;height:600px;"></div>
+		<img id="insetImgLeft">
+		<img id="insetImgRight">
+	</div>
 	<br>
 	<br>
 	<div>
@@ -236,12 +240,11 @@
 		    strokeStyle: 'solid' // 선의 스타일입니다
 		});
 		polyline2.setMap(map);
-		console.log("startPostiont1 : "+ startPosition1 + "startPostion2 : "+startPosition2);
-		console.log("congestionRate1 : "+ congestionRate1 + "congestionRate2 : "+congestionRate2);
+		insertImg(response);
 	}
 
-	//document.getElementById('selectDate').value = new Date().toISOString().substring(0, 10);	//현재 날짜로 지정 
-	document.getElementById('selectDate').value = new Date("2022-11-16").toISOString().substring(0, 10);	//임시로 데이터 있는곳
+	document.getElementById('selectDate').value = new Date().toISOString().substring(0, 10);	//현재 날짜로 지정 
+	//document.getElementById('selectDate').value = new Date("2022-11-16").toISOString().substring(0, 10);	//임시로 데이터 있는곳
 	
 	// 시간 select박스 동적으로 삽입
 	var $select = jQuery("#selHour");
@@ -256,13 +259,14 @@
 	function submitInputSelect() {
 		
 //    	alert("insertComment 실행됨");
-    	var name = document.getElementById("birdge").value;
+    	var name = document.getElementById("bridge").value;
 //		alert(typeof bridge);
 //    	alert(bridge);
-    	var date = document.getElementById("selectDate").value;
+    	var selDate = document.getElementById("selectDate").value;
 //    	alert(date);
-	//    	var selHour = document.getElementById("selHour").value;
-   		var time = '12:00:00';	//임시로 데이터 있는 곳
+	   	var selHour = document.getElementById("selHour").value;
+//	   	alert(typeof time);
+//   		var time = '12:00:00';	//임시로 데이터 있는 곳
     	
 //    	alert(time);
 // 		alert("uri가져오기전");
@@ -270,7 +274,7 @@
 //		alert(typeof time);
     	var uri = /*[[ @{/congestionrate} ]]*/null;
     	var headers = {"Content-Type": "application/json"};
-    	var params = {"name": name, "date": date, "time": time};
+    	var params = {"name": name, "selDate": selDate, "selHour": selHour};
 //	  	alert(JSON.stringify(params));  	
 //    	alert("아작스전");
     	$.ajax({
@@ -286,9 +290,9 @@
     			}
     		,
     		error: function(xhr, status, error) {
-    			console.log("code:"+xhr.status+"\n"+"message:"+xhr.responseText+"\n"+"error:"+error);
-    			alert("code:"+xhr.status+"\n"+"message:"+xhr.responseText+"\n"+"error:"+error);
-    			return false;
+//    			alert("에러가 발생하였습니다.");
+//    			alert("code:"+xhr.status+"\n"+"message:"+xhr.responseText+"\n"+"error:"+error);
+    			alert("해당날짜의 데이터가 없습니다 다른날짜를 선택해 주세요.");
     		}
     	});
     };
@@ -331,7 +335,28 @@
 
       document.getElementById('freeList').innerHTML = html;
     }
-
+	
+    function insertImg(response){
+    	switch(response[0].name){
+    	case "성산대교":
+    		$("#insetImgLeft").attr("src", "https://www.google.com/imgres?imgurl=https%3A%2F%2Fimage.ytn.co.kr%2Fgeneral%2Fjpg%2F2022%2F0707%2F202207071212075693_t.jpg&imgrefurl=https%3A%2F%2Fwww.ytn.co.kr%2F_ln%2F0103_202207071212075693&tbnid=lCTIZ_DKlYk4AM&vet=12ahUKEwjdrruV0NT7AhWJPpQKHUkcDKcQMygAegUIARDgAQ..i&docid=ZnrfYA61TuX4SM&w=1280&h=720&q=%EC%84%B1%EC%82%B0%EB%8C%80%EA%B5%90&ved=2ahUKEwjdrruV0NT7AhWJPpQKHUkcDKcQMygAegUIARDgAQ");
+        	$("#insetImgRight").attr("src", "https://www.google.com/imgres?imgurl=https%3A%2F%2Fmblogthumb-phinf.pstatic.net%2F20160826_39%2Fmissymom582_1472198726283dsQ0o_JPEG%2FP1330183_%25BB%25E7%25BA%25BB.jpg%3Ftype%3Dw800&imgrefurl=http%3A%2F%2Fm.blog.naver.com%2Fmissymom582%2F220797473375&tbnid=Ws8k5MFNjDUyUM&vet=12ahUKEwjdrruV0NT7AhWJPpQKHUkcDKcQMygBegUIARDiAQ..i&docid=j08KvjPu9WlCdM&w=800&h=534&q=%EC%84%B1%EC%82%B0%EB%8C%80%EA%B5%90&ved=2ahUKEwjdrruV0NT7AhWJPpQKHUkcDKcQMygBegUIARDiAQ");
+        	break;
+    	case "청담대교":
+    		$("#insetImgLeft").attr("src", imgurl);
+        	$("#insetImgRight").attr("src", imgurl);
+        	break;
+    	case "한남대교":
+    		$("#insetImgLeft").attr("src", imgurl);
+        	$("#insetImgRight").attr("src", imgurl);
+        	break;
+        default:
+        	
+        	break;
+    	}
+    	
+    	
+    }
 	 
 	    /*]]>*/
 </script>

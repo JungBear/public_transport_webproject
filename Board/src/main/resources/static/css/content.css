@@ -321,6 +321,11 @@ input[readonly], select[readonly], textarea[readonly], .readonly, input[disabled
 #selHour{width: 158px;}
 #selSubmit{width:158px;}
 #map{margin-top:10px;}
+.drawMap{position: relative;}
+#insetImgLeft{position:absolute; z-index:1;top:400px}
+#insetImgRight{position:absolute; z-index:1;left:700px;top:400px}
+
+
 
 /*comment */
 .notice-list {list-style: none; padding: 0px;}
