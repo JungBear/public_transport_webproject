@@ -6,7 +6,8 @@ import lombok.Data;
 //DTO = response + request
 @Data
 public class PostResponse {
-
+	
+	private int userNo;
     private int id;               // PK
     private int type;                 //게시글 분류
     private String title;                  // 제목

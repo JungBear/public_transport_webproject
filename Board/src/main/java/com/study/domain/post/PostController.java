@@ -127,6 +127,21 @@ public class PostController {
         }
     }
     
+	//마이페이지 내 글 보기 
+	@GetMapping("/user/UserListMyBoard.do")
+	 public String userPostList(@ModelAttribute("params") final SearchDto params,
+	    		@SessionAttribute(name = "userInfo", required = false)UserResponse user,Model model) {
+	    	if(user == null) {
+	        	return "user/needLogin";
+	        }
+	    	params.setUserNo(user.getUserNo());
+	    	PagingResponse<PostResponse> response = postService.UserPostList(params);
+	    	model.addAttribute("response", response);
+	    	model.addAttribute("userInfo", user);
+	        return "user/listMyBoard";
+	    }
+    
+	
     
     // 사용자에게 메시지를 전달하고, 페이지를 리다이렉트 한다.
     private String showMessageAndRedirect(final MessageDto params, Model model) {

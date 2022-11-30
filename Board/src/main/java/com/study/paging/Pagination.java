@@ -22,6 +22,7 @@ public class Pagination {
         }
     }
 
+
     private void calculation(SearchDto params) {
 
         // 전체 페이지 수 계산
@@ -52,7 +53,5 @@ public class Pagination {
         // 다음 페이지 존재 여부 확인
         existNextPage = (endPage * params.getRecordSize()) < totalRecordCount;
     }
-    
-    
 
 }

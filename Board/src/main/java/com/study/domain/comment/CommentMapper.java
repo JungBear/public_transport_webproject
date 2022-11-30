@@ -26,4 +26,11 @@ public interface CommentMapper {
 	public List<CommentDTO> selectCommentList(CommentDTO params);
 
 	public int commentCount(CommentDTO params);
+	
+	public int UserCommentListCount(SearchDto params);
+	
+	/*
+	 * 나의 댓글리스트 출력
+	 */
+	public List<UserCommentListDTO> UserCommentList(SearchDto params);
 }

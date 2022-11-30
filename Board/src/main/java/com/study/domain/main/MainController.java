@@ -1,15 +1,12 @@
 package com.study.domain.main;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
@@ -37,8 +34,12 @@ public class MainController {
 
 	@GetMapping(value = "/congestionrate")
 	@ResponseBody
-	public List<BridgeDTO> getcongestionRate(BridgeDTO bridgeDTO, Model model) {
-		System.out.println("컨트롤러 진입");
+	public List<BridgeDTO> getcongestionRate(String selHour,String selDate,String name, Model model) {
+		BridgeDTO bridgeDTO = new BridgeDTO();
+		bridgeDTO.setDate(LocalDate.parse(selDate));
+		bridgeDTO.setTime(LocalTime.parse(selHour+":00"));
+		bridgeDTO.setName(name);
+		System.out.println(bridgeDTO);
 		List<BridgeDTO> bridgeList = MainService.getcongestionRate(bridgeDTO);
 		model.addAttribute("bridgeList", bridgeList);
 		System.out.println("bridgeList값 : "+bridgeList);

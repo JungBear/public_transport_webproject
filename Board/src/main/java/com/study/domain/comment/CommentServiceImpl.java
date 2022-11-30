@@ -6,6 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.study.common.dto.SearchDto;
+import com.study.paging.Pagination;
+import com.study.paging.PagingResponse;
+
 @Service
 public class CommentServiceImpl implements CommentService {
 
@@ -49,5 +53,20 @@ public class CommentServiceImpl implements CommentService {
 		}
 
 		return commentList;
+	}
+	
+	@Override
+	public PagingResponse<UserCommentListDTO> UserCommentList(final SearchDto params){
+		int count = commentMapper.UserCommentListCount(params);
+        if (count < 1) {
+            return new PagingResponse<>(Collections.emptyList(), null);
+        }
+
+        Pagination pagination = new Pagination(count, params);
+        params.setPagination(pagination);
+        System.out.println("여까지됨?");
+        List<UserCommentListDTO> list = commentMapper.UserCommentList(params);
+        System.out.println("얘가안되나보네");
+		return new PagingResponse<>(list, pagination);
 	}
 }

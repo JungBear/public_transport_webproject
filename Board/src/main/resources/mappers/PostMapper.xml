@@ -270,4 +270,53 @@
             a.created_date DESC
         LIMIT 5
     </select>
+    
+    <!-- 마이페이지 나의 글 보기 -->
+    
+    	<!-- 내글리스트 출력 -->
+    <select id="userPostList" parameterType="com.study.common.dto.SearchDto" resultType="com.study.domain.post.PostResponse">
+        SELECT
+			  a.id
+	        , a.type
+	        , a.title
+	        , a.content
+	        , a.writer_no
+	        , a.created_date
+	        , a.modified_date      
+	        , a.del_yn
+	        , a.del_date
+	        , a.notice
+            , b.nickname
+            , b.user_no
+        FROM
+            board as a
+        JOIN
+        	user as b
+        ON
+        	a.writer_no = b.user_no
+        WHERE
+            a.del_yn = 0
+        AND
+        	b.user_no = #{userNo}
+        ORDER BY
+            a.id DESC
+        LIMIT #{pagination.limitStart}, #{recordSize}
+    </select>
+    
+           <!--내 글 수 카운팅 -->
+    <select id="userPostListCount" parameterType="com.study.common.dto.SearchDto" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM
+            board as a
+        JOIN 
+			user as b
+		ON
+			a.writer_no=b.user_no
+        WHERE
+            a.del_yn = 0
+        AND
+       		b.user_no = #{userNo}
+    </select>
+
 </mapper>

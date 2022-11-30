@@ -4,7 +4,7 @@
     <div id="adm_wrap">
         <header>
             <div class="head">
-                <h1 style="font-size:30px; "><a href="/">한량</a></h1>
+                <h1><a href="/"><img src="https://raw.githubusercontent.com/JungBear/public_transport_webproject/main/Board/src/main/resources/static/images/%EB%A1%9C%EA%B3%A0.png"></a></h1>
                 <div class="top_menu">
                     <div th:if="${userInfo==null}" class="login_user"><a href="http://localhost:8080/user/signin.do"><strong>로그인</strong></a></div>
                     <div th:unless="${userInfo==null}"class="login_user"><strong><i class="far fa-user-circle"></i> [[ ${userInfo.nickname} ]]</strong>님 반갑습니다.</div>
@@ -56,6 +56,7 @@
     <script th:src="@{/js/jquery-3.6.0.min.js}"></script>
     <script th:src="@{/js/common.js}"></script>
     <script th:src="@{/js/moment.js}"></script>
+    <script src="https://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.js"></script>
     <script src="https://kit.fontawesome.com/79613ae794.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
