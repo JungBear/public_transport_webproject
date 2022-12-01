@@ -102,6 +102,10 @@
 	function drawMap(response){
 		// response[0] : 남단 -> 북단
 		// response[1] : 북단 -> 남단
+		if(response == null || response == ''){
+			alert("해당날짜의 데이터가 없습니다 다른날짜를 선택해 주세요.");
+			return false;
+		}
 		let bridgeName = response[0].name;
 //		console.log(bridgeName);
 		switch (bridgeName){
@@ -259,7 +263,7 @@
 	function submitInputSelect() {
 		
 //    	alert("insertComment 실행됨");
-    	var name = document.getElementById("bridge").value;
+    	var name = document.getElementById("bridgeName").value;
 //		alert(typeof bridge);
 //    	alert(bridge);
     	var selDate = document.getElementById("selectDate").value;
