@@ -65,7 +65,7 @@ public class PostController {
     	PagingResponse<PostResponse> response = postService.findFreePost(params);
     	model.addAttribute("response", response);
     	model.addAttribute("userInfo", user);
-        return "post/list";
+        return "post/freelist";
     }
     
     // 정보 게시글 리스트 페이지
