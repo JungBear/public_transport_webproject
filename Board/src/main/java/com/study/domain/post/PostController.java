@@ -1,5 +1,6 @@
 package com.study.domain.post;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -27,12 +28,18 @@ public class PostController {
     // 정보 게시글 작성 페이지
     @GetMapping("/post/write.do")
     public String openInfoPostWrite(@RequestParam(value = "id", required = false) final Long id,
-    		@SessionAttribute(name = "userInfo", required = false)UserResponse user, Model model) {
+    		@SessionAttribute(name = "userInfo", required = false)UserResponse user, Model model,
+    		HttpServletRequest request) {
     	if(user == null) {
         	return "user/needLogin";
         }
     	if (id != null) {
+    		
             PostResponse post = postService.findById(id);
+            if(user.getUserNo() != post.getWriterNo()) {
+            	MessageDto message = new MessageDto("잘못된 접근입니다", "/", RequestMethod.GET, null);
+            	return showMessageAndRedirect(message, model);
+            }
             model.addAttribute("post", post);
         }
     	model.addAttribute("userInfo", user);
@@ -97,6 +104,10 @@ public class PostController {
     		,@SessionAttribute(name = "userInfo", required = false)UserResponse user, Model model) {
     	if(user == null) {
         	return "user/needLogin";
+        }
+    	if(user.getUserNo() != params.getWriterNo()) {
+    		MessageDto message = new MessageDto("게시글 권한이없습니다.", "/post/infolist.do", RequestMethod.GET, null);
+        	return showMessageAndRedirect(message, model);
         }
     	params.setWriterNo(user.getUserNo());
         postService.updatePost(params);

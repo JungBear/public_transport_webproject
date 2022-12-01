@@ -328,7 +328,7 @@ h5 {
 			$("#idCheckBtn").click(function() {
 //				alert($("#userid").val());
 		        $.ajax({
-		            url: "http://localhost:8080/getId",
+		            url: "/getId",
 		            type: "POST",
 		            data: { "id": $("#userid").val() },
 		            success: function(res) {
@@ -345,9 +345,7 @@ h5 {
 		                }
 		            },
 		            error: function(xhr, status, error) {
-		    			console.log("code:"+xhr.status+"\n"+"message:"+xhr.responseText+"\n"+"error:"+error);
-		    			alert("code:"+xhr.status+"\n"+"message:"+xhr.responseText+"\n"+"error:"+error);
-		    			return false;
+		    			alert("현재 회원가입을 할 수 없는 상태입니다. 잠시후 진행해 주세요.");
 		    		}
 				});
 			});
@@ -359,7 +357,7 @@ h5 {
 //				alert($("#userid").val());
 				
 		        $.ajax({
-		            url: "http://localhost:8080/getNickname",
+		            url: "/getNickname",
 		            type: "POST",
 		            data: { "nickname": $("#userNickname").val() },
 		            success: function(res) {
@@ -477,7 +475,7 @@ h5 {
 				
 				alert(JSON.stringify(params));
                 $.ajax({
-                    url: "http://localhost:8080/user/signup.do",
+                    url: "/user/signup.do",
                     type: "POST",
                     data: params,
 
@@ -486,7 +484,7 @@ h5 {
                     	alert(JSON.stringify(res));
                         if(res.trim() == 'ok') {
                             alert("가입되었습니다!");
-                            location.href="http://localhost:8080/user/signin.do";
+                            location.href="/user/signin.do";
                         } else {
                             alert("가입되지 않았습니다!");
                             $("#userid").val("");
@@ -509,14 +507,14 @@ h5 {
 	/*
 	function signupcomplete() {
 		alert("회원가입에 성공했습니다.");
-		window.location.href='http://localhost:8080/';
+		window.location.href='/';
 	}
 		
 	*/
 	
 	/* 로그인이 성공했을 때(alert를 띄우지 말자.) */
 //	 function signincomplete(){
-//		window.location.href="http://localhost:8080/"
+//		window.location.href="/"
 //	}
 	</script>
 	
