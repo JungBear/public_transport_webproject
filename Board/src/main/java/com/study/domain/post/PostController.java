@@ -35,7 +35,7 @@ public class PostController {
             PostResponse post = postService.findById(id);
             model.addAttribute("post", post);
         }
-        
+    	model.addAttribute("userInfo", user);
         return "post/write";
     }
         
