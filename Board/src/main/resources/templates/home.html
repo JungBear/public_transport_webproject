@@ -251,10 +251,20 @@
 	
 	// 시간 select박스 동적으로 삽입
 	var $select = jQuery("#selHour");
+	let today = new Date();
+	let hours = today.getHours();
+	console.log(hours);
 	for (var hr = 0; hr < 24; hr++) {
-	  	var hrStr = hr.toString().padStart(2, "0")+ ":";
-		var val = hrStr + "00";
-		$select.append('<option val="' + val + '">' + val + '</option>');
+	  	var hrStr = hr.toString().padStart(2, "0");
+		var val = hrStr + ":00";
+		
+		
+		if(hours==hrStr){
+			$select.append('<option val="' + val + '" selected>' + val + '</option>');
+		}else{
+			$select.append('<option val="' + val + '">' + val + '</option>');
+		}
+		
 	}
 	
 	var mmt = moment();
