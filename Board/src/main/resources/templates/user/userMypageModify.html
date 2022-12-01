@@ -50,7 +50,7 @@ layout:decorate="~{layout/basic}">
 				<span class="modifyPwdHintSpan"  style="color:blue">수정가능</span>
 				<select name="PwdHint" id="inputPwdHint" class="inputUserInfo"  th:value="${userInfo.pwdHint}" required>
 		        	<option th:selected="${userInfo.pwdHint}=='자신의 보물 1호는?'">자신의 보물 1호는?</option>
-		        	<option th:selected="${userInfo.pwdHint}=='자신이 졸업한 초등학교의 이름은?'">자신이 졸업한 초등학교의 이름은?</option>
+		        	<option th:selected="${userInfo.pwdHint}=='아버지 성함은?'">아버지 성함은?</option>
 		     	</select>
 				
 				<label class="modifyPwdHintAnsLabel">*비밀번호 답</label>

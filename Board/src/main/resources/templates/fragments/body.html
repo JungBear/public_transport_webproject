@@ -4,7 +4,7 @@
     <div id="adm_wrap">
         <header>
             <div class="head">
-                <h1><a href="/"><img src="https://raw.githubusercontent.com/JungBear/public_transport_webproject/main/Board/src/main/resources/static/images/%EB%A1%9C%EA%B3%A0.png"></a></h1>
+                <h1><a href="/"><img id="mainLogo" src="https://raw.githubusercontent.com/JungBear/public_transport_webproject/main/Board/src/main/resources/static/images/%EB%A9%94%EC%9D%B8%EB%A1%9C%EA%B3%A0.png"></a></h1>
                 <div class="top_menu">
                     <div th:if="${userInfo==null}" class="login_user"><a href="http://localhost:8080/user/signin.do"><strong>로그인</strong></a></div>
                     <div th:unless="${userInfo==null}"class="login_user"><strong><i class="far fa-user-circle"></i> [[ ${userInfo.nickname} ]]</strong>님 반갑습니다.</div>

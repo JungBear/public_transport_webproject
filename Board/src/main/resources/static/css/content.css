@@ -350,16 +350,17 @@ input[readonly], select[readonly], textarea[readonly], .readonly, input[disabled
 }
 
  .profile_wrap{
-	box-sizing : border-box;
-	width:350px;
-	height:600px;
-	margin :auto;
+	display:flex;
+	justify-content:center;
+	/* height:600px; */
+	/* margin :auto; */
+ 	align-items:center; 
 } 
 
 .signout{
 	width:100px;
-	display:block;
-	margin:auto;
+	position: absolute;
+	top:630px;
 } 
 
 /* .inputUserInfo::before{
@@ -464,7 +465,7 @@ ul{
 
 .modifyUserInfo{
 	/* background-color: blue; */
-	width : 370px;
+	width : 450px;
 	/* align-items:center; */
 	/* text-align:center; */
 	display:inline-block;
@@ -589,7 +590,8 @@ ul{
 	
 }
 .content5{
-	background:#fff; border-radius:12px; box-shadow:0 0 20px rgba(80,80,80,0.1); padding:40px 40px 70px 40px; min-height:750px; overflow:hidden;
+	background:#fff; border-radius:12px; box-shadow:0 0 20px rgba(80,80,80,0.1);
+	padding:40px 40px 70px 40px; min-height:750px; overflow:hidden;
 }
 
 /*로그인이 필요한 서비스입니다*/
