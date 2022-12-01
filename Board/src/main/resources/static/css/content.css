@@ -316,7 +316,7 @@ input[readonly], select[readonly], textarea[readonly], .readonly, input[disabled
 .hList{display:inline;}
 .mainLeftInfoList{float: left;}
 .mainRightInfoList{float:right}
-#h3FreeList{float:right; right : 470px}
+#h3FreeList{float:right; right : 39%}
 #bridgeName{width: 158px;}
 #selectDate{width: 158px;}
 #selHour{width: 158px;}
