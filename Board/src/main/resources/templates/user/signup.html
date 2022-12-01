@@ -326,9 +326,13 @@ h5 {
 
 		$(document).ready(function(){
 			$("#idCheckBtn").click(function() {
+				if($("#userid").val()==null || $("#userid").val()==''){
+					alert("아이디를 입력해주세요");
+					return false;
+				}
 //				alert($("#userid").val());
 		        $.ajax({
-		            url: "http://localhost:8080/getId",
+		            url: "/getId",
 		            type: "POST",
 		            data: { "id": $("#userid").val() },
 		            success: function(res) {
@@ -357,9 +361,13 @@ h5 {
 		$(document).ready(function(){
 			$("#nicknameCheckBtn").click(function() {
 //				alert($("#userid").val());
+				if($("#userNickname").val()==null || $("#userNickname").val()==''){
+					alert("닉네임을 입력해주세요");
+					return false;
+				}
 				
 		        $.ajax({
-		            url: "http://localhost:8080/getNickname",
+		            url: "/getNickname",
 		            type: "POST",
 		            data: { "nickname": $("#userNickname").val() },
 		            success: function(res) {
@@ -477,7 +485,7 @@ h5 {
 				
 				alert(JSON.stringify(params));
                 $.ajax({
-                    url: "http://localhost:8080/user/signup.do",
+                    url: "/user/signup.do",
                     type: "POST",
                     data: params,
 
@@ -486,7 +494,7 @@ h5 {
                     	alert(JSON.stringify(res));
                         if(res.trim() == 'ok') {
                             alert("가입되었습니다!");
-                            location.href="http://localhost:8080/user/signin.do";
+                            location.href="/user/signin.do";
                         } else {
                             alert("가입되지 않았습니다!");
                             $("#userid").val("");
@@ -509,14 +517,14 @@ h5 {
 	/*
 	function signupcomplete() {
 		alert("회원가입에 성공했습니다.");
-		window.location.href='http://localhost:8080/';
+		window.location.href='/';
 	}
 		
 	*/
 	
 	/* 로그인이 성공했을 때(alert를 띄우지 말자.) */
 //	 function signincomplete(){
-//		window.location.href="http://localhost:8080/"
+//		window.location.href="/"
 //	}
 	</script>
 	

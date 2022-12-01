@@ -44,7 +44,7 @@
 	$(document).ready(function() {
 	  $("#login").click(function() {
 	      $.ajax({
-	          url: "http://localhost:8080/user/signin.do",
+	          url: "/user/signin.do",
 	          type: "POST",
 	          data: {
 	              id: $("#userId").val(),
@@ -59,13 +59,11 @@
 	              } else {
 	                  // 로그인 정보를 세션에 저장
 //	                  alert(`${json.nickname}님 환영합니다!`);
-	                  location.href = "http://localhost:8080";
+	                  location.href = "/";
 	              }
 	          },
 	          error: function(xhr, status, error) {
-	        	  console.log("code:"+xhr.status+"\n"+"message:"+xhr.responseText+"\n"+"error:"+error);
-	    			alert("code:"+xhr.status+"\n"+"message:"+xhr.responseText+"\n"+"error:"+error);
-	    			return false;
+	        	  alert("서버에 문제가 있습니다. 잠시후 실행해 주세요.");
 	          }
 	      });
 	  });
@@ -277,7 +275,7 @@ h5 {
 	<script>
 	/* 로그인이 성공했을 때(alert를 띄우지 말자.) */
 	function signincomplete(){
-		window.location.href="http://localhost:8080/"
+		window.location.href="/"
 	}
 	</script> 
 
