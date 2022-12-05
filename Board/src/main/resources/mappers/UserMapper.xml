@@ -33,7 +33,7 @@
         SELECT 
         	IFNULL(COUNT(*), 0) 
         FROM 
-       		USER
+       		user
         WHERE 
         	id = #{id}
     </select>
@@ -43,7 +43,7 @@
         SELECT 
         	IFNULL(COUNT(*), 0) 
         FROM
-        	USER
+        	user
         WHERE 
         	nickname = #{nickname}
     </select>
