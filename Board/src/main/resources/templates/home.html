@@ -16,7 +16,7 @@
 						<select name="bridge" id="bridgeName" class="bridge">
 							<option value="성산대교">성산대교</option>
 							<option value="청담대교">청담대교</option>
-							<option value="한 남대교">한남대교</option>
+							<option value="한남대교">한남대교</option>
 						</select>
 					</li>
 					<li class="inputSelect">
@@ -141,7 +141,7 @@
 		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 		// 지도에 표시할 선을 생성합니다
 		
-		let startPosition1 = response[0].startPosition;   //남단시작
+		let startPosition1 = response[0].startPosition;  //남단시작
 		let startLatitude1 = 0;
 		let startLongitude1 = 0;
 		let endLatitude1 = 0;
@@ -169,13 +169,12 @@
 		
 		
 		let congestionRate1 = response[0].congestionRate; //남단->북단의 혼잡도
-		
 		let color1 = '';   // 남단-> 북단 혼잡도에 따른 색
-		if(0<congestionRate1 && congestionRate1<=33){
+		if(congestionRate1==1){
 			color1 = '#39D729';     //원활
-		}else if(33<congestionRate1 && congestionRate1<=66){
+		}else if(congestionRate1==2){
 			color1 = '#FFC829';     // 서행
-		}else if(66<congestionRate1 && congestionRate1<=100){
+		}else if(congestionRate1==3){
 			color1 = '#FF3829'      // 정체
 		}
 		
@@ -222,12 +221,12 @@
 	}		
 		
 		let color2 = '';   // 북단-> 남단 혼잡도에 따른 색
-		if(0<congestionRate2 && congestionRate2<=33){
-			color1 = '#39D729';     //원활
-		}else if(33<congestionRate2 && congestionRate2<=66){
-			color1 = '#FFC829';     // 서행
-		}else if(66<congestionRate2 && congestionRate2<=100){
-			color1 = '#FF3829'      // 정체
+		if(congestionRate2==1){
+			color2 = '#39D729';     //원활
+		}else if(congestionRate2==2){
+			color2 = '#FFC829';     // 서행
+		}else if(congestionRate2==3){
+			color2 = '#FF3829'      // 정체
 		}
 		
 		
