@@ -27,5 +27,7 @@ public class CommentDTO {
 	private LocalDateTime delDate;
 	private int secret;
 	private String nickname;
+    private int countGood;
+    private int countBad;
 	
 }
