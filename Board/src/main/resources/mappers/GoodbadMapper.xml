@@ -1,99 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.study.domain.goodbad.GoodbadMapper">
-<!-- 게시글 추천수 -->
-<update id="updateGood" parameterType="int">
-update
-	board 
-set 
-	count_good = count_good+1
-where 
-	id = #{id} 
-</update>
-
-<!-- 게시글 추천 취소 -->
-<update id="updateGoodCancel" parameterType="int">
-update 
-	board 
-set 
-	count_good = count_good - 1
-where 
-	id = #{id} 
-</update>
-
-<!-- 게시글 비추천수 -->
-<update id="updateBad" parameterType="int">
-update 
-	board 
-set 
-	count_bad = count_bad+1
-where 
-	id = #{id} 
-</update>
-
-<!-- 게시글 비추천 취소 -->
-<update id="updateBadCancel" parameterType="int">
-update 
-	board 
-set 
-	count_bad = count_bad - 1
-where 
-	id = #{id} 
-</update>
-
-<!-- 게시글 추천 시 good 테이블에 insert -->
-<insert id="insertGood" parameterType="com.study.domain.goodbad.GoodbadDTO">
-insert into good(id , board_id , comment_id, user_no, goodbad) 
-values((SELECT NVL(MAX(id), 0) + 1 FROM MP_LIKE),#{boardId} ,#{commentId}, #{userNo}, 1)
-</insert>
-
-<!-- 게시글 비추천 시 good 테이블에 insert -->
-<insert id="insertBad">
-insert into good(id , board_id , comment_id, user_no, goodbad) 
-values((SELECT NVL(MAX(id), 0) + 1 FROM MP_LIKE),#{boardId} ,#{commentId}, #{userNo}, 0)
-</insert>
-
-<!-- 게시글 추천, 비추천 취소 시 delete -->
-<delete id="deleteGood">
-delete from good 
-where board_id = #{boardId} and user_no = #{userNo}
-</delete>
-
-<!-- 게시글 추천 시 Check를 1로 만들어서 중복방지-->
-<update id="updateLikeCheck">
-update 
-	good
-set 
-	checkgood = 1
-where 
-	board_id = #{boardId} 
-and 
-	user_no = #{userNo}
-</update>
-
-<!-- 게시글 추천취소 시 다시 0  -->
-<update id="updateLikeCheckCancel">
-update 
-	good 
-set 
-	checkgood = 0
-where 
-	board_id = #{boardId} 
-and 
-	user_no = #{userNo}
-</update>
-
-<!-- 게시글 추천 중복방지 select문 -->
-<select id="likeCheck" resultType="int">
-select 
-	count(*) 
-from 
-	good 
-where 
-	board_id = #{boardId} 
-and 
-	user_no = #{userNo}
+<!-- 추천 눌럿는지 안눌럿는지 -->
+<select id="checkGood" parameterType="com.study.domain.goodbad.GoodbadDTO" resultType="int">
+	select 
+		count(*) 
+	from 
+		good
+	where 
+		board_id = #{boardId}
+	and 
+		user_no = #{userNo}
+	and 
+		goodbad = 0
 </select>
 
+<!-- 비추천 눌럿는지 안눌럿는지 -->
+<select id="checkbad" parameterType="com.study.domain.goodbad.GoodbadDTO" resultType="int">
+	select 
+		count(*) 
+	from 
+		good
+	where 
+		board_id = #{boardId}
+	and 
+		user_no = #{userNo}
+	and 
+		goodbad = 1
+</select>
 
 </mapper>

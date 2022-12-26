@@ -105,6 +105,8 @@
 		, a.del_yn
 		, a.del_date
 		, a.secret
+		, a.count_good
+	    , a.count_bad
 		, b.nickname
 		FROM
 			comment as a
@@ -148,6 +150,8 @@
 		, a.del_yn
 		, a.del_date
 		, a.secret
+		, a.count_good
+	    , a.count_bad
 		, b.nickname
 		, c.title
 		, c.id

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.study.common.dto.MessageDto;
 import com.study.common.dto.SearchDto;
+import com.study.domain.goodbad.GoodbadDTO;
+import com.study.domain.goodbad.GoodbadService;
 import com.study.domain.user.UserResponse;
 import com.study.paging.PagingResponse;
 
@@ -23,6 +25,7 @@ import lombok.RequiredArgsConstructor;
 public class PostController {
 
     private final PostService postService;
+    private final GoodbadService goodbadservice;
     
     // 정보 게시글 작성 페이지
     @GetMapping("/post/write.do")
@@ -86,6 +89,14 @@ public class PostController {
         	return "user/needLogin";
         }
         PostResponse post = postService.findById(id);
+        GoodbadDTO goodbad = new GoodbadDTO();
+        goodbad.setBoardId(id);
+        goodbad.setUserNo(user.getUserNo());
+        boolean goodresult = goodbadservice.checkGood(goodbad);
+        boolean badresult = goodbadservice.checkbad(goodbad);
+        
+        model.addAttribute("badresult", badresult);
+        model.addAttribute("goodresult", goodresult);
         model.addAttribute("post", post);
         model.addAttribute("userInfo",user);
         return "post/view";

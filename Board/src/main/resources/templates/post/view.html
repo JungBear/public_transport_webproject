@@ -63,7 +63,7 @@
                         <td>[[ ${post.title} ]]</td>
 
                         <th scope="row">추천</th>
-                        <td colspan="3">추후 추천 추가예정</td>
+                        <td colspan="3">[[ ${post.countGood} ]]</td>
                     </tr>
                     <tr>
                         <th scope="row">작성자</th>
@@ -76,9 +76,13 @@
                 </tbody>
             </table>
             <p class="btn_set">
+            	<button th:if="${userInfo.userNo} != ${post.writerNo} and  ${goodresult} == false" type="button" class="btn btn-outline-primary">추천<span class="badge text-bg-secondary">[[ ${post.countGood} ]]</span></button>
+            	<button th:if="${userInfo.userNo} != ${post.writerNo} and  ${goodresult} == true" type="button" class="btn btn-primary">추천 취소<span class="badge text-bg-secondary">[[ ${post.countGood} ]]</span></button>	
                 <a th:if="${userInfo.userNo} == ${post.writerNo}" th:href="@{/post/write.do( id=${post.id} )}" class="btns btn_bdr4 btn_mid">수정</a>
                 <button th:if="${userInfo.userNo} == ${post.writerNo}"  type="button" onclick="deletePost();" class="btns btn_bdr1 btn_mid">삭제</button>
-                <a href="#" onClick="history.back()" class="btns btn_bdr3 btn_mid">뒤로</a>
+                <a href="#" onClick="history.backq()" class="btns btn_bdr3 btn_mid">뒤로</a>
+                <button th:if="${userInfo.userNo} != ${post.writerNo} and  ${badresult} == false" type="button" class="btn btn-outline-danger">비추천<span class="badge text-bg-secondary">[[ ${post.countBad} ]]</span></button>
+                <button th:if="${userInfo.userNo} != ${post.writerNo} and  ${badresult} == true" type="button" class="btn btn-danger">비추천 취소<span class="badge text-bg-secondary">[[ ${post.countBad} ]]</span></button>
             </p>
 
 		<div class="comment">
@@ -311,6 +315,54 @@
 	
     function removeModal(){
     	$("#commentModal").modal("hide");
+    }
+    
+    // 추천버튼을 눌렀을 때
+    function clickgood(){
+	var likeval = [[ ${goodbad} ]];
+		
+		let boardId = [[ ${post.id} ]];
+		let userNo = [[ ${userInfo.userNo} ]];
+		if(likeval > 0){
+			console.log(likeval + "좋아요 누름");
+			$('.LikeBtn').html("좋아요 취소");
+			$('.LikeBtn').click(function() {
+				$.ajax({
+					type :'post',
+					url : '<c:url value ="/FreeBoard/likeDown"/>',
+					contentType: 'application/json',
+					data : JSON.stringify(
+							{
+								"boardId" : boardId,
+								"userNo" : userNo
+							}		
+						),
+					success : function(data) {
+						alert('취소 성공');
+					}
+				})// 아작스 끝
+			})
+
+		}else{
+			console.log(likeval + "좋아요 안누름")
+			console.log(userNo);
+			$('.LikeBtn').click(function() {
+				$.ajax({
+					type :'post',
+					url : '<c:url value ="/FreeBoard/likeUp"/>',
+					contentType: 'application/json',
+					data : JSON.stringify(
+							{
+								"board_no" : board_no,
+								"user_no" : user_no
+							}		
+						),
+					success : function(data) {
+						alert('성공염');
+					}
+				})// 아작스 끝
+			})
+    	}
     }
     
     /*]]>*/
