@@ -7,4 +7,13 @@ public interface GoodbadMapper {
 	int checkGood(GoodbadDTO params);
 	
 	int checkbad(GoodbadDTO params);
+	
+	void clickGood(GoodbadDTO params);
+
+	void cancelGood(GoodbadDTO params);
+	
+	void increaseCountGood(int params);
+	
+	void decreaseCountGood(int params);
+	
 }

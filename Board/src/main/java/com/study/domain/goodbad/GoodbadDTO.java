@@ -7,7 +7,7 @@ public class GoodbadDTO {
 	
 	private int id; 
 	private int boardType;
-	private Long boardId;
+	private int boardId;
 	private int commentId;
 	private int goodbad;
 	private int goodDate;

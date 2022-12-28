@@ -90,11 +90,13 @@ public class PostController {
         }
         PostResponse post = postService.findById(id);
         GoodbadDTO goodbad = new GoodbadDTO();
-        goodbad.setBoardId(id);
+        int intId = id.intValue();
+        goodbad.setBoardId(intId);
         goodbad.setUserNo(user.getUserNo());
         boolean goodresult = goodbadservice.checkGood(goodbad);
         boolean badresult = goodbadservice.checkbad(goodbad);
-        
+        System.out.println("goodresult : "+ goodresult);
+        System.out.println("badresult : "+ badresult);
         model.addAttribute("badresult", badresult);
         model.addAttribute("goodresult", goodresult);
         model.addAttribute("post", post);

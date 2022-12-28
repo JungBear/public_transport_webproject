@@ -76,8 +76,8 @@
                 </tbody>
             </table>
             <p class="btn_set">
-            	<button th:if="${userInfo.userNo} != ${post.writerNo} and  ${goodresult} == false" type="button" class="btn btn-outline-primary">추천<span class="badge text-bg-secondary">[[ ${post.countGood} ]]</span></button>
-            	<button th:if="${userInfo.userNo} != ${post.writerNo} and  ${goodresult} == true" type="button" class="btn btn-primary">추천 취소<span class="badge text-bg-secondary">[[ ${post.countGood} ]]</span></button>	
+            	<button th:if="${userInfo.userNo} != ${post.writerNo} and  ${goodresult} == false" type="button" onclick="clickgood();" class="btn btn-outline-primary">추천<span class="badge text-bg-secondary">[[ ${post.countGood} ]]</span></button>
+            	<button th:if="${userInfo.userNo} != ${post.writerNo} and  ${goodresult} == true" type="button" onclick="clickgoodcancel();" class="btn btn-primary">추천 취소<span class="badge text-bg-secondary">[[ ${post.countGood} ]]</span></button>	
                 <a th:if="${userInfo.userNo} == ${post.writerNo}" th:href="@{/post/write.do( id=${post.id} )}" class="btns btn_bdr4 btn_mid">수정</a>
                 <button th:if="${userInfo.userNo} == ${post.writerNo}"  type="button" onclick="deletePost();" class="btns btn_bdr1 btn_mid">삭제</button>
                 <a href="#" onClick="history.backq()" class="btns btn_bdr3 btn_mid">뒤로</a>
@@ -317,21 +317,24 @@
     	$("#commentModal").modal("hide");
     }
     
-    // 추천버튼을 눌렀을 때
-    function clickgood(){
-	var likeval = [[ ${goodbad} ]];
+    function clickgoodcancel(){
+		var likeval = [[ ${goodresult} ]];
+		//alert(likeval);
+		//alert("추천하시겠습니까?");	
+		let boardId = [[ ${post.id} ]] ;
+		//alert(boardId + ": boardId");
+		//alert(typeof(boardId));
+		let userNo =[[ ${userInfo.userNo} ]] ;
+		//alert(userNo);
 		
-		let boardId = [[ ${post.id} ]];
-		let userNo = [[ ${userInfo.userNo} ]];
-		if(likeval > 0){
+		let uri = /*[[ @{/cancelgood} ]]*/null;
+		if(likeval == true){
 			console.log(likeval + "좋아요 누름");
-			$('.LikeBtn').html("좋아요 취소");
-			$('.LikeBtn').click(function() {
 				$.ajax({
 					type :'post',
-					url : '<c:url value ="/FreeBoard/likeDown"/>',
+					url : uri,
 					contentType: 'application/json',
-					data : JSON.stringify(
+					data :JSON.stringify(
 							{
 								"boardId" : boardId,
 								"userNo" : userNo
@@ -339,35 +342,57 @@
 						),
 					success : function(data) {
 						alert('취소 성공');
-					}
+					},
+				error: function(xhr, status, error) {
+	    			alert("에러가 발생하였습니다.");
+	    			alert("code:"+xhr.status+"\n"+"message:"+xhr.responseText+"\n"+"error:"+error);
+	    			return false;
+	    		}
 				})// 아작스 끝
-			})
-
-		}else{
-			console.log(likeval + "좋아요 안누름")
-			console.log(userNo);
-			$('.LikeBtn').click(function() {
-				$.ajax({
-					type :'post',
-					url : '<c:url value ="/FreeBoard/likeUp"/>',
-					contentType: 'application/json',
-					data : JSON.stringify(
-							{
-								"board_no" : board_no,
-								"user_no" : user_no
-							}		
-						),
+		}
+    }
+ // 추천버튼을 눌렀을 때
+	function clickgood(){
+		var likeval = [[ ${goodresult} ]];
+//		alert(likeval);
+		//alert("추천하시겠습니까?");	
+		var boardId = [[ ${post.id} ]] ;
+		//alert(boardId + ": boardId");
+		//alert(typeof(boardId));
+		var userNo =  [[ ${userInfo.userNo} ]] ;
+		//alert(userNo);
+		
+		var uri = /*[[ @{/clickgood} ]]*/null;
+		//var params = {"boardId" : boardid, "userNo": userno}
+		var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "POST"};
+		//alert(JSON.stringify(params));
+		
+		if(likeval == false){
+			$.ajax({
+				type :'post',
+				url : uri,
+				contentType: 'application/json',
+				data :JSON.stringify(
+						{
+							"boardId" : boardId,
+							"userNo" : userNo
+						}		
+					),
 					success : function(data) {
 						alert('성공염');
-					}
+					},
+					error: function(xhr, status, error) {
+		    			alert("에러가 발생하였습니다.");
+		    			alert("code:"+xhr.status+"\n"+"message:"+xhr.responseText+"\n"+"error:"+error);
+		    			console.log("code:"+xhr.status+"\n"+"message:"+xhr.responseText+"\n"+"error:"+error);
+		    			return false;
+		    		}
 				})// 아작스 끝
-			})
     	}
-    }
     
+    
+	}
     /*]]>*/
-  </script>
+	</script>
 </th:block>
-
-
 </html>

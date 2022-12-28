@@ -24,4 +24,20 @@ public class GoodbadService {
 			return true;
 		}
 	}
+	
+	public void clickGood(GoodbadDTO params) {
+		goodbadmapper.clickGood(params);
+	}
+	
+	public void cancelGood(GoodbadDTO params) {
+		goodbadmapper.cancelGood(params);
+	}
+	
+	public void increaseCountGood(int params) {
+		goodbadmapper.increaseCountGood(params);
+	}
+	
+	public void decreaseCountGood(int params) {
+		goodbadmapper.decreaseCountGood(params);
+	}
 }
