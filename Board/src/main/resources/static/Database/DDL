@@ -35,7 +35,9 @@ CREATE TABLE `board` (
    `modified_date`   DATETIME   NULL   COMMENT 'YYYYMMDDhhmmss',
    `del_yn`   TINYINT   NOT NULL   DEFAULT 0   COMMENT '0과 1로 구성, 0이면 존재, 1이면 삭제',
    `del_date`   DATETIME   NULL   COMMENT 'YYYYMMDDhhmmss',
-   `notice`   TINYINT   NOT NULL   DEFAULT 0   COMMENT '0이면 기본글, 1이면 공지'
+   `notice`   TINYINT   NOT NULL   DEFAULT 0   COMMENT '0이면 기본글, 1이면 공지',
+	`count_good`	INT	NOT NULL	DEFAULT 0,
+	`count_bad`	INT	NOT NULL	DEFAULT 0
 );
 
 
@@ -54,7 +56,9 @@ CREATE TABLE `comment` (
    `modified_date`   DATETIME   NULL   COMMENT 'YYYYMMDDhhmmss',
    `del_yn`   TINYINT   NOT NULL   DEFAULT 0   COMMENT '0과 1로 구성, 0이면 존재, 1이면 삭제',
    `del_date`   DATETIME   NULL   COMMENT 'YYYYMMDDyymmss',
-   `secret`   TINYINT   NOT NULL   DEFAULT 0   COMMENT '0일때 공개, 1일때 비밀'
+   `secret`   TINYINT   NOT NULL   DEFAULT 0   COMMENT '0일때 공개, 1일때 비밀',
+   `count_good`	INT	NOT NULL	DEFAULT 0,
+   `count_bad`	INT	NOT NULL	DEFAULT 0
 );
 
 DROP TABLE IF EXISTS `report`;
@@ -72,12 +76,13 @@ CREATE TABLE `report` (
 DROP TABLE IF EXISTS `good`;
 
 CREATE TABLE `good` (
-   `id`   INT   NOT null COMMENT 'Auto Increment',
-   `board_type`   TINYINT   NULL   COMMENT '0이면 정보글, 1이면 자유글',
-   `board_id`   INT   NULL,
-   `comment_id`   INT   NULL,
-   `user_no`   INT   NULL,
-   `goodBad`   TINYINT   NOT NULL   DEFAULT 0   COMMENT '추천이면 1, 비추면0'
+	`id`	INT	NOT null COMMENT 'Auto Increment',
+	`board_type`	TINYINT	NULL	COMMENT '0이면 정보글, 1이면 자유글',
+	`board_id`	INT	NULL,
+	`comment_id`	INT	NULL,
+	`user_no`	INT	NULL,
+	`goodbad`	TINYINT	NOT NULL	DEFAULT 0	COMMENT '추천이면 1, 비추면0',
+	`good_date`	DATETIME	NOT NULL	DEFAULT CURRENT_TIMESTAMP
 );
 
 ALTER TABLE `user` ADD CONSTRAINT `PK_USER` PRIMARY KEY (
@@ -172,10 +177,6 @@ REFERENCES `user` (
    `user_no`
 );
 
-insert into user(id, name, nickname, email, pwd, pwd_hint, pwd_hint_ans, gender, age, Administrator)
-values ("mod459", "정상필", "성남베어", "mod459@naver.com", 1234, "민경이는?","삵",0,19970202,1);
-insert into user(id, name, nickname, email, pwd, pwd_hint, pwd_hint_ans, gender, age, Administrator)
-values ("mod491", "정상필", "성남베", "mod459@naver.com", 1234, "민경이는?","삵",0,19970202,1);
 
 select * from user;
 
@@ -225,5 +226,4 @@ insert into analysis(name,start_position, `date`, `time`,congestion_rate)
 values("한남대교","한남대교북단",'2022-11-16','12:00', 70); 
 insert into analysis(name,start_position, `date`, `time`,congestion_rate) 
 values("한남대교","한남대교남단",'2022-11-16','12:00', 10); 
-
 

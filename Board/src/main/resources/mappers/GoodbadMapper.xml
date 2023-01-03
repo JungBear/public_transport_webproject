@@ -59,4 +59,30 @@
 	WHERE
 		id = #{id}
 </update>
+
+<!--  비추천 눌렀을 때 -->
+<insert id="clickBad" parameterType="com.study.domain.goodbad.GoodbadDTO">
+	insert into good (id ,board_id , user_no, goodbad)
+	values((select * from (select max(id)+1 from good) next), #{boardId},#{userNo},0)
+</insert>
+
+<!-- 비추천눌렀을 때 게시글의 좋아요 갯수 +1 -->
+<update id="increaseCountBad" parameterType="int">
+	UPDATE 
+		board
+	SET 
+		count_bad = count_bad + 1
+	WHERE
+		id = #{id}
+</update>
+
+<!-- 비추천눌렀을 때 게시글의 좋아요 갯수 -1 -->
+<update id="decreaseCountBad" parameterType="int">
+	UPDATE 
+		board
+	SET 
+		count_bad = count_bad - 1
+	WHERE
+		id = #{id}
+</update>
 </mapper>

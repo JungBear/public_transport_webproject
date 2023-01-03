@@ -38,4 +38,27 @@ public class GoodbadController {
 		goodbadservice.cancelGood(params);
 		goodbadservice.decreaseCountGood(params.getBoardId());
 	}
+	
+	@PostMapping("/clickbad")
+	@ResponseBody 
+	public void badUp(//@RequestParam("boardId") int boardid, @RequestParam(value="userNo") int userno,
+			@RequestBody GoodbadDTO params,
+			@SessionAttribute(name = "userInfo", required = false)UserResponse user) {
+		System.out.println("컨트롤러 연결 성공");
+		//GoodbadDTO params = new GoodbadDTO();
+		//params.setBoardId(boardid);
+		//params.setUserNo(userno);
+		System.out.println(params);
+		goodbadservice.clickBad(params);
+		goodbadservice.increaseCountBad(params.getBoardId());
+	}
+	
+	@ResponseBody
+	@PostMapping("/cancelbad")
+	public void badDown(@RequestBody GoodbadDTO params, 
+			@SessionAttribute(name = "userInfo", required = false)UserResponse user) {
+		System.out.println("좋아요 싫어요!");
+		goodbadservice.cancelGood(params);
+		goodbadservice.decreaseCountBad(params.getBoardId());
+	}
 }

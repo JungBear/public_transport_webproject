@@ -16,4 +16,9 @@ public interface GoodbadMapper {
 	
 	void decreaseCountGood(int params);
 	
+	void clickBad(GoodbadDTO params);
+	
+	void increaseCountBad(int params);
+	
+	void decreaseCountBad(int params);
 }
