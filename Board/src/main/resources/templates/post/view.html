@@ -342,6 +342,7 @@
 						),
 					success : function(data) {
 						alert('추천 취소가 되었습니다');
+						location.reload();
 					},
 				error: function(xhr, status, error) {
 	    			alert("현재 추천 취소를 진행할 수 없습니다. 잠시후 시도해주세요");
@@ -378,6 +379,7 @@
 					),
 					success : function(data) {
 						alert('추천하였습니다.');
+						location.reload();
 					},
 					error: function(xhr, status, error) {
 		    			//alert("해당 게시물에는 추천을 할 수 없습니다. 비추천 취소를 누르고 다시 진행해주세요.");
@@ -389,7 +391,7 @@
  }
 	    function clickbadcancel(){
 			var likeval = [[ ${goodresult} ]];
-			alert(likeval);
+			//alert(likeval);
 			//alert("추천하시겠습니까?");	
 			let boardId = [[ ${post.id} ]] ;
 			//alert(boardId + ": boardId");
@@ -412,6 +414,7 @@
 							),
 						success : function(data) {
 							alert('비추천을 취소하였습니다.');
+							location.reload();
 						},
 					error: function(xhr, status, error) {
 		    			alert("현재 비추천 취소를 진행할 수 없습니다. 잠시후 시도해주세요");
@@ -448,6 +451,7 @@
 						),
 						success : function(data) {
 							alert('비추천을 하였습니다.');
+							location.reload();
 						},
 						error: function(xhr, status, error) {
 			    			alert("해당 게시물에는 비추천을 할 수 없습니다. 추천 취소를 누르고 다시 진행해주세요.");
