@@ -40,7 +40,7 @@
 ![Untitled](./한량/Untitled%201.png)
 
 ## ppt
-![ppt]("")
+![ppt]("https://github.com/JungBear/public_transport_webproject/blob/main/%EA%B5%90%ED%86%B5_%EC%B5%9C%EC%A2%85.pdf")
 
 ### 📌맡은 역할
 
